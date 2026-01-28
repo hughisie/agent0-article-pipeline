@@ -1,0 +1,47 @@
+# Google Cloud Build configuration for automatic deployment
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/agent0-gui:$COMMIT_SHA', '.']
+  
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/agent0-gui:$COMMIT_SHA']
+  
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'agent0-gui'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/agent0-gui:$COMMIT_SHA'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--port'
+      - '8080'
+      - '--memory'
+      - '2Gi'
+      - '--cpu'
+      - '2'
+      - '--timeout'
+      - '900'
+      - '--max-instances'
+      - '10'
+      - '--min-instances'
+      - '0'
+      - '--set-env-vars'
+      - 'GOOGLE_DRIVE_FOLDER_ID=17txivAocXR4R5qMsWi4vYUB6Kg2K1N1m'
+      - '--set-secrets'
+      - 'GEMINI_API_KEY=GEMINI_API_KEY:latest,DEEPSEEK_API_KEY=DEEPSEEK_API_KEY:latest,WP_BASE_URL=WP_BASE_URL:latest,WP_USERNAME=WP_USERNAME:latest,WP_APPLICATION_PASSWORD=WP_APPLICATION_PASSWORD:latest,GOOGLE_CLIENT_ID=GOOGLE_CLIENT_ID:latest,JWT_SECRET=JWT_SECRET:latest,GOOGLE_ACCESS_TOKEN=GOOGLE_ACCESS_TOKEN:latest'
+
+images:
+  - 'gcr.io/$PROJECT_ID/agent0-gui:$COMMIT_SHA'
+
+options:
+  machineType: 'N1_HIGHCPU_8'
+  timeout: '1200s'

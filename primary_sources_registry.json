@@ -1,0 +1,5126 @@
+[
+  {
+    "url": "https://www.boe.es/error/documentNotFound.php",
+    "first_seen": "2026-01-10T18:30:38.796807+00:00",
+    "last_seen": "2026-01-10T18:30:38.796807+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-El sector inmobiliario augura otra pérdida de viviendas en alquiler en Barcelona por la nueva regula.json",
+        "run_id": "93d04fa7-700c-43af-bcca-dbfb73971e37",
+        "date": "2026-01-09T06:00:38+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.gencat.cat/dogc/",
+    "first_seen": "2026-01-10T18:35:10.315195+00:00",
+    "last_seen": "2026-01-10T18:35:10.315195+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-El sector inmobiliario augura otra pérdida de viviendas en alquiler en Barcelona por la nueva regula.json",
+        "run_id": "2bcfb9ec-065b-41ad-8ebe-1e5ef3fc6c1f",
+        "date": "2026-01-09T06:00:38+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://dogc.gencat.cat/ca/document-del-dogc/index.html?documentId=CVE-DOGC-B-25363084-2025",
+    "first_seen": "2026-01-10T18:49:29.805017+00:00",
+    "last_seen": "2026-01-10T18:49:29.805017+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-El sector inmobiliario augura otra pérdida de viviendas en alquiler en Barcelona por la nueva regula.json",
+        "date": "2026-01-09T06:00:38+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://dogc.gencat.cat/ca/document-del-dogc/?documentId=1033405",
+    "first_seen": "2026-01-11T10:47:49.280614+00:00",
+    "last_seen": "2026-01-11T10:47:49.280614+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-El sector inmobiliario augura otra pérdida de viviendas en alquiler en Barcelona por la nueva regula.json",
+        "run_id": "8e832763-8ac4-483a-ab3a-30724fe998d1",
+        "date": "2026-01-09T06:00:38+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.barcelona.cat/infobarcelona/en/new-stage-of-work-to-separate-the-tracks-of-the-trambesos_1334057.html",
+    "first_seen": "2026-01-11T18:07:35.573506+00:00",
+    "last_seen": "2026-01-11T18:07:35.573506+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "09-Las obras del cambio de trazado del tranvía alteran la circulación entre les Glòries y la Diagonal p.json",
+        "run_id": "337a514c-7d67-4652-8053-10160d6b978b",
+        "date": "2026-01-08T17:53:12+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://dogc.gencat.cat/ca/document-del-dogc/?documentId=1030654",
+    "first_seen": "2026-01-11T18:55:18.501999+00:00",
+    "last_seen": "2026-01-11T18:55:18.501999+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "02-Las restricciones por la peste porcina suspenden una quincena de carreras de montaña en el área de B.json",
+        "run_id": "a84f3f39-13da-4dcd-86f2-b426fadf12fb",
+        "date": "2026-01-10T16:05:06+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260110/barcelona-drogas-centro-drogodependencias-huelga-125552144?utm_source=rss-noticias&utm_medium=feed&utm_campaign=barcelona",
+    "first_seen": "2026-01-11T18:58:43.490074+00:00",
+    "last_seen": "2026-01-11T18:58:43.490074+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "04-Un centro de drogodependencias de Barcelona suma 43 días de huelga indefinida por un conflicto labor.json",
+        "run_id": "a84f3f39-13da-4dcd-86f2-b426fadf12fb",
+        "date": "2026-01-10T14:09:57+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://irap.org/2025/12/catalan-risk-mapping-results-expose-critical-vulnerability-of-motorcyclists/",
+    "first_seen": "2026-01-11T19:01:49.799507+00:00",
+    "last_seen": "2026-01-11T19:01:49.799507+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "09-MAPA Estas son las carreteras en el área de Barcelona más peligrosas para las bicis.json",
+        "run_id": "a84f3f39-13da-4dcd-86f2-b426fadf12fb",
+        "date": "2026-01-10T10:01:15+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://ajuntament.barcelona.cat/premsa/2026/01/09/trobada-institucional-entre-lalcalde-de-barcelona-i-el-president-domnium-cultural-2/",
+    "first_seen": "2026-01-11T19:04:52.066454+00:00",
+    "last_seen": "2026-01-11T19:04:52.066454+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "100-Reducir a cero las listas de espera para aprender catalán objetivo de Òmnium y Ayuntamiento de Barc.json",
+        "run_id": "a84f3f39-13da-4dcd-86f2-b426fadf12fb",
+        "date": "2026-01-09T15:49:10+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.totbarcelona.cat/economia/alstom-catalunya-metros-tmb-683501/",
+    "first_seen": "2026-01-11T19:10:49.296665+00:00",
+    "last_seen": "2026-01-11T19:10:49.296665+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "104-Alstom redoblarà l’aposta per Catalunya amb una nova oferta per fabricar 39 metros per a TMB.json",
+        "run_id": "a84f3f39-13da-4dcd-86f2-b426fadf12fb",
+        "date": "2026-01-10T20:01:31+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2025-26792",
+    "first_seen": "2026-01-12T08:58:25.930109+00:00",
+    "last_seen": "2026-01-12T08:58:25.930109+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "02-El abono único de transporte de 60 euros sale a la venta este lunes.json",
+        "run_id": "93111372-6a3d-4d8b-be95-680a7e758489",
+        "date": "2026-01-11T20:09:00+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260111/barcelona-personas-sin-hogar-muertes-ayuntamiento-125571909?utm_source=rss-noticias&utm_medium=feed&utm_campaign=barcelona",
+    "first_seen": "2026-01-12T09:02:44.984471+00:00",
+    "last_seen": "2026-01-12T09:02:44.984471+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "05-La muerte de cinco personas si hogar en cinco semanas marca el inicio de 2026 en el Ayuntamiento de.json",
+        "run_id": "93111372-6a3d-4d8b-be95-680a7e758489",
+        "date": "2026-01-11T13:16:49+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.iberlibro.com/servlet/BookDetailsPL?bi=30252876646&searchurl=tn%3Dde%2Buna%2Bderrota%2Ba%2Buna%2Bvictoria%2B6%2Boctubre%2B1934-19%2Bjulia%2B1936%26sortby%3D20",
+    "first_seen": "2026-01-12T09:06:37.506852+00:00",
+    "last_seen": "2026-01-12T09:06:37.506852+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "07-Cómo el metro fue decisivo para que Barcelona frenara el golpe de Estado de 1936.json",
+        "run_id": "93111372-6a3d-4d8b-be95-680a7e758489",
+        "date": "2026-01-11T11:57:10+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260110/javier-morral-seria-imposible-abrir-ahora-servei-estacio-arago-paseo-gracia-barcelona-125514550",
+    "first_seen": "2026-01-12T09:09:40.831798+00:00",
+    "last_seen": "2026-01-12T09:56:07.309864+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "13-Javier Morral Sería imposible abrir ahora Servei Estació en Aragó con paseo de Gràcia.json",
+        "run_id": "93111372-6a3d-4d8b-be95-680a7e758489",
+        "date": "2026-01-10T12:01:18+01:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "13-Javier Morral Sería imposible abrir ahora Servei Estació en Aragó con paseo de Gràcia.json",
+        "run_id": "b4dbf04b-fc64-4ffb-a744-dc4d7fa5b5b6",
+        "date": "2026-01-10T12:01:18+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260112/11426438/guirnaldas-luminosas-relanzar-callejuelas-gotic-born.html",
+    "first_seen": "2026-01-12T09:13:29.813736+00:00",
+    "last_seen": "2026-01-12T10:00:32.837267+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "29-Barcelona mantendrá luces de Navidad para iluminar callejuelas del Born y el Gòtic.json",
+        "run_id": "93111372-6a3d-4d8b-be95-680a7e758489",
+        "date": "2026-01-12T05:00:00+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "29-Barcelona mantendrá luces de Navidad para iluminar callejuelas del Born y el Gòtic.json",
+        "run_id": "b4dbf04b-fc64-4ffb-a744-dc4d7fa5b5b6",
+        "date": "2026-01-12T05:00:00+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://ajuntament.barcelona.cat/premsa/2025/05/16/la-proposta-guanyadora-del-concurs-del-taller-masriera-aposta-per-la-recuperacio-del-temple-jardi/",
+    "first_seen": "2026-01-12T09:16:58.903371+00:00",
+    "last_seen": "2026-01-12T10:03:57.453028+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "90-La joia amagada de l'Eixample que Barcelona vol recuperar.json",
+        "run_id": "93111372-6a3d-4d8b-be95-680a7e758489",
+        "date": "2026-01-11T06:59:13+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "90-La joia amagada de l'Eixample que Barcelona vol recuperar.json",
+        "run_id": "b4dbf04b-fc64-4ffb-a744-dc4d7fa5b5b6",
+        "date": "2026-01-11T06:59:13+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://web.gencat.cat/ca/seu-electronica",
+    "first_seen": "2026-01-12T09:20:48.674287+00:00",
+    "last_seen": "2026-01-12T09:20:48.674287+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "98-Els ciberestafadors també ataquen la Generalitat en deu anys intenten robar 1,7 milions.json",
+        "run_id": "93111372-6a3d-4d8b-be95-680a7e758489",
+        "date": "2026-01-11T17:00:14+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2025-26798",
+    "first_seen": "2026-01-12T09:44:22.188477+00:00",
+    "last_seen": "2026-01-12T09:44:22.188477+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "02-El abono único de transporte de 60 euros sale a la venta este lunes.json",
+        "run_id": "b4dbf04b-fc64-4ffb-a744-dc4d7fa5b5b6",
+        "date": "2026-01-11T20:09:00+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.arrelsfundacio.org/informat/noticies/",
+    "first_seen": "2026-01-12T09:48:24.126068+00:00",
+    "last_seen": "2026-01-12T09:48:24.126068+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "05-La muerte de cinco personas si hogar en cinco semanas marca el inicio de 2026 en el Ayuntamiento de.json",
+        "run_id": "b4dbf04b-fc64-4ffb-a744-dc4d7fa5b5b6",
+        "date": "2026-01-11T13:16:49+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://dialnet.unirioja.es/servlet/libro?codigo=25418",
+    "first_seen": "2026-01-12T09:52:28.765384+00:00",
+    "last_seen": "2026-01-12T09:52:28.765384+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "07-Cómo el metro fue decisivo para que Barcelona frenara el golpe de Estado de 1936.json",
+        "run_id": "b4dbf04b-fc64-4ffb-a744-dc4d7fa5b5b6",
+        "date": "2026-01-11T11:57:10+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://seuelectronica.antifrau.cat/ca/csv/get?id=79711000280905202506EDA11A7590",
+    "first_seen": "2026-01-12T10:09:35.034063+00:00",
+    "last_seen": "2026-01-12T10:09:35.034063+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "98-Els ciberestafadors també ataquen la Generalitat en deu anys intenten robar 1,7 milions.json",
+        "run_id": "b4dbf04b-fc64-4ffb-a744-dc4d7fa5b5b6",
+        "date": "2026-01-11T17:00:14+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=R02_q_R7R_0",
+    "first_seen": "2026-01-12T17:00:33.529526+00:00",
+    "last_seen": "2026-01-12T17:00:33.529526+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "69-VÍDEO Netflix estrena una comèdia romàntica rodada a Barcelona.json",
+        "run_id": "bdec602f-5964-452c-b263-1a80522dd442",
+        "date": "2026-01-11T15:21:07+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.arrelsfundacio.org/1-982-persones-dormen-al-carrer-a-barcelona/",
+    "first_seen": "2026-01-12T17:00:38.378009+00:00",
+    "last_seen": "2026-01-12T17:00:38.378009+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "70-L’oposició crítica Collboni per ser poc “contundent” contra el sensellarisme.json",
+        "run_id": "bdec602f-5964-452c-b263-1a80522dd442",
+        "date": "2026-01-11T13:24:37+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/445831/govern-aprova-calendari-festes-laborals-lany-2026",
+    "first_seen": "2026-01-12T17:00:41.622041+00:00",
+    "last_seen": "2026-01-12T17:00:41.622041+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "74-Tots els festius i ponts del calendari 2026 a Barcelona.json",
+        "run_id": "bdec602f-5964-452c-b263-1a80522dd442",
+        "date": "2026-01-11T07:37:22+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://ajuntament.barcelona.cat/premsa/2026/01/10/afectacions-a-la-mobilitat-per-la-nova-fase-de-les-obres-de-ll8-de-fgc-a-partir-de-dilluns-a-lentorn-de-placa-espanya/",
+    "first_seen": "2026-01-12T17:01:04.075245+00:00",
+    "last_seen": "2026-01-12T17:01:04.075245+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "34-Nuevos cortes de tráfico con la llegada de la tuneladora de la L8 a Espanya.json",
+        "run_id": "bdec602f-5964-452c-b263-1a80522dd442",
+        "date": "2026-01-11T05:00:00+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://elpais.com/espana/catalunya/2026-01-11/la-generalitat-busca-herederos-para-771-catalanes-que-murieron-sin-dejar-testamento.html",
+    "first_seen": "2026-01-12T17:01:44.155757+00:00",
+    "last_seen": "2026-01-12T17:01:44.155757+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "23-La Generalitat busca herederos para 771 catalanes que murieron sin dejar testamento.json",
+        "run_id": "bdec602f-5964-452c-b263-1a80522dd442",
+        "date": "2026-01-11T09:20:17+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.equiposytalento.com/recurso-no-encontrado/",
+    "first_seen": "2026-01-12T17:04:35.958752+00:00",
+    "last_seen": "2026-01-12T17:04:35.958752+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "85-Dues expolítiques fitxen per empreses catalanes.json",
+        "run_id": "bdec602f-5964-452c-b263-1a80522dd442",
+        "date": "2026-01-12T06:00:35+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.20minutos.es/cataluna/barcelona/metro-barcelona-cierra-mejor-noviembre-historia-con-42-4-millones-usuarios-un-3-mas_6919836_0.html",
+    "first_seen": "2026-01-12T23:04:20.466233+00:00",
+    "last_seen": "2026-01-12T23:04:20.466233+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "33-El metro de Barcelona cierra el mejor noviembre de la historia con 42,4 millones de usuarios, un 3.json",
+        "run_id": "512d96c5-580a-4718-9308-45454363156d",
+        "date": "2026-01-12T11:01:47+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://cido.diba.cat/normativa_local/20889134/instruccio-per-la-qual-es-donen-criteris-per-a-tramitar-les-sollicituds-dinstallacio-destufes-electriques-a-les-terrasses-dels-establiments-de-restauracio-o-assimilats-de-conformitat-amb-lordenanca-de-terrasses-ajuntament-de-barcelona",
+    "first_seen": "2026-01-12T23:04:52.386573+00:00",
+    "last_seen": "2026-01-12T23:04:52.386573+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "12-Barcelona aclara los requisitos para instalar estufas eléctricas en terrazas requerirán obra fija y.json",
+        "run_id": "512d96c5-580a-4718-9308-45454363156d",
+        "date": "2026-01-12T11:11:29+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.infoclm.es/toledo/2026/01/12/toledo-en-el-punto-de-mira-de-la-estafa-del-falso-gestor-bancario/",
+    "first_seen": "2026-01-12T23:04:58.135410+00:00",
+    "last_seen": "2026-01-12T23:04:58.135410+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "29-Detenido un joven en Cornellà por estafar más de 150.000 euros haciéndose pasar por un gestor del ba.json",
+        "run_id": "512d96c5-580a-4718-9308-45454363156d",
+        "date": "2026-01-12T13:20:07+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.totbarcelona.cat/politica/eleccions-barcelona-2027-barometre-anticipa-baixa-participacio-683928/",
+    "first_seen": "2026-01-12T23:05:09.139940+00:00",
+    "last_seen": "2026-01-12T23:05:09.139940+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "101-Barcelona s’allunya de la política un 43% d’indecisos a setze mesos de les eleccions.json",
+        "run_id": "512d96c5-580a-4718-9308-45454363156d",
+        "date": "2026-01-11T20:02:18+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260112/11432809/cruz-sagrada-familia-luce-tercer-brazo.html",
+    "first_seen": "2026-01-13T09:07:29.653362+00:00",
+    "last_seen": "2026-01-13T09:07:29.653362+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "13-La cruz de la Sagrada Família ya luce su tercer brazo.json",
+        "run_id": "af4cf416-5f18-48a1-98e6-225f2f6acd69",
+        "date": "2026-01-12T18:23:09+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://x.com/salvadorilla/status/XXXXXXXXXXXX",
+    "first_seen": "2026-01-13T09:07:33.508624+00:00",
+    "last_seen": "2026-01-13T09:07:33.508624+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "47-Els pagesos aixequen els talls de carreteres després de reunir-se amb Illa.json",
+        "run_id": "af4cf416-5f18-48a1-98e6-225f2f6acd69",
+        "date": "2026-01-12T18:13:11+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://grupo.iberia.es/pressrelease",
+    "first_seen": "2026-01-13T09:07:46.314934+00:00",
+    "last_seen": "2026-01-13T09:07:46.314934+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "54-Dues expolítiques fitxen per empreses catalanes.json",
+        "run_id": "af4cf416-5f18-48a1-98e6-225f2f6acd69",
+        "date": "2026-01-12T06:00:35+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.atm.cat/es/comunicacio/publicacions/emef",
+    "first_seen": "2026-01-13T09:08:20.735910+00:00",
+    "last_seen": "2026-01-13T09:08:20.735910+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-Rodalies en Barcelona pierde 10 millones de usuarios en dos años mientras Madrid gana más de 15 mill.json",
+        "run_id": "af4cf416-5f18-48a1-98e6-225f2f6acd69",
+        "date": "2026-01-13T06:00:36+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://metropoliabierta.elespanol.com/informacion-municipal/20251127/tsjc-desestima-recursos-ordenanza-bajas-emisiones-ayuntamiento-barcelona/1003742711254_0.html",
+    "first_seen": "2026-01-13T09:08:27.641060+00:00",
+    "last_seen": "2026-01-13T09:08:27.641060+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "03-La Justicia mantiene el veto a los vehículos sin etiqueta ambiental en la actual ZBE de Barcelona.json",
+        "run_id": "af4cf416-5f18-48a1-98e6-225f2f6acd69",
+        "date": "2026-01-13T06:00:24+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://eab.abime.net/showthread.php?t=121910",
+    "first_seen": "2026-01-13T14:29:30.140066+00:00",
+    "last_seen": "2026-01-14T08:50:14.262127+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "retro_gaming"
+    ],
+    "article_refs": [
+      {
+        "id": "retro_gaming",
+        "filename": "155-Ghosts'n Goblins is also getting a Commodore Amiga AGA edition via JOTD!.json",
+        "run_id": "80e44664-8004-43f6-9e79-fb10b81e45d8",
+        "date": "2026-01-12T21:53:00+00:00"
+      },
+      {
+        "id": "retro_gaming",
+        "filename": "155-ghosts-n-goblins-amiga.json",
+        "date": "2026-01-12T21:53:00+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://github.com/Rainchus/Quest64-Recomp",
+    "first_seen": "2026-01-13T14:29:44.336293+00:00",
+    "last_seen": "2026-01-13T18:57:22.521460+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "retro_gaming"
+    ],
+    "article_refs": [
+      {
+        "id": "retro_gaming",
+        "filename": "115-The N64's most infamous JRPG is getting the same recompilation treatment that gave us 60 FPS PC rema.json",
+        "run_id": "80e44664-8004-43f6-9e79-fb10b81e45d8",
+        "date": "2026-01-12T21:03:10+00:00"
+      },
+      {
+        "id": "retro_gaming",
+        "filename": "115-The N64's most infamous JRPG is getting the same recompilation treatment that gave us 60 FPS PC rema.json",
+        "date": "2026-01-12T21:03:10+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/economia/20260113/obras-acceso-ferroviario-rodalies-aeropuerto-ejecucion-95-125639326?utm_source=rss-noticias&utm_medium=feed&utm_campaign=barcelona",
+    "first_seen": "2026-01-14T09:31:27.577644+00:00",
+    "last_seen": "2026-01-14T09:31:27.577644+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "06-Las obras del acceso ferroviario de Rodalies al aeropuerto de Barcelona-El Prat ya están al 95% de e.json",
+        "run_id": "a9ddc796-f371-40e2-a31d-e40612ac815d",
+        "date": "2026-01-13T14:34:03+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/252567/ferrocarrils-adapta-funcionament-carnet-pensionista-sistema-t-mobilitat",
+    "first_seen": "2026-01-14T09:31:38.423819+00:00",
+    "last_seen": "2026-01-14T09:31:38.423819+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "05-El peregrinaje de miles de pensionistas a estaciones de FGC para comprar su abono rebajado, sin solu.json",
+        "run_id": "a9ddc796-f371-40e2-a31d-e40612ac815d",
+        "date": "2026-01-13T16:15:54+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260113/barcelona-super-puente-febrero-carnaval-santa-eulalia-san-valentin-125648675?utm_source=rss-noticias&utm_medium=feed&utm_campaign=barcelona",
+    "first_seen": "2026-01-14T09:31:43.527718+00:00",
+    "last_seen": "2026-01-14T09:31:43.527718+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "02-Barcelona vivirá un super puente’ este febrero de 2026 al solaparse Carnaval, Santa Eulàlia y San Va.json",
+        "run_id": "a9ddc796-f371-40e2-a31d-e40612ac815d",
+        "date": "2026-01-13T18:33:51+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.vilaweb.cat/noticies/catalunya-curs-escolar-8-setembre-tres-anys/",
+    "first_seen": "2026-01-14T09:31:50.142475+00:00",
+    "last_seen": "2026-01-14T09:31:50.142475+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "100-El govern català proposa de començar el curs el 8 de setembre els tres anys vinents.json",
+        "run_id": "a9ddc796-f371-40e2-a31d-e40612ac815d",
+        "date": "2026-01-13T10:15:02+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260113/primera-casa-disenada-gaudi-construyo-mataro-1878-costo-1790-pesetas-125635048?utm_source=rss-noticias&utm_medium=feed&utm_campaign=barcelona",
+    "first_seen": "2026-01-14T09:32:45.324098+00:00",
+    "last_seen": "2026-01-14T09:32:45.324098+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "07-La primera casa diseñada por Gaudí se construyó en Mataró en el año 1878.json",
+        "run_id": "a9ddc796-f371-40e2-a31d-e40612ac815d",
+        "date": "2026-01-13T13:42:48+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://x.com/i/status/2010967098418049386",
+    "first_seen": "2026-01-14T09:34:59.412060+00:00",
+    "last_seen": "2026-01-14T09:34:59.412060+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "15-Detenido un 'tironero' por robar cadenas de oro a ocho ancianos en Barcelona mientras estaba de perm.json",
+        "run_id": "a9ddc796-f371-40e2-a31d-e40612ac815d",
+        "date": "2026-01-13T09:40:35+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.aena.es/doc/detalleprensa/260113-bcn-estadisticas-2025.pdf",
+    "first_seen": "2026-01-14T09:35:07.255108+00:00",
+    "last_seen": "2026-01-14T09:35:07.255108+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "32-El aeropuerto de El Prat cerró 2025 con 57,5 millones de pasajeros, por encima de su límite teórico.json",
+        "run_id": "a9ddc796-f371-40e2-a31d-e40612ac815d",
+        "date": "2026-01-13T16:11:06+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/445831/bombers-generalitat-tanquen-lany-2025-mes-62500-actuacions",
+    "first_seen": "2026-01-14T09:35:13.037543+00:00",
+    "last_seen": "2026-01-14T09:35:13.037543+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "63-Los Bombers de la Generalitat cierran 2025 con 62.639 actuaciones, un 9% más que en 2024.json",
+        "run_id": "a9ddc796-f371-40e2-a31d-e40612ac815d",
+        "date": "2026-01-13T17:54:29+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.exceltur.org/wp-content/uploads/2026/01/EXCELTUR-Nota-de-prensa-Informe-Perspectivas-N95-Balance-2025-y-previsiones-2026.pdf",
+    "first_seen": "2026-01-14T09:36:03.879005+00:00",
+    "last_seen": "2026-01-14T09:36:03.879005+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "33-Las viviendas turísticas se reducen un 4% en los destinos más visitados de España.json",
+        "run_id": "a9ddc796-f371-40e2-a31d-e40612ac815d",
+        "date": "2026-01-13T14:20:17+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.europapress.es/catalunya/noticia-tsjc-confirma-57-anos-carcel-hombre-violo-primas-menores-prostituyo-20260113184559.html",
+    "first_seen": "2026-01-14T09:37:02.843657+00:00",
+    "last_seen": "2026-01-14T09:37:02.843657+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "65-El TSJC confirma 57 años de cárcel para el hombre que violó a sus primas menores y prostituyó a una.json",
+        "run_id": "a9ddc796-f371-40e2-a31d-e40612ac815d",
+        "date": "2026-01-13T17:45:59+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.vilaweb.cat/noticies/tretze-casos-mes-pesta-porcina-africana-senglars-collserola/",
+    "first_seen": "2026-01-14T09:37:34.246918+00:00",
+    "last_seen": "2026-01-14T09:37:34.246918+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "98-Confirmen tretze casos més de pesta porcina africana en senglars a Collserola.json",
+        "run_id": "a9ddc796-f371-40e2-a31d-e40612ac815d",
+        "date": "2026-01-13T10:41:09+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.europapress.es/catalunya/noticia-barcelona-aprueba-nomenclator-15-nuevos-espacios-publicos-figuras-femeninas-20260113182751.html",
+    "first_seen": "2026-01-14T09:38:12.580700+00:00",
+    "last_seen": "2026-01-14T09:38:12.580700+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "67-Barcelona aprueba el nomenclátor de 15 nuevos espacios públicos a figuras femeninas.json",
+        "run_id": "a9ddc796-f371-40e2-a31d-e40612ac815d",
+        "date": "2026-01-13T17:27:51+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://ajuntament.barcelona.cat/premsa/2026/01/13/la-31a-edicio-del-forum-de-seguretat-viaria-analitza-el-paper-del-missatge-en-la-seguretat-viaria/",
+    "first_seen": "2026-01-14T22:00:10.771797+00:00",
+    "last_seen": "2026-01-14T22:00:10.771797+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-Barcelona destaca la comunicación como clave para salvar vidas en el Foro de Seguridad Vial.json",
+        "run_id": "5c662e70-900d-431e-b729-60ca13ab99bb",
+        "date": "2026-01-14T19:20:34+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260114/barcelona-ciutadella-upf-derribo-viviendas-militares-wellington-125649888",
+    "first_seen": "2026-01-14T22:00:24.776241+00:00",
+    "last_seen": "2026-01-14T22:00:24.776241+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "07-Las grúas empiezan a derribar las últimas casas de los militares de la Ciutadella que quedaban en pi.json",
+        "run_id": "5c662e70-900d-431e-b729-60ca13ab99bb",
+        "date": "2026-01-14T14:09:12+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260114/barcelona-tendra-verano-11-camaras-paseo-maritimo-barceloneta-125647116",
+    "first_seen": "2026-01-14T22:01:20.744757+00:00",
+    "last_seen": "2026-01-14T22:01:20.744757+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "03-Barcelona tendrá este verano 11 cámaras de videovigilancia en el paseo marítimo de la Barceloneta.json",
+        "run_id": "5c662e70-900d-431e-b729-60ca13ab99bb",
+        "date": "2026-01-14T18:00:32+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260114/crece-compra-viviendas-extranjeros-barcelona-2025-tribuna-inmoscopia-apis-125679012",
+    "first_seen": "2026-01-14T22:01:35.816228+00:00",
+    "last_seen": "2026-01-14T22:01:35.816228+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "02-El 23% de la compra de viviendas en Barcelona en 2025 fue por parte de extranjeros.json",
+        "run_id": "5c662e70-900d-431e-b729-60ca13ab99bb",
+        "date": "2026-01-14T18:03:00+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260114/tres-personas-titulos-sociales-moverse-generalitat-barcelona-metropolitana-tarjetas-bonificaciones-125676349",
+    "first_seen": "2026-01-14T22:01:37.756632+00:00",
+    "last_seen": "2026-01-14T22:01:37.756632+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "06-Una de cada tres personas usa títulos sociales para moverse en transporte público en Barcelona.json",
+        "run_id": "5c662e70-900d-431e-b729-60ca13ab99bb",
+        "date": "2026-01-14T14:21:48+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://ajuntament.barcelona.cat/obres/es/noticias/nueva-fase-de-las-obras-de-desdoblamiento-de-las-vias-del-trambesos-1589100",
+    "first_seen": "2026-01-14T22:03:42.340357+00:00",
+    "last_seen": "2026-01-14T22:03:42.340357+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "14-Esta calle de Barcelona se convierte en peatonal para siempre.json",
+        "run_id": "5c662e70-900d-431e-b729-60ca13ab99bb",
+        "date": "2026-01-14T11:55:15+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/economia/20260114/congreso-ise-supone-impacto-520-millones-barcelona-125646079",
+    "first_seen": "2026-01-14T22:04:11.824019+00:00",
+    "last_seen": "2026-01-14T22:04:11.824019+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "13-El congreso ISE ya supone una inyección de 520 millones de euros para Barcelona.json",
+        "run_id": "5c662e70-900d-431e-b729-60ca13ab99bb",
+        "date": "2026-01-14T12:01:48+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://sagradafamilia.org/",
+    "first_seen": "2026-01-14T22:04:59.424011+00:00",
+    "last_seen": "2026-01-14T22:04:59.424011+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "22-Instalados los cuatro brazos horizontales de la cruz de la torre de Jesucristo de la Sagrada Familia.json",
+        "run_id": "5c662e70-900d-431e-b729-60ca13ab99bb",
+        "date": "2026-01-14T17:14:05+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/gastronomia/restaurantes/20260114/restaurante-kiosko-universal-boqueria-barcelona-125614667",
+    "first_seen": "2026-01-14T22:05:06.345248+00:00",
+    "last_seen": "2026-01-14T22:05:06.345248+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "17-Restaurante Kiosko Universal lo que vale la pena de la Boqueria.json",
+        "run_id": "5c662e70-900d-431e-b729-60ca13ab99bb",
+        "date": "2026-01-14T16:37:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.europapress.es/catalunya/noticia-collboni-defiende-senado-bajada-49-alquiler-barcelona-ley-vivienda-20260114152337.html",
+    "first_seen": "2026-01-14T22:05:44.545816+00:00",
+    "last_seen": "2026-01-14T22:05:44.545816+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "67-Collboni defiende en el Senado una bajada del 4,9% del alquiler en Barcelona con la Ley de Vivienda.json",
+        "run_id": "5c662e70-900d-431e-b729-60ca13ab99bb",
+        "date": "2026-01-14T14:23:37+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elnacional.cat/es/barcelona/antic-teatre-reprocha-collboni-desmantelamiento-sistematico-cultura-base_1537108_102.html",
+    "first_seen": "2026-01-14T22:07:29.446641+00:00",
+    "last_seen": "2026-01-14T22:07:29.446641+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "70-El Antic Teatre reprocha a Collboni un desmantelamiento sistemático de la cultura de base.json",
+        "run_id": "5c662e70-900d-431e-b729-60ca13ab99bb",
+        "date": "2026-01-14T13:48:19+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.barcelona.cat/infobarcelona/ca/noticia/ampliacio-de-100-a-178-places-per-acollir-persones-sense-llar-a-barcelona_2080709.html",
+    "first_seen": "2026-01-15T10:01:31.186420+00:00",
+    "last_seen": "2026-01-15T10:01:31.186420+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "03-Barcelona ampliará con 78 nuevas camas y 12 profesionales la atención a las personas sin hogar duran.json",
+        "date": "2026-01-14T20:42:02+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.batlleiroig.com/",
+    "first_seen": "2026-01-15T10:02:51.103648+00:00",
+    "last_seen": "2026-01-15T10:02:51.103648+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-Un lago recuperado y seis plazas un jardín urbano dinamizará el ecobarrio’ de la Mercedes en Barcel.json",
+        "date": "2026-01-15T06:00:58+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260115/barcelona-pisos-mercedes-obras-ecodistrito-125690134?utm_source=rss-noticias&utm_medium=feed&utm_campaign=barcelona",
+    "first_seen": "2026-01-15T10:04:25.246875+00:00",
+    "last_seen": "2026-01-15T10:04:25.246875+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "02-El ecodistrito’ de la Mercedes en Barcelona prevé empezar obras a finales de 2026 y disponer de 300.json",
+        "date": "2026-01-15T06:00:56+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.barcelona.cat/infobarcelona/ca/ampliacio-de-100-a-178-places-per-acollir-persones-sense-llar-a-barcelona_1260341.html",
+    "first_seen": "2026-01-15T10:04:58.277494+00:00",
+    "last_seen": "2026-01-15T10:04:58.277494+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "03-Barcelona ampliará con 78 nuevas camas y 12 profesionales la atención a las personas sin hogar duran.json",
+        "date": "2026-01-14T20:42:02+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260115/11440275/aterrizaje-emergencia-avion-turkish-airlines-prat-emergencia-bordo.html",
+    "first_seen": "2026-01-15T13:09:45.990215+00:00",
+    "last_seen": "2026-01-15T13:09:45.990215+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "unknown"
+    ],
+    "article_refs": [
+      {
+        "id": "unknown",
+        "filename": "quick_aterrizaje_de_emergencia_de_un_avi_n_de_turkish_ai_1768482399.json",
+        "date": "2026-01-15T13:06:39.077965+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://x.com/y_ustun/status/XXXXX",
+    "first_seen": "2026-01-15T13:19:10.839551+00:00",
+    "last_seen": "2026-01-15T13:42:05.628940+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "unknown"
+    ],
+    "article_refs": [
+      {
+        "id": "unknown",
+        "filename": "quick_aterrizaje_de_emergencia_de_un_avi_n_de_turkish_ai_1768482896.json",
+        "run_id": "6d0dff6c-72c1-40af-a111-3c4bd897a3ed",
+        "date": "2026-01-15T13:14:56.438903+00:00"
+      },
+      {
+        "id": "unknown",
+        "filename": "quick_aterrizaje_de_emergencia_de_un_avi_n_de_turkish_ai_1768482399.json",
+        "date": "2026-01-15T13:06:39.077965+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://x.com/aena/status/1746817282855147820",
+    "first_seen": "2026-01-15T13:31:24.625818+00:00",
+    "last_seen": "2026-01-15T13:31:24.625818+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "unknown"
+    ],
+    "article_refs": [
+      {
+        "id": "unknown",
+        "filename": "quick_un_pasajero_accede_a_la_wifi_de_un_vuelo_de_estamb_1768483845.json",
+        "date": "2026-01-15T13:30:45.810890+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://x.com/aena",
+    "first_seen": "2026-01-15T13:36:07.236485+00:00",
+    "last_seen": "2026-01-15T13:36:07.236485+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "unknown"
+    ],
+    "article_refs": [
+      {
+        "id": "unknown",
+        "filename": "quick_aterrizaje_de_emergencia_de_un_avi_n_de_turkish_ai_1768482896.json",
+        "date": "2026-01-15T13:14:56.438903+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.vilaweb.cat/noticies/48-aprova-proves-lliures-folc-docents-catala-illes/",
+    "first_seen": "2026-01-15T14:50:47.930622+00:00",
+    "last_seen": "2026-01-15T14:50:47.930622+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "93-Un 48% de docents aprova les proves lliures del FOLC per a ensenyar català a les Illes.json",
+        "run_id": "e9e313e5-d60d-4fb5-98a2-2c3af37eb63d",
+        "date": "2026-01-14T11:30:52+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.atm.cat/web/ca/58.php?p_id=98",
+    "first_seen": "2026-01-15T14:51:02.515254+00:00",
+    "last_seen": "2026-01-15T14:51:02.515254+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "33-Las nuevas tarifas de transporte en Barcelona entran en vigor el jueves con subidas del 3,5%.json",
+        "run_id": "e9e313e5-d60d-4fb5-98a2-2c3af37eb63d",
+        "date": "2026-01-14T15:24:50+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://metgesdecatalunya.cat/es/actualidad/noticias/mc-vuelve-movilizar-2000-facultativos-barcelona-exige-olga-pane-que-negocie-o-se-aparte",
+    "first_seen": "2026-01-15T14:51:02.838120+00:00",
+    "last_seen": "2026-01-15T14:51:02.838120+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "20-Unos 1000 médicos claman en Barcelona por su situación laboral en una jornada de huelga con un segui.json",
+        "run_id": "e9e313e5-d60d-4fb5-98a2-2c3af37eb63d",
+        "date": "2026-01-14T15:21:20+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/782908/generalitat-lajuntament-terrassa-pacten-bateria-dacords-materia-seguretat-habitatge-salut-esports",
+    "first_seen": "2026-01-15T14:51:06.441864+00:00",
+    "last_seen": "2026-01-15T14:51:06.441864+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "10-Terrassa y la Generalitat pactan una comisaría mixta en los antiguos juzgados para 2028 y abren mesa.json",
+        "run_id": "e9e313e5-d60d-4fb5-98a2-2c3af37eb63d",
+        "date": "2026-01-14T13:06:49+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://whc.unesco.org/en/news/2591",
+    "first_seen": "2026-01-16T07:50:18.193773+00:00",
+    "last_seen": "2026-01-16T07:50:18.193773+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "102-Barcelona 2026. World Capital of Architecture.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "3926-03-12T00:00:00+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260115/barcelona-quiere-turistas-descubran-catalunya-aliviar-presion-125727295",
+    "first_seen": "2026-01-16T07:50:21.782163+00:00",
+    "last_seen": "2026-01-16T09:19:02.752481+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-Barcelona quiere que sus turistas descubran toda Catalunya y aliviar la presión en la ciudad.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "2026-01-15T18:58:52+01:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "01-Barcelona quiere que sus turistas descubran toda Catalunya y aliviar la presión en la ciudad.json",
+        "run_id": "d14dedd2-54f3-432f-a0ac-fe597181eadb",
+        "date": "2026-01-15T18:58:52+01:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "01-Barcelona quiere que sus turistas descubran toda Catalunya y aliviar la presión en la ciudad.json",
+        "run_id": "2555c664-6ec9-4990-bd94-52823a5a6796",
+        "date": "2026-01-15T18:58:52+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://noticies.tmb.cat/sala-de-premsa/barcelona-millora-reforca-servei-de-bus-amb-mes-oferta-mes-intermodalitat-flota-mes",
+    "first_seen": "2026-01-16T07:50:29.523480+00:00",
+    "last_seen": "2026-01-16T07:50:29.523480+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "03-La línea de bus H12 se reinventa en Barcelona para ser más rápida y frecuente.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "2026-01-15T18:07:54+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260115/lhospitalet-aprueba-moratoria-ano-concesion-licencias-nuevos-hoteles-125718285",
+    "first_seen": "2026-01-16T07:50:37.747301+00:00",
+    "last_seen": "2026-01-16T07:50:37.747301+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "07-L'Hospitalet aprueba una moratoria de un año para la concesión de licencias de nuevos hoteles.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "2026-01-15T15:45:41+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/gastronomia/restaurantes/20260115/buenos-restaurantes-barcelona-casa-fiero-640-veracruz-125633083",
+    "first_seen": "2026-01-16T07:54:11.377086+00:00",
+    "last_seen": "2026-01-16T07:54:11.377086+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "17-5 buenos restaurantes que debes pisar antes de que acabe enero.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "2026-01-15T07:48:35+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.barcelona.cat/infobarcelona/es/abierto-el-tramite-para-pedir-ayudas-para-las-actividades-extraescolares_1377889.html",
+    "first_seen": "2026-01-16T07:54:14.954167+00:00",
+    "last_seen": "2026-01-16T07:54:14.954167+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "14-Nuevas ayudas para extraescolares en Barcelona en 2026 cuándo y cómo pedirlas.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "2026-01-15T11:03:57+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://bop.diba.cat/",
+    "first_seen": "2026-01-16T07:54:17.625771+00:00",
+    "last_seen": "2026-01-16T07:54:17.625771+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "13-La nueva ordenanza de civismo de Barcelona entrará en vigor el 15 de febrero con multas más elevadas.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "2026-01-15T11:10:15+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.20minutos.es/cataluna/barcelona/melendi-anuncia-un-segundo-concierto-barcelona-tras-agotar-las-entradas-primero_6921786_0.html",
+    "first_seen": "2026-01-16T07:54:51.827961+00:00",
+    "last_seen": "2026-01-16T07:54:51.827961+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "20-Melendi anuncia un segundo concierto en Barcelona tras agotar las entradas del primero.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "2026-01-15T19:04:34+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/economia/20260115/barcelona-concentra-44-por-ciento-inversion-startups-espana-2025-1374-millones-125717143",
+    "first_seen": "2026-01-16T07:57:36.719405+00:00",
+    "last_seen": "2026-01-16T07:57:36.719405+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "10-Barcelona concentra el 44% de la inversión en 'startups' en España durante el 2025 con 1.374 millone.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "2026-01-15T15:21:09+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.instagram.com/anticcolmadobcn/",
+    "first_seen": "2026-01-16T07:57:41.964735+00:00",
+    "last_seen": "2026-01-16T07:57:41.964735+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "22-Cena y barra libre de mobiliario por menos de 20 euros el restaurante de Barcelona donde te puedes.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "2026-01-15T17:19:28+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260115/11440204/antiga-fabrica-estrella-damm-reune-mas-106-000-asistentes-2025.html",
+    "first_seen": "2026-01-16T07:58:26.671680+00:00",
+    "last_seen": "2026-01-16T09:19:06.705268+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "41-La Antiga Fàbrica Estrella Damm reúne a más de 106.000 asistentes en el 2025.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "2026-01-15T09:43:06+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "41-La Antiga Fàbrica Estrella Damm reúne a más de 106.000 asistentes en el 2025.json",
+        "run_id": "d14dedd2-54f3-432f-a0ac-fe597181eadb",
+        "date": "2026-01-15T09:43:06+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "41-La Antiga Fàbrica Estrella Damm reúne a más de 106.000 asistentes en el 2025.json",
+        "run_id": "2555c664-6ec9-4990-bd94-52823a5a6796",
+        "date": "2026-01-15T09:43:06+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.sindicaturabarcelona.cat/wp-content/uploads/202410_Dret-salut_AO-sobre-la-celebracio-de-la-Fira-del-Joc-Casinos-i-Apostes_24OF000005.pdf",
+    "first_seen": "2026-01-16T07:58:57.763971+00:00",
+    "last_seen": "2026-01-16T07:58:57.763971+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "40-La Sindicatura de Greuges vuelve a cuestionar la feria del juego y pide abrir el debate político.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "2026-01-15T10:31:58+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.europapress.es/catalunya/noticia-turkish-airlines-estudia-emprender-acciones-legales-falsa-amenaza-bomba-20260115181148.html",
+    "first_seen": "2026-01-16T07:59:21.913949+00:00",
+    "last_seen": "2026-01-16T07:59:21.913949+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "62-Turkish Airlines estudia emprender acciones legales tras la falsa amenaza de bomba.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "2026-01-15T17:11:48+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.telecogresca.com/associacio/",
+    "first_seen": "2026-01-16T08:01:10.031966+00:00",
+    "last_seen": "2026-01-16T08:01:10.031966+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "69-La Telecogresca, en peligro por las nuevas condiciones del Ayuntamiento de Barcelona para el parque.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "2026-01-15T14:04:30+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.vilaweb.cat/noticies/grenlandia-es-tambe-un-conflicte-existencial-per-a-nosaltres-els-europeus/",
+    "first_seen": "2026-01-16T08:01:16.482803+00:00",
+    "last_seen": "2026-01-16T09:57:49.186431+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "99-L’Espanyol-Girona de demà es podrà veure en català en obert.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "2026-01-15T09:40:30+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "99-L’Espanyol-Girona de demà es podrà veure en català en obert.json",
+        "run_id": "d14dedd2-54f3-432f-a0ac-fe597181eadb",
+        "date": "2026-01-15T09:40:30+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "99-L’Espanyol-Girona de demà es podrà veure en català en obert.json",
+        "run_id": "238c3e1c-cee6-4744-9f03-60ebb0f31fbe",
+        "date": "2026-01-15T09:40:30+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elnacional.cat/es/barcelona/golpe-despedidas-soltero-barcelona-multara-ir-por-calle-con-elementos-sexuales-exhibicionismo_1537951_102.html",
+    "first_seen": "2026-01-16T08:01:42.315930+00:00",
+    "last_seen": "2026-01-16T08:01:42.315930+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "68-Golpe a las despedidas de soltero Barcelona multará los elementos sexuales y el exhibicionismo en l.json",
+        "run_id": "1c96a9bc-4133-4671-a1f3-0d25c1d859b9",
+        "date": "2026-01-15T18:30:21+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260115/11440221/sindicatura-greuges-vuelve-cuestionar-feria-juego-pide-abrir-debate-politico.html",
+    "first_seen": "2026-01-16T09:10:20.983481+00:00",
+    "last_seen": "2026-01-16T09:18:55.312317+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "40-La Sindicatura de Greuges vuelve a cuestionar la feria del juego y pide abrir el debate político.json",
+        "run_id": "d14dedd2-54f3-432f-a0ac-fe597181eadb",
+        "date": "2026-01-15T10:31:58+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "40-La Sindicatura de Greuges vuelve a cuestionar la feria del juego y pide abrir el debate político.json",
+        "run_id": "2555c664-6ec9-4990-bd94-52823a5a6796",
+        "date": "2026-01-15T10:31:58+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.vilaweb.cat/noticies/espanyol-girona-veure-gratis-catala-obert-teledeporte/",
+    "first_seen": "2026-01-16T09:18:45.188942+00:00",
+    "last_seen": "2026-01-16T09:36:20.592848+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "99-L’Espanyol-Girona de demà es podrà veure en català en obert.json",
+        "run_id": "2555c664-6ec9-4990-bd94-52823a5a6796",
+        "date": "2026-01-15T09:40:30+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "99-L’Espanyol-Girona de demà es podrà veure en català en obert.json",
+        "run_id": "b27c20cb-90f6-4b4f-af7c-45e33351d215",
+        "date": "2026-01-15T09:40:30+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260115/11440772/futura-ley-alta-montana-abarca-144-municipios-excluye-156-actuales.html",
+    "first_seen": "2026-01-16T12:44:38.826510+00:00",
+    "last_seen": "2026-01-16T12:44:38.826510+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "13-La futura ley de alta montaña abarca 144 municipios y excluye 156 de los actuales.json",
+        "run_id": "bbbc2804-5da1-426a-8a77-72e6c3e6efb4",
+        "date": "2026-01-15T18:42:03+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.20minutos.es/cataluna/barcelona/presidente-aena-ve-inviable-que-se-pueda-ceder-gestion-aeropuerto-barcelona_6921792_0.html",
+    "first_seen": "2026-01-16T12:45:08.281787+00:00",
+    "last_seen": "2026-01-16T12:45:08.281787+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "04-El presidente de Aena ve inviable que se pueda ceder la gestión del aeropuerto de Barcelona.json",
+        "run_id": "bbbc2804-5da1-426a-8a77-72e6c3e6efb4",
+        "date": "2026-01-15T19:29:38+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.totbarcelona.cat/mobilitat/contracte-milionari-tmb-concurs-trens-l3-l5-685097/",
+    "first_seen": "2026-01-16T12:45:11.543143+00:00",
+    "last_seen": "2026-01-16T12:45:11.543143+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "33-Contracte milionari de TMB treu a concurs “posar al dia” 34 trens de l’L3 i l’L5.json",
+        "run_id": "bbbc2804-5da1-426a-8a77-72e6c3e6efb4",
+        "date": "2026-01-15T20:06:32+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://elpais.com/economia/negocios/2026-01-16/pasado-y-presente-de-los-clubes-privados-elitismo-entre-notas-de-jazz.html",
+    "first_seen": "2026-01-16T12:45:46.669497+00:00",
+    "last_seen": "2026-01-16T12:45:46.669497+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "07-Pasado y presente de los clubes privados elitismo entre notas de jazz.json",
+        "run_id": "bbbc2804-5da1-426a-8a77-72e6c3e6efb4",
+        "date": "2026-01-16T05:30:00+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/445831/l-increment-d-oferta-de-busos-entre-manresa-barcelona-entrara-funcionament-dilluns-12-gener",
+    "first_seen": "2026-01-17T11:17:25.753673+00:00",
+    "last_seen": "2026-01-17T11:17:25.753673+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "03-El bus nocturno entre Manresa y Barcelona arranca este fin de semana.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T18:44:35+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/eixample/20260116/barcelona-ofrece-agencia-estatal-salud-publica-perla-arquitectonica-gozada-125746544",
+    "first_seen": "2026-01-17T11:17:27.860594+00:00",
+    "last_seen": "2026-01-17T11:17:27.860594+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-Barcelona ofrece para la Agencia Estatal de Salud Pública una perla arquitectónica apenas gozada en.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T18:51:57+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260116/furor-liquidacion-lujoso-hotel-barcelona-llevado-todo-podido-125758370",
+    "first_seen": "2026-01-17T11:17:52.522640+00:00",
+    "last_seen": "2026-01-17T11:17:52.522640+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "02-Furor por la liquidación de un lujoso hotel de Barcelona Me he llevado todo lo que he podido.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T18:50:24+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ara.cat/economia/energia/sistema-electric-espanyol-perd-potencia-augmenta-saturacio_1_5619998.html",
+    "first_seen": "2026-01-17T11:18:12.503802+00:00",
+    "last_seen": "2026-01-17T11:18:12.503802+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "110-El sistema elèctric espanyol perd potència i augmenta la saturació.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T17:24:37+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260116/barcelona-droga-narcolocal-cerrado-gotic-mossos-125753519",
+    "first_seen": "2026-01-17T11:18:14.343371+00:00",
+    "last_seen": "2026-01-17T11:18:14.343371+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "11-Los Mossos clausuran un 'narcolocal' conflictivo en el centro de Barcelona y lo sellan con cemento p.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T14:36:56+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260116/mapa-son-ciudades-segunda-corona-t-social-transporte-publico-125749610",
+    "first_seen": "2026-01-17T11:20:24.921808+00:00",
+    "last_seen": "2026-01-17T11:20:24.921808+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "12-MAPA Estas son las ciudades de la segunda corona de Barcelona que tendrán descuentos por la T-Socia.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T12:57:43+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/sucesos/20260116/detenidos-sant-adria-besos-ropa-robada-tienda-barcelona-125750413",
+    "first_seen": "2026-01-17T11:20:41.171726+00:00",
+    "last_seen": "2026-01-17T11:20:41.171726+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "13-Detenidos en Sant Adrià de Besòs con 1.200 piezas de ropa robadas de una tienda en Barcelona.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T12:56:43+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.vilaweb.cat/noticies/govern-senglars-pesta-porcina/",
+    "first_seen": "2026-01-17T11:21:41.460706+00:00",
+    "last_seen": "2026-01-17T11:21:41.460706+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "130-El govern detecta quatre senglars més amb pesta porcina i en total ja en són seixanta-quatre.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T13:42:17+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://eur-lex.europa.eu/eli/reg_del/2025/1766",
+    "first_seen": "2026-01-17T11:21:43.085551+00:00",
+    "last_seen": "2026-01-17T11:21:43.085551+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "131-Els pescadors de Catalunya, el País Valencià i les Illes van a la vaga contra la normativa de la UE.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T13:33:02+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.diputaciolleida.cat/la-29a-fira-de-loli-qualitat-verge-extra-de-les-borges-blanques-reuneix-per-primer-cop-les-cinc-denominacions-dorigen-de-catalunya/",
+    "first_seen": "2026-01-17T11:21:43.511800+00:00",
+    "last_seen": "2026-01-17T11:21:43.511800+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "132-Comença la Fira de l’Oli de les Borges Blanques, amb rècord de productors.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T13:00:21+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat:443/gov",
+    "first_seen": "2026-01-17T11:23:28.997677+00:00",
+    "last_seen": "2026-01-27T16:32:14.144849+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news",
+      "unknown"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "135-Ajuntaments i entitats oferiran 350 nous cursos de català bàsic per a adults.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T11:41:34+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "03-Catalunya busca evitar la fuga de funcionarios a empresas privadas con una ley que mejora sus condic.json",
+        "run_id": "2bca87cc-b3db-4483-8f27-c17cc90e124b",
+        "date": "2026-01-18T06:00:00+01:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "01-Los buses interurbanos de Catalunya cierran un 2025 de récord y prevén doblar la flota en tres años.json",
+        "run_id": "b7bfe263-64d7-4e48-9e1f-62c63a4cbcb1",
+        "date": "2026-01-19T06:00:32+01:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "14-Barcelona activa la alerta del plan básico de emergencias municipal por el mal estado del mar.json",
+        "run_id": "2f52e57f-e30f-45f9-b758-e5a443659e50",
+        "date": "2026-01-19T10:48:03+01:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "30-El nuevo teatro y escuela de Focus en Barcelona prevé abrir en 2028 con 11 millones de inversión.json",
+        "run_id": "b155db65-a208-49fc-a547-51f8ea6b404f",
+        "date": "2026-01-19T19:39:17+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "94-Els bombers cercaran el desaparegut a Palau-sator durant la nit amb drons.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T16:06:21+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "138-La UB suspèn els exàmens i la resta d’universitats oferiran alternatives.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-21T10:26:06+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "124-Comença el tall a la AP-7 a Martorell i es preveu que duri dies.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-21T14:41:57+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "02-Cataluña recupera el servicio de trenes de Rodalies tras dos días de caos.json",
+        "run_id": "47055665-f0e0-4d35-9c12-cc2a639f8001",
+        "date": "2026-01-23T06:51:54+01:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "121-Suspendida la zona de Bajas Emisiones en Barcelona por el caos de Rodalies cualquier vehículo puede.json",
+        "run_id": "bab24ea3-484e-42e5-9baa-e11dce33c583",
+        "date": "2026-01-23T19:43:03.349990"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "14-Encuentran a una mujer muerta tras una discusión en un local de L'Hospitalet.json",
+        "run_id": "bab24ea3-484e-42e5-9baa-e11dce33c583",
+        "date": "2026-01-23T08:07:27+01:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "01-Detenido un hombre como presunto autor de la muerte violenta de una mujer en L'Hospitalet.json",
+        "run_id": "e1aa9680-eaa5-4ffa-9933-e1fbed43a8b5",
+        "date": "2026-01-23T22:36:51+01:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "10-Un camión de 40 toneladas de nitrógeno líquido refrigerado queda encallado en Torrelles de Llobregat.json",
+        "run_id": "8c12556d-b170-41f9-b4e8-eb97851b91ba",
+        "date": "2026-01-24T10:54:43+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "35-Els turistes van gastar a Catalunya el 2025 un 4,5% més que l'any anterior.json",
+        "run_id": "8c12556d-b170-41f9-b4e8-eb97851b91ba",
+        "date": "2026-01-24T19:14:06+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "11-Rodalies restablece las líneas con más usuarios este lunes y pasa a ser gratuito durante un mes.json",
+        "run_id": "8be64ba8-2f85-4aef-81ef-a46217567b8c",
+        "date": "2026-01-25T17:27:54+00:00"
+      },
+      {
+        "id": "unknown",
+        "filename": "5.Catalan-Government-and-Spanish-State-Negotiate-Solutions-Amid-Rodalies-Commuter.json",
+        "run_id": "a4fd91ef-b2eb-41a9-8b1b-d1ea3387cbcb"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/445831/paneque-amb-constitucio-rodalies-catalunya-assumim-sobretot-responsabilitat",
+    "first_seen": "2026-01-17T11:23:46.359311+00:00",
+    "last_seen": "2026-01-17T11:23:46.359311+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "137-Constituïda l’empresa mixta de Rodalia entre la Generalitat i RENFE.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T11:09:58+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.vilaweb.cat/noticies/facua-denuncia-live-nation-recarrecs-entrades-rosalia/",
+    "first_seen": "2026-01-17T11:24:46.690093+00:00",
+    "last_seen": "2026-01-17T11:24:46.690093+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "139-Facua denuncia Live Nation pels recàrrecs desorbitats en la venda d’entrades de Rosalía.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T10:52:51+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260116/detenido-terrassa-agredir-arma-blanca-125749123",
+    "first_seen": "2026-01-17T11:25:00.766356+00:00",
+    "last_seen": "2026-01-17T11:25:00.766356+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "15-Un detenido en Terrassa por agredir con arma blanca a un hombre en la Mina.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T12:30:59+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.barcelona.cat/infobarcelona/ca/barcelona-compra-97-habitatges-i-tres-solars-el-2025-i-eleva-el-parc-public-fins-a-296-pisos_1257492.html",
+    "first_seen": "2026-01-17T11:25:20.597652+00:00",
+    "last_seen": "2026-01-17T11:25:20.597652+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "14-Barcelona compra 97 pisos durante 2025 por 21 millones de euros, la mayoría de ellos habitados.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T12:38:08+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://noticies.tmb.cat/sala-de-premsa/lexposicio-de-trens-historics-restaurats-tanca-amb-gairebe-93000-visitants",
+    "first_seen": "2026-01-17T11:26:42.230519+00:00",
+    "last_seen": "2026-01-17T11:26:42.230519+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "149-L’exposició de trens històrics restaurats tanca amb gairebé 93.000 visitants.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-11-01T19:03:00"
+      }
+    ]
+  },
+  {
+    "url": "https://noticies.tmb.cat/empresa/xarxa-metro-de-barcelona-estrena-quatre-noves-pantalles-de-gran-format",
+    "first_seen": "2026-01-17T11:27:00.122283+00:00",
+    "last_seen": "2026-01-17T11:27:00.122283+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "147-La xarxa del metro de Barcelona estrena quatre noves pantalles de gran format.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-15T10:00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://offensive-bcn.com/",
+    "first_seen": "2026-01-17T11:28:17.709854+00:00",
+    "last_seen": "2026-01-17T11:28:17.709854+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "16-Ciberespías de todo el mundo se reúnen en Barcelona en un congreso secreto organizado por una empres.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T12:20:20+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.hospitalitynet.org/announcement/41009100.html",
+    "first_seen": "2026-01-17T11:28:30.089345+00:00",
+    "last_seen": "2026-01-17T11:28:30.089345+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "36-En busca de la almohada a cinco euros un mercadillo vende los objetos de un hotel antes de su refor.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T16:16:39+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.barcelonarockfest.com/",
+    "first_seen": "2026-01-17T11:28:56.842089+00:00",
+    "last_seen": "2026-01-17T11:28:56.842089+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "43-Megadeth se incorpora al cartel del Barcelona Rock Fest.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T15:46:30+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ccoo.cat/noticies/ccoo-planta-cara-a-la-publicitat-sexista-amb-la-sancio-a-bakers-panaderia/",
+    "first_seen": "2026-01-17T11:29:46.687682+00:00",
+    "last_seen": "2026-01-17T11:29:46.687682+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "78-Multa de 30.000 euros a un forn de pa de Barcelona per publicitat sexista.json",
+        "run_id": "15d439f4-3d47-46f9-b0de-e90d5346771e",
+        "date": "2026-01-16T15:05:06+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://junts.cat/noticia/2026/01/17/junts-vol-adaptar-la-taxa-turistica-a-la-realitat-territorial-per-reforcar-lautonomia-local/",
+    "first_seen": "2026-01-18T11:05:29.242759+00:00",
+    "last_seen": "2026-01-18T11:05:29.242759+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "41-Junts propone que la tasa turística solo suba en temporada alta y que se demore su entrada en vigor.json",
+        "run_id": "0146a02b-94d0-43de-a750-56065f222955",
+        "date": "2026-01-16T17:12:18+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/491500/president-illa-lhospital-germans-trias-dels-millors-catalunya-maxima-millor-tecnologia",
+    "first_seen": "2026-01-18T11:05:30.528958+00:00",
+    "last_seen": "2026-01-18T11:05:30.528958+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "26-El Hospital Germans Trias de Badalona abre seis nuevos quirófanos con la última tecnología robótica.json",
+        "run_id": "0146a02b-94d0-43de-a750-56065f222955",
+        "date": "2026-01-16T13:01:39+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lamoncloa.gob.es/Paginas/PageNotFoundError.aspx?requestUrl=/serviciosdeprensa/notasprensa/inclusion/Paginas/2026/160126-afiliacion-extranjeros.aspx",
+    "first_seen": "2026-01-18T11:05:58.625147+00:00",
+    "last_seen": "2026-01-18T11:05:58.625147+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "86-Rècord històric d'estrangers treballant a Catalunya.json",
+        "run_id": "0146a02b-94d0-43de-a750-56065f222955",
+        "date": "2026-01-16T14:12:08+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260117/incendia-tren-estacion-tortosa-deja-125793923",
+    "first_seen": "2026-01-18T16:32:12.459737+00:00",
+    "last_seen": "2026-01-18T16:32:12.459737+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "02-Se incendia un tren en la estación Tortosa y deja la ciudad sin servicio ferroviario.json",
+        "run_id": "2bca87cc-b3db-4483-8f27-c17cc90e124b",
+        "date": "2026-01-17T20:56:48+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.arquitecturacatalana.cat/ca/obres/edifici-doficines-santana-i-soler",
+    "first_seen": "2026-01-18T16:32:19.275107+00:00",
+    "last_seen": "2026-01-18T16:32:19.275107+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "13-Un rincón de Chicago en Via Laietana.json",
+        "run_id": "2bca87cc-b3db-4483-8f27-c17cc90e124b",
+        "date": "2026-01-17T23:05:00+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://estadiolimpic.barcelona/es/agenda",
+    "first_seen": "2026-01-18T16:32:34.408610+00:00",
+    "last_seen": "2026-01-18T16:32:34.408610+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-Un 2026 repleto de conciertos y eventos internacionales en la Anella Olímpica.json",
+        "run_id": "2bca87cc-b3db-4483-8f27-c17cc90e124b",
+        "date": "2026-01-18T06:00:22+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://web.gencat.cat/ca/ciutadania/actualitat",
+    "first_seen": "2026-01-18T16:33:14.679934+00:00",
+    "last_seen": "2026-01-18T16:33:14.679934+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "04-Del machete a la pistola las bandas pasan a palabras mayores.json",
+        "run_id": "2bca87cc-b3db-4483-8f27-c17cc90e124b",
+        "date": "2026-01-18T05:30:01+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.totbarcelona.cat/societat/esborrar-anomalia-franquista-barcelona-idea-erc-glories-684799/",
+    "first_seen": "2026-01-18T16:36:30.996228+00:00",
+    "last_seen": "2026-01-18T16:36:30.996228+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "28-Esborrar una “anomalia” franquista de Barcelona la idea d’ERC per a les Glòries.json",
+        "run_id": "2bca87cc-b3db-4483-8f27-c17cc90e124b",
+        "date": "2026-01-17T20:00:42+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://x.com/salvadorilla/status/1748057288647704739",
+    "first_seen": "2026-01-19T08:38:22.348548+00:00",
+    "last_seen": "2026-01-19T08:38:22.348548+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "31-Illa asegura estar bien y con ánimos y agradece el trabajo del Hospital Vall d'Hebron.json",
+        "run_id": "b7bfe263-64d7-4e48-9e1f-62c63a4cbcb1",
+        "date": "2026-01-18T20:52:39+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.vilaweb.cat/noticies/25-morts-en-accidents-de-tren-als-paisos-catalans-en-el-que-portem-de-segle-156-a-lestat-espanyol/",
+    "first_seen": "2026-01-19T08:38:53.404983+00:00",
+    "last_seen": "2026-01-19T08:38:53.404983+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "40-25 morts en accidents de tren als Països Catalans en el que portem de segle, 156 a l’estat espanyol.json",
+        "run_id": "b7bfe263-64d7-4e48-9e1f-62c63a4cbcb1",
+        "date": "2026-01-19T00:14:13+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/govern/docs/2025/02/14/15/02/e19e819a-185a-46e8-8d25-b321b31910a7.pdf",
+    "first_seen": "2026-01-19T08:39:44.884873+00:00",
+    "last_seen": "2026-01-19T08:39:44.884873+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "33-Diversos robatoris de coure desestabilitzen els equipaments esportius de Montjuïc.json",
+        "run_id": "b7bfe263-64d7-4e48-9e1f-62c63a4cbcb1",
+        "date": "2026-01-18T20:01:05+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/2026/01/18/proteccio-civil-demana-extremar-prudencia-llevantada-dema-portara-mes-pluja-neu-fort-onatg",
+    "first_seen": "2026-01-19T08:39:58.295205+00:00",
+    "last_seen": "2026-01-19T08:39:58.295205+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "55-“Cal extremar la precaució” la llevantada durà més pluja, neu i fort onatge.json",
+        "run_id": "b7bfe263-64d7-4e48-9e1f-62c63a4cbcb1",
+        "date": "2026-01-18T19:51:00+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260119/11441750/banda-pisos-ilegales-paseo-gracia.html",
+    "first_seen": "2026-01-19T09:26:22.781834+00:00",
+    "last_seen": "2026-01-19T09:26:22.781834+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "11-En las entrañas de la banda de los apartamentos turísticos de lujo ilegales del paseo de Gràcia.json",
+        "date": "2026-01-19T05:00:00+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260119/galdric-santana-seguro-gaudi-cambiaria-algo-pero-sagrada-familia-es-su-proyecto-barcelona-125760337",
+    "first_seen": "2026-01-19T19:11:43.454888+00:00",
+    "last_seen": "2026-01-19T19:11:43.454888+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-Galdric Santana Seguro que Gaudí cambiaría algo de la Sagrada Família, pero es su proyecto, dejó se.json",
+        "run_id": "2f52e57f-e30f-45f9-b758-e5a443659e50",
+        "date": "2026-01-19T18:32:18+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://contractaciopublica.cat/es/detall-publicacio/300437075",
+    "first_seen": "2026-01-19T19:12:02.153822+00:00",
+    "last_seen": "2026-01-19T19:12:02.153822+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "02-Las floristas de la Rambla de Barcelona celebrarán su último San Valentín en las paradas históricas.json",
+        "run_id": "2f52e57f-e30f-45f9-b758-e5a443659e50",
+        "date": "2026-01-19T17:47:24+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260119/fuga-gas-obliga-confinar-escuela-desalojar-polideportivo-esplugues-125846209",
+    "first_seen": "2026-01-19T19:12:14.743284+00:00",
+    "last_seen": "2026-01-19T19:12:14.743284+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "05-Un escape de gas obliga a confinar una escuela y a desalojar un polideportivo en Esplugues de Llobre.json",
+        "run_id": "2f52e57f-e30f-45f9-b758-e5a443659e50",
+        "date": "2026-01-19T15:01:11+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260119/barcelona-reclama-dos-millones-concesionario-chiringuitos-ciutadella-sagrada-familia-park-guell-montjuic-125729774",
+    "first_seen": "2026-01-19T19:12:24.207077+00:00",
+    "last_seen": "2026-01-19T19:12:24.207077+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "09-Barcelona reclama dos millones al antiguo concesionario de chiringuitos de la Ciutadella, la Sagrada.json",
+        "run_id": "2f52e57f-e30f-45f9-b758-e5a443659e50",
+        "date": "2026-01-19T12:13:07+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://ajuntament.barcelona.cat/premsa/2022/05/19/ca-lalier-acull-una-roda-de-premsa-esmorzar-per-presentar-un-projecte-de-gastronomia-sostenible-una-iniciativa-innovadora-financada-per-la-ciutat-proativa/",
+    "first_seen": "2026-01-19T19:12:29.263316+00:00",
+    "last_seen": "2026-01-19T19:12:29.263316+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "08-Barcelona registra una caída histórica de la contaminación y roza el objetivo europeo de 2030.json",
+        "run_id": "2f52e57f-e30f-45f9-b758-e5a443659e50",
+        "date": "2026-01-19T13:20:45+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://x.com/bcn_ajuntament/status/1748259200000000000",
+    "first_seen": "2026-01-19T19:14:59.329316+00:00",
+    "last_seen": "2026-01-19T19:14:59.329316+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "10-Barcelona activa la alerta por mal estado del mar olas de más de 2,5 metros y playas cerradas.json",
+        "run_id": "2f52e57f-e30f-45f9-b758-e5a443659e50",
+        "date": "2026-01-19T11:20:30+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/gastronomia/20260119/mejores-tiendas-quesos-barcelona-124925713",
+    "first_seen": "2026-01-19T19:15:08.624201+00:00",
+    "last_seen": "2026-01-19T19:15:08.624201+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "11-11 tiendas para perder la cabeza (y el paladar) por el queso en Barcelona.json",
+        "run_id": "2f52e57f-e30f-45f9-b758-e5a443659e50",
+        "date": "2026-01-19T08:01:58+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://x.com/TMB_bcn/status/some_tweet_id_here",
+    "first_seen": "2026-01-19T19:15:52.278944+00:00",
+    "last_seen": "2026-01-19T19:15:52.278944+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "21-El metro y los buses de Barcelona pararán un minuto a las 12 horas de este lunes por las víctimas de.json",
+        "run_id": "2f52e57f-e30f-45f9-b758-e5a443659e50",
+        "date": "2026-01-19T11:46:27+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://x.com/ajesplugues/status/1748286991167420556",
+    "first_seen": "2026-01-19T19:17:10.715917+00:00",
+    "last_seen": "2026-01-19T19:17:10.715917+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "49-Un escape de gas en la avenida Lluís Companys de Esplugues (Barcelona) obliga a confinar a vecinos.json",
+        "run_id": "2f52e57f-e30f-45f9-b758-e5a443659e50",
+        "date": "2026-01-19T13:25:14+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.europapress.es/catalunya/noticia-defensor-paciente-cifra-202114-personas-esperan-cirugia-catalunya-20260119141118.html",
+    "first_seen": "2026-01-19T19:18:51.448329+00:00",
+    "last_seen": "2026-01-19T19:18:51.448329+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "52-El Defensor del Paciente cifra en 202.114 las personas que esperan una cirugía en Catalunya.json",
+        "run_id": "2f52e57f-e30f-45f9-b758-e5a443659e50",
+        "date": "2026-01-19T13:11:18+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.totbarcelona.cat/cultura-i-oci/macrofesta-historica-perill-preu-ajuntament-telecogresca-685885/",
+    "first_seen": "2026-01-19T19:19:29.038995+00:00",
+    "last_seen": "2026-01-19T19:19:29.038995+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "60-Una macrofesta històrica, en perill pel preu que fa pagar l’Ajuntament de Barcelona.json",
+        "run_id": "2f52e57f-e30f-45f9-b758-e5a443659e50",
+        "date": "2026-01-19T10:01:13+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.europapress.es/catalunya/firadebarcelona-00630/noticia-agro-barcelona-wine-week-2026-preve-reunir-1300-bodegas-mas-20260119140906.html",
+    "first_seen": "2026-01-19T19:19:41.908840+00:00",
+    "last_seen": "2026-01-19T19:19:41.908840+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "53-Agro.- La Barcelona Wine Week 2026 prevé reunir a 1.300 bodegas, un 4% más.json",
+        "run_id": "2f52e57f-e30f-45f9-b758-e5a443659e50",
+        "date": "2026-01-19T13:09:05+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.vilaweb.cat/noticies/hbo-max-catala-cavaller-set-regnes-nova-serie-joc-de-trons/",
+    "first_seen": "2026-01-19T19:20:01.600574+00:00",
+    "last_seen": "2026-01-19T19:20:01.600574+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "82-HBO Max estrena en català la nova sèrie de ‘Joc de trons’.json",
+        "run_id": "2f52e57f-e30f-45f9-b758-e5a443659e50",
+        "date": "2026-01-19T10:07:25+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260119/aldi-abre-mes-nueva-sede-mercado-montserrat-roquetes-barcelona-125859704",
+    "first_seen": "2026-01-20T08:29:26.221850+00:00",
+    "last_seen": "2026-01-20T08:29:26.221850+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "02-ALDI abre este 28 de enero un nuevo establecimiento en el mercado de Montserrat de Barcelona.json",
+        "run_id": "b155db65-a208-49fc-a547-51f8ea6b404f",
+        "date": "2026-01-19T23:59:11+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260120/11434947/barcelona-discute-recuperar-medalla-oro-original-ciudad-franquismo-modifico.html",
+    "first_seen": "2026-01-20T08:29:40.484459+00:00",
+    "last_seen": "2026-01-20T08:29:40.484459+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "08-Barcelona debate recuperar la medalla de oro original de la ciudad que el franquismo modificó.json",
+        "run_id": "b155db65-a208-49fc-a547-51f8ea6b404f",
+        "date": "2026-01-20T05:00:00+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.barcelona.cat/infobarcelona/es/barcelona-desactiva-22-redes-mafiosas-de-alquiler-ilegal-de-pisos-turisticos-desde-2016_1320626.html",
+    "first_seen": "2026-01-20T08:29:50.229348+00:00",
+    "last_seen": "2026-01-20T08:29:50.229348+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "06-La banda de los retretes clandestinos.json",
+        "run_id": "b155db65-a208-49fc-a547-51f8ea6b404f",
+        "date": "2026-01-20T05:00:00+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/692019/temporal-maritim-pluja-intensa-neu-vent-cal-extremar-precaucio-mobilitat-activitats-lexterior",
+    "first_seen": "2026-01-20T08:30:03.812756+00:00",
+    "last_seen": "2026-01-20T08:30:03.812756+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "03-Un restaurante de la playa de la Barceloneta se blinda con sacos de arena para hacer frente al tempo.json",
+        "run_id": "b155db65-a208-49fc-a547-51f8ea6b404f",
+        "date": "2026-01-19T19:59:20+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260119/11443792/muere-motorista-choque-camion-ronda-litoral-barcelona.html",
+    "first_seen": "2026-01-20T08:30:04.600125+00:00",
+    "last_seen": "2026-01-20T08:30:04.600125+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "11-Muere una motorista en un choque contra un camión en la Ronda Litoral de Barcelona.json",
+        "run_id": "b155db65-a208-49fc-a547-51f8ea6b404f",
+        "date": "2026-01-19T20:29:41+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.europapress.es/catalunya/noticia-bombers-recibe-457-avisos-derivados-temporal-atraviesa-catalunya-20260119221430.html",
+    "first_seen": "2026-01-20T08:33:38.003508+00:00",
+    "last_seen": "2026-01-20T08:33:38.003508+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "27-Bombers recibe 457 avisos derivados del temporal que atraviesa Catalunya.json",
+        "run_id": "b155db65-a208-49fc-a547-51f8ea6b404f",
+        "date": "2026-01-19T21:14:30+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elnacional.cat/es/barcelona/vall-hebron-montjuic-museu-transport-barcelona-busca-ubicacion_1539676_102.html",
+    "first_seen": "2026-01-20T08:34:33.097281+00:00",
+    "last_seen": "2026-01-20T08:34:33.097281+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "33-Vall d'Hebron o Montjuïc El Museu del Transport de Barcelona busca ubicación.json",
+        "run_id": "b155db65-a208-49fc-a547-51f8ea6b404f",
+        "date": "2026-01-20T05:30:00+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.bancderecursos.org/es/resultados-del-pont-alimentari-en-2024/",
+    "first_seen": "2026-01-20T23:15:09.720837+00:00",
+    "last_seen": "2026-01-20T23:15:09.720837+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "05-Barcelona estudiará cómo reaprovechar las sobras de todos los comedores escolares.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T16:22:50+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/ocio-y-cultura/20260120/barcelona-portada-vogue-revista-125882429",
+    "first_seen": "2026-01-20T23:15:25.789048+00:00",
+    "last_seen": "2026-01-20T23:15:25.789048+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "08-Barcelona, portada de la revista 'Vogue'.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T14:51:40+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260120/psc-junts-pactan-rescate-teatre-capitol-125883568",
+    "first_seen": "2026-01-20T23:15:36.713460+00:00",
+    "last_seen": "2026-01-20T23:15:36.713460+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "07-PSC y Junts pactan el rescate del Teatre Capitol y la recalificación de la sede de Telefónica.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T14:53:43+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260120/fotos-temporal-harry-engulle-arena-playas-barcelona-125885637",
+    "first_seen": "2026-01-20T23:15:44.029484+00:00",
+    "last_seen": "2026-01-20T23:15:44.029484+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "03-FOTOS El temporal Harry engulle la arena de las playas de Barcelona y deja las duchas desfalcadas.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T17:02:54+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://penotariado.com/inmobiliario/home",
+    "first_seen": "2026-01-20T23:15:45.286690+00:00",
+    "last_seen": "2026-01-20T23:15:45.286690+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "04-MAPA Tres distritos concentran el 57% de la venta de viviendas a extranjeros en Barcelona.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T16:29:01+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://premsa-estatics-prod.s3.eu-west-1.amazonaws.com/premsa/wp-content/uploads/2026/01/CDretsSocials-20-01-26-Ordre-del-dia.pdf",
+    "first_seen": "2026-01-20T23:18:29.690296+00:00",
+    "last_seen": "2026-01-20T23:18:29.690296+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "14-Barcelona atribuye a una suma de factores la muerte de una persona sin hogar durante la ola de frío.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T12:48:37+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260120/barcelona-vandalismo-retrovisores-destrozados-porta-nou-barris-video-dv-loc-125875905",
+    "first_seen": "2026-01-20T23:18:31.077501+00:00",
+    "last_seen": "2026-01-20T23:18:31.077501+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "12-Una treintena de retrovisores de vehículos aparcados aparecen destrozados en dos calles de Barcelona.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T13:27:33+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260120/bellaterra-aplaza-consulta-anexion-cerdanyola-sant-cugat-vecinos-emd-125870470",
+    "first_seen": "2026-01-20T23:19:16.544512+00:00",
+    "last_seen": "2026-01-20T23:19:16.544512+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "16-Bellaterra aplaza la consulta sobre su anexión a Sant Cugat y busca una posición unitaria ante Cerda.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T11:11:41+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://guide.michelin.com/es/es/principado-de-asturias/arriondas/restaurante/casa-marcial",
+    "first_seen": "2026-01-20T23:19:42.561733+00:00",
+    "last_seen": "2026-01-20T23:19:42.561733+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "21-Así es el restaurante Michelin más barato de Barcelona y cómo reservar su menú por menos de 40€.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T17:33:04+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.20minutos.es/cataluna/barcelona/gobierno-collboni-defiende-sus-protocolos-para-los-sinhogar-durante-las-olas-frio-damos-una-respuesta-diferente_6923398_0.html",
+    "first_seen": "2026-01-20T23:19:50.095446+00:00",
+    "last_seen": "2026-01-20T23:19:50.095446+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "20-El gobierno de Collboni defiende sus protocolos para los sinhogar durante las olas de frío Damos u.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T12:24:45+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/691002/lagencia-catalana-laigua-aca-posa-informacio-publica-lactualitzacio-les-arees-major-risc-dinundacio",
+    "first_seen": "2026-01-20T23:21:56.064432+00:00",
+    "last_seen": "2026-01-20T23:21:56.064432+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "22-La actualización de las zonas inundables de Catalunya avanza a su fase final con los municipios de m.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T15:08:50+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260120/11444350/barcelona-compromete-instalar-detectores-humo-pisos-personas-mayores-vulnerables.html",
+    "first_seen": "2026-01-20T23:23:21.919418+00:00",
+    "last_seen": "2026-01-20T23:23:21.919418+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "29-Barcelona se compromete a instalar detectores de humo en pisos de personas mayores vulnerables.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T14:55:44+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelones-nord/20260120/11444161/detenido-grupo-criminal-favorecia-inmigracion-irregular-parejas-hecho-ficticias.html",
+    "first_seen": "2026-01-20T23:23:30.107982+00:00",
+    "last_seen": "2026-01-20T23:23:30.107982+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "31-Detenido un grupo criminal que favorecía la inmigración irregular con parejas de hecho ficticias.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T10:09:09+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.totbarcelona.cat/mobilitat/mor-motorista-36-anys-accident-ronda-litoral-686224/",
+    "first_seen": "2026-01-20T23:23:41.854069+00:00",
+    "last_seen": "2026-01-20T23:23:41.854069+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "65-Mor una motorista de 36 anys en un accident a la ronda del Litoral.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T09:18:13+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ara.cat/media/pintades-filmin-documental-policies-reprimir-manifestacions_1_5623118.html",
+    "first_seen": "2026-01-20T23:23:48.302190+00:00",
+    "last_seen": "2026-01-20T23:23:48.302190+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "73-Pintades contra Filmin per un documental amb els policies que van reprimir les manifestacions del 20.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T11:29:06+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ara.cat/economia/comerc/aranzels-trump-han-afectat-2-9-totes-exportacions-catalanes-mon_1_5623048.html",
+    "first_seen": "2026-01-20T23:25:43.658741+00:00",
+    "last_seen": "2026-01-20T23:25:43.658741+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "81-Els aranzels de Trump han afectat un 2,9% de totes les exportacions catalanes al món.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T12:04:20+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://ec.europa.eu/commission/presscorner/detail/en/IP_26_XXX",
+    "first_seen": "2026-01-20T23:26:17.940439+00:00",
+    "last_seen": "2026-01-20T23:26:17.940439+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "82-Brussel·les vol prohibir els contractes com els d'Espanya amb Huawei per qüestions de seguretat.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T17:25:10+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://seucontractacio.bsmsa.cat/licitacion/fichaExpte.do;jsessionid=VWkaGEVI2Avw9Mri9IqzP0kB-fsjheBO5xdTMOuT?idExpediente=11631",
+    "first_seen": "2026-01-20T23:27:13.338653+00:00",
+    "last_seen": "2026-01-20T23:27:13.338653+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "86-L'Ajuntament de Barcelona insta la Telecogresca a decidir a què vol jugar.json",
+        "run_id": "b1f52669-1c82-48aa-8f06-dee694d5645e",
+        "date": "2026-01-20T17:35:51+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.20minutos.es/cataluna/barcelona/rescatan-helicoptero-un-windsurfista-sitges-durante-temporal-harry_6923734_0.html",
+    "first_seen": "2026-01-21T16:16:57.358722+00:00",
+    "last_seen": "2026-01-21T16:16:57.358722+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "08-Rescatan en helicóptero a un windsurfista en Sitges durante el temporal Harry.json",
+        "run_id": "12961db7-210c-42c0-a721-db1c29b81d8c",
+        "date": "2026-01-20T20:23:26+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notespremsa/445856/mante-lemergencia-del-procicat-laccident-dun-tren-r4-gelida",
+    "first_seen": "2026-01-21T16:17:25.278113+00:00",
+    "last_seen": "2026-01-21T16:17:25.278113+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "07-Muere el maquinista de un tren descarrilado en Gelida hay 37 heridos, cinco de ellos graves.json",
+        "run_id": "12961db7-210c-42c0-a721-db1c29b81d8c",
+        "date": "2026-01-20T22:05:27+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260120/ada-colau-recupera-hospital-sant-125897841",
+    "first_seen": "2026-01-21T16:17:31.725835+00:00",
+    "last_seen": "2026-01-21T16:17:31.725835+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "03-Ada Colau se recupera en el Hospital de Sant Pau de una operación de vesícula biliar.json",
+        "run_id": "12961db7-210c-42c0-a721-db1c29b81d8c",
+        "date": "2026-01-20T21:00:50+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.20minutos.es/cataluna/barcelona/catalunya-flexibilizara-las-proximas-semanas-las-restricciones-por-peste-porcina-79-municipios_6923685_0.html",
+    "first_seen": "2026-01-21T16:17:50.889708+00:00",
+    "last_seen": "2026-01-21T16:17:50.889708+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "11-Catalunya flexibilizará en las próximas semanas las restricciones por peste porcina en 79 municipios.json",
+        "run_id": "12961db7-210c-42c0-a721-db1c29b81d8c",
+        "date": "2026-01-20T19:00:41+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260121/tsjc-anula-plan-urbanistico-ampliacion-la-fira-gran-via-hospitalet-no-paralizaran-obras-125874064",
+    "first_seen": "2026-01-21T16:17:59.354350+00:00",
+    "last_seen": "2026-01-21T16:17:59.354350+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-El TSJC anula el plan urbanístico de la ampliación de la Fira en L'Hospitalet pero no se paralizarán.json",
+        "run_id": "12961db7-210c-42c0-a721-db1c29b81d8c",
+        "date": "2026-01-21T06:00:55+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://elpais.com/gastronomia/2026-01-21/siete-panaderias-donde-hacerse-con-el-mejor-pan.html",
+    "first_seen": "2026-01-21T16:20:11.156940+00:00",
+    "last_seen": "2026-01-21T16:20:11.156940+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "13-Siete panaderías donde hacerse con el mejor pan.json",
+        "run_id": "12961db7-210c-42c0-a721-db1c29b81d8c",
+        "date": "2026-01-21T05:30:00+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260121/barcelona-medira-presion-turistica-barrio-nuevo-indice-125932878",
+    "first_seen": "2026-01-21T22:09:50.454455+00:00",
+    "last_seen": "2026-01-21T22:09:50.454455+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "03-Barcelona medirá la presión turística barrio a barrio con un nuevo índice público.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-21T17:46:45+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.europapress.es/catalunya/noticia-bonet-afirma-movilidad-barcelona-sigue-normalidad-pese-suspension-rodalies-20260121133825.html",
+    "first_seen": "2026-01-21T22:09:52.569432+00:00",
+    "last_seen": "2026-01-21T22:09:52.569432+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "05-El tráfico en Barcelona aumenta hasta un 11% por la suspensión de Rodalies.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-21T16:19:31+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2010-12003",
+    "first_seen": "2026-01-21T22:10:04.758300+00:00",
+    "last_seen": "2026-01-21T22:10:04.758300+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "100-Em poden cobrar el cobert Puc demanar aigua gratuïta I altres dubtes que teniu quan aneu a restaur.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-21T06:00:54+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260121/barcelona-embarranca-despliegue-contenedores-inteligentes-125924382",
+    "first_seen": "2026-01-21T22:10:28.149859+00:00",
+    "last_seen": "2026-01-21T22:10:28.149859+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "02-Barcelona embarranca con el despliegue de los contenedores inteligentes.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-21T18:00:44+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ara.cat/politica/independentisme-carrega-gestio-l-arran-col-lapse-rodalies_1_5624265.html",
+    "first_seen": "2026-01-21T22:11:00.427107+00:00",
+    "last_seen": "2026-01-21T22:11:00.427107+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "103-Evitable, causat per la desinversió i l'espoli fiscal l'independentisme assenyala l'Estat pel.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-21T08:55:52+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://metropoliabierta.elespanol.com/ca/el-pols-de-la-ciutat/20260109/operatiu-policial-robatoris-patinet-barcelona-centenars-didentificats-mes-antecedents/1003742721922_0.html",
+    "first_seen": "2026-01-21T22:13:55.279141+00:00",
+    "last_seen": "2026-01-21T22:13:55.279141+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "77-Un robatori violent acaba amb un accident dels lladres que fugien en patinet.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-21T15:51:25+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://x.com/emergenciescat/status/1748721677320073582",
+    "first_seen": "2026-01-21T22:14:26.226260+00:00",
+    "last_seen": "2026-01-21T22:14:26.226260+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "42-Así avanzan los trabajos para despejar la vía tras el accidente de tren en Gelida.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-21T14:37:21+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ara.cat/societat/maquinistes-convoquen-vaga-general-despres-dels-accidents-d-adamuz-gelida_1_5624228.html",
+    "first_seen": "2026-01-21T22:15:17.970092+00:00",
+    "last_seen": "2026-01-21T22:15:17.970092+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "84-Revolta de maquinistes Rodalies vol reprendre el servei demà, però no té clar si hi haurà prou cond.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-21T08:02:46+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/2026/01/21/desembassaments-preventius-conques-internes-assegurant-estabilitat-aigua-despres-temporal-harry/",
+    "first_seen": "2026-01-21T22:16:00.247863+00:00",
+    "last_seen": "2026-01-21T22:16:00.247863+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "110-Temps canviant amb una mica de tot pel pas de nous fronts.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-21T16:37:46+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.institutmetropoli.cat/es/estudi/informe-resultados-sinteticos-evamb-2024/",
+    "first_seen": "2026-01-21T22:17:19.402727+00:00",
+    "last_seen": "2026-01-21T22:17:19.402727+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "27-Más del 25% de la población de Barcelona fue víctima de al menos un delito en 2024.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-21T16:28:27+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.totbarcelona.cat/successos/tallat-carrer-arago-bombers-malalt-686665/",
+    "first_seen": "2026-01-21T22:17:30.448419+00:00",
+    "last_seen": "2026-01-21T22:17:30.448419+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "78-L’evacuació d’un veí malalt obliga a tallar el carrer d’Aragó.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-21T12:33:28+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lasexta.com/noticias/sociedad/desprendimiento-talud-provocado-lluvias-hipotesis-principal-accidente-moral-gelida_202601216970fd13c48f6b4ee368e200.html",
+    "first_seen": "2026-01-21T22:18:12.360465+00:00",
+    "last_seen": "2026-01-21T22:18:12.360465+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "59-Desprendimiento de un talud provocado por las lluvias la hipótesis principal tras el accidente mort.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-21T17:21:39+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/comer/beber/20260121/11443921/barcelona-wine-week-batira-todos-records.html",
+    "first_seen": "2026-01-21T22:18:58.227297+00:00",
+    "last_seen": "2026-01-21T22:18:58.227297+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "45-La Barcelona Wine Week batirá todos sus récords.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-21T07:26:03+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelones-nord/20260120/11444077/albiol-anuncia-creacion-comedor-social-albergue-indigentes-badalona.html",
+    "first_seen": "2026-01-21T22:21:20.912382+00:00",
+    "last_seen": "2026-01-21T22:21:20.912382+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "40-Albiol anuncia la creación de un comedor social y un albergue para indigentes en Badalona.json",
+        "run_id": "19e8599b-7f75-48cc-ad68-634d96a66beb",
+        "date": "2026-01-20T08:41:46+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://video.microcontenidos.com/EPPlayerTV.aspx?iframeid=8p2lYk2akE&videoid=1044656&parte=1",
+    "first_seen": "2026-01-22T10:25:48.527395+00:00",
+    "last_seen": "2026-01-22T10:25:48.527395+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "03-Los trenes de Rodalies siguen paralizados en Cataluña pese al anuncio de recuperación del servicio.json",
+        "run_id": "05a3177e-d05e-4f00-932c-a731d53d21d0",
+        "date": "2026-01-22T07:01:15+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.vilaweb.cat/noticies/maquinistes-document-adif-servei/",
+    "first_seen": "2026-01-22T10:25:53.283355+00:00",
+    "last_seen": "2026-01-22T10:25:53.283355+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "30-Els maquinistes reclamen un document escrit d’ADIF que garanteixi la seguretat per a reprendre el se.json",
+        "run_id": "05a3177e-d05e-4f00-932c-a731d53d21d0",
+        "date": "2026-01-21T21:11:39+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260122/11445615/barcelona-presionara-fondo-cerrar-narcopiso-ocupado-propiedad-desentiende.html",
+    "first_seen": "2026-01-22T10:26:05.560056+00:00",
+    "last_seen": "2026-01-22T10:26:05.560056+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "07-Barcelona presionará a un fondo para cerrar un narcopiso ocupado de su propiedad del que se desentie.json",
+        "run_id": "05a3177e-d05e-4f00-932c-a731d53d21d0",
+        "date": "2026-01-22T05:00:00+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elnacional.cat/es/barcelona/cinco-oros-plaza-con-nombre-carta-monumento-viajero_1540201_102.html",
+    "first_seen": "2026-01-22T10:26:45.391454+00:00",
+    "last_seen": "2026-01-22T10:26:45.391454+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "26-El Cinc d'Oros, una plaza con nombre de naipe y estatua viajera.json",
+        "run_id": "05a3177e-d05e-4f00-932c-a731d53d21d0",
+        "date": "2026-01-22T05:30:00+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.instagram.com/p/C2S4y-rN5eX/",
+    "first_seen": "2026-01-22T19:34:06.033157+00:00",
+    "last_seen": "2026-01-22T19:34:06.033157+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "10-Arte temporal como homenaje un escultor ucraniano 'devuelve' a Freddie Mercury y Montserrat Caballé.json",
+        "run_id": "4dcf9b70-83c8-4f4c-a492-77bcfa2048c7",
+        "date": "2026-01-22T09:25:32+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.20minutos.es/cataluna/barcelona/hallan-coche-playa-barcelona-arrastrado-temporal-diciembre_6924706_0.html",
+    "first_seen": "2026-01-22T19:34:11.430266+00:00",
+    "last_seen": "2026-01-22T19:34:11.430266+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "14-Hallan un coche en una playa de Barcelona que fue arrastrado por un temporal el pasado mes de diciem.json",
+        "run_id": "4dcf9b70-83c8-4f4c-a492-77bcfa2048c7",
+        "date": "2026-01-22T17:49:07+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260122/barcelona-historia-barri-gotic-catedral-edad-media-dv-loc-125604125",
+    "first_seen": "2026-01-22T19:34:25.685778+00:00",
+    "last_seen": "2026-01-22T19:34:25.685778+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "06-La zona más antigua de Barcelona donde se concentran siglos de poder e historia.json",
+        "run_id": "4dcf9b70-83c8-4f4c-a492-77bcfa2048c7",
+        "date": "2026-01-22T12:54:00+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260122/largas-colas-vuelven-buses-barcelona-caida-rodalies-falta-informacion-125959129",
+    "first_seen": "2026-01-22T19:34:49.716064+00:00",
+    "last_seen": "2026-01-22T19:34:49.716064+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "07-La logística ha sido horrible largas colas en los buses de Barcelona el segundo día de caída de R.json",
+        "run_id": "4dcf9b70-83c8-4f4c-a492-77bcfa2048c7",
+        "date": "2026-01-22T12:13:12+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260122/el-temporal-dana-gravemente-las-playas-del-area-de-barcelona-necesitamos-ayuda-urgente-del-ministerio-125965205",
+    "first_seen": "2026-01-22T19:34:59.841606+00:00",
+    "last_seen": "2026-01-22T19:34:59.841606+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "05-El temporal daña gravemente las playas del área de Barcelona Es imprescindible que intervenga el M.json",
+        "run_id": "4dcf9b70-83c8-4f4c-a492-77bcfa2048c7",
+        "date": "2026-01-22T14:02:51+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.europapress.es/catalunya/noticia-catalunya-limita-refuerzo-nivel-alerta-antiterrorista-intereses-palestino-israelis-20260122180442.html",
+    "first_seen": "2026-01-22T19:36:16.234170+00:00",
+    "last_seen": "2026-01-22T19:36:16.234170+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "43-Catalunya limita el refuerzo del nivel 4 de alerta antiterrorista a intereses palestino-israelís.json",
+        "run_id": "4dcf9b70-83c8-4f4c-a492-77bcfa2048c7",
+        "date": "2026-01-22T17:04:42+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.europapress.es/economia/noticia-cloudworks-factura-135-millones-2025-174-mas-preve-alcanzar-15-millones-2026-20260122174732.html",
+    "first_seen": "2026-01-22T19:36:26.904607+00:00",
+    "last_seen": "2026-01-22T19:36:26.904607+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "45-Cloudworks factura 13,5 millones en 2025 (+17,4%) y prevé alcanzar los 15 millones en 2026.json",
+        "run_id": "4dcf9b70-83c8-4f4c-a492-77bcfa2048c7",
+        "date": "2026-01-22T16:45:32+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elnacional.cat/es/barcelona/plaza-glories-crece-hacia-consell-cent-en-marcha-derribos-pendientes_1541371_102.html",
+    "first_seen": "2026-01-22T19:38:59.401059+00:00",
+    "last_seen": "2026-01-22T19:38:59.401059+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "49-La plaza de las Glòries crece hacia Consell de Cent en marcha los derribos pendientes.json",
+        "run_id": "4dcf9b70-83c8-4f4c-a492-77bcfa2048c7",
+        "date": "2026-01-22T17:44:59+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elnacional.cat/es/barcelona/mercado-montserrat-abrira-en-marzo-pero-supermercado-ya-funcionara-finales-enero_1541419_102.html",
+    "first_seen": "2026-01-22T19:39:08.317664+00:00",
+    "last_seen": "2026-01-22T19:39:08.317664+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "48-El mercado de Montserrat abrirá en marzo, pero el supermercado ya funcionará a finales de enero.json",
+        "run_id": "4dcf9b70-83c8-4f4c-a492-77bcfa2048c7",
+        "date": "2026-01-22T18:51:46+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ara.cat/economia/comptes-publics/l-inverteix-catalunya-nomes-euros-pressupostats-ferrocarril_1_5625477.html",
+    "first_seen": "2026-01-22T19:40:20.222601+00:00",
+    "last_seen": "2026-01-22T19:40:20.222601+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "57-L’Estat inverteix a Catalunya només un de cada dos euros pressupostats en ferrocarril.json",
+        "run_id": "4dcf9b70-83c8-4f4c-a492-77bcfa2048c7",
+        "date": "2026-01-22T12:49:19+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elpuntavui.cat/article/1-economia/4-economia/2397022-els-maquinistes-el-govern-renfe-i-adif-pacten-les-condicions-per-restablir-el-servei-de-rodalies.html",
+    "first_seen": "2026-01-22T19:42:03.745091+00:00",
+    "last_seen": "2026-01-22T19:42:03.745091+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "93-Només sis de cent quaranta maquinistes de RENFE a Catalunya s’han presentat a la feina aquest matí.json",
+        "run_id": "4dcf9b70-83c8-4f4c-a492-77bcfa2048c7",
+        "date": "2026-01-22T16:45:47+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ara.cat/cultura/cinema/oscars/sirat-nominada-l-oscar-millor-pel-licula-internacional_1_5625527.html",
+    "first_seen": "2026-01-22T19:42:09.040226+00:00",
+    "last_seen": "2026-01-22T19:42:09.040226+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "64-'Sirat' aconsegueix dues nominacions als Oscars És una proesa.json",
+        "run_id": "4dcf9b70-83c8-4f4c-a492-77bcfa2048c7",
+        "date": "2026-01-22T13:47:35+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.vilaweb.cat/noticies/sindicats-medics-vaga-setmanal-cada-mes/",
+    "first_seen": "2026-01-22T19:45:08.666133+00:00",
+    "last_seen": "2026-01-22T19:45:08.666133+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "108-Els sindicats mèdics convoquen una vaga setmanal cada mes.json",
+        "run_id": "4dcf9b70-83c8-4f4c-a492-77bcfa2048c7",
+        "date": "2026-01-22T10:30:07+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/445831/servei-rodalies-catalunya-reprem-activitat-partir-dema-22-gener",
+    "first_seen": "2026-01-23T09:28:15.817063+00:00",
+    "last_seen": "2026-01-23T09:28:15.817063+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "unknown"
+    ],
+    "article_refs": [
+      {
+        "id": "unknown",
+        "filename": "001_Confusión_entre_los_pasajeros_de_Barcelona_ante_la_reanudación_de_Rodalies_Hay_pocos_trenes.md",
+        "run_id": "92eea458-22d5-4165-9b2f-caaaf18679a8",
+        "date": "2026-01-23T09:05:50"
+      }
+    ]
+  },
+  {
+    "url": "https://www.europapress.es/catalunya/noticia-mossos-investiga-muerte-violenta-mujer-lhospitalet-barcelona-20260123073139.html",
+    "first_seen": "2026-01-23T10:19:45.565574+00:00",
+    "last_seen": "2026-01-23T10:19:45.565574+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "25-Mossos investiga la muerte violenta de una mujer en L'Hospitalet (Barcelona).json",
+        "run_id": "ecd5b3a3-bab8-49eb-aaf4-b624606b43dc",
+        "date": "2026-01-23T06:31:39+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/295325/desbloquegem-situacio-acord-que-aportara-beneficis-usuaris-treballadors-renfe",
+    "first_seen": "2026-01-23T10:19:49.573295+00:00",
+    "last_seen": "2026-01-23T10:19:49.573295+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "02-Cataluña recupera el servicio de trenes de Rodalies tras dos días de caos.json",
+        "run_id": "ecd5b3a3-bab8-49eb-aaf4-b624606b43dc",
+        "date": "2026-01-23T06:51:54+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.3cat.cat/esport3/vitor-roque-xavi-explica-el-motiu-dels-seus-pocs-minuts-i-en-reivindica-el-fitxatge/noticia/3273183/",
+    "first_seen": "2026-01-23T10:20:21.804477+00:00",
+    "last_seen": "2026-01-23T10:20:21.804477+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "36-Dues setmanes en la penombra veïns del Guinardó pateixen caigudes constants del subministrament elè.json",
+        "run_id": "ecd5b3a3-bab8-49eb-aaf4-b624606b43dc",
+        "date": "2026-01-23T06:01:38+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://noticies.tmb.cat/sala-de-premsa/linies-dautobus-afectades-47a-cursa-moritz-sant-antoni",
+    "first_seen": "2026-01-23T10:20:36.148143+00:00",
+    "last_seen": "2026-01-23T10:37:52.785845+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "57-Línies d’autobús afectades per la 47a Cursa Moritz Sant Antoni.json",
+        "run_id": "ecd5b3a3-bab8-49eb-aaf4-b624606b43dc",
+        "date": "2026-01-23T07:21:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "57-Línies d’autobús afectades per la 47a Cursa Moritz Sant Antoni.json",
+        "run_id": "ae4af400-92a6-4732-9251-cea7ded11a23",
+        "date": "2026-01-23T07:21:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "57-Línies d’autobús afectades per la 47a Cursa Moritz Sant Antoni.json",
+        "run_id": "47055665-f0e0-4d35-9c12-cc2a639f8001",
+        "date": "2026-01-23T07:21:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.20minutos.es/cataluna/barcelona/diputacio-barcelona-presenta-su-oferta-cicloturismo-fitur-ante-regreso-tour-francia-catalunya_6924769_0.html",
+    "first_seen": "2026-01-23T10:20:38.804172+00:00",
+    "last_seen": "2026-01-23T11:01:36.268815+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-La Diputació de Barcelona presenta su oferta de cicloturismo en el Fitur ante el regreso del Tour de.json",
+        "run_id": "ecd5b3a3-bab8-49eb-aaf4-b624606b43dc",
+        "date": "2026-01-22T20:39:20+01:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "01-La Diputació de Barcelona presenta su oferta de cicloturismo en el Fitur ante el regreso del Tour de.json",
+        "run_id": "ae4af400-92a6-4732-9251-cea7ded11a23",
+        "date": "2026-01-22T20:39:20+01:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "01-La Diputació de Barcelona presenta su oferta de cicloturismo en el Fitur ante el regreso del Tour de.json",
+        "run_id": "ab391423-5f67-4908-b74d-6de6d85207e9",
+        "date": "2026-01-22T20:39:20+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://elpais.com/gastronomia/restaurantes/2026-01-23/una-leyenda-de-elbulli-abre-en-barcelona-una-cerveceria-donde-recupera-tapas-de-toda-la-vida.html",
+    "first_seen": "2026-01-23T10:21:04.717432+00:00",
+    "last_seen": "2026-01-23T10:37:03.275097+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "07-Una leyenda de elBulli abre en Barcelona una cervecería donde recupera tapas de toda la vida.json",
+        "run_id": "ecd5b3a3-bab8-49eb-aaf4-b624606b43dc",
+        "date": "2026-01-23T05:30:00+01:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "07-Una leyenda de elBulli abre en Barcelona una cervecería donde recupera tapas de toda la vida.json",
+        "run_id": "47055665-f0e0-4d35-9c12-cc2a639f8001",
+        "date": "2026-01-23T05:30:00+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/445831/mossos-desquadra-investiguen-mort-violenta-dona-hospitalet-llobregat",
+    "first_seen": "2026-01-23T10:30:26.168692+00:00",
+    "last_seen": "2026-01-23T10:30:26.168692+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "25-Mossos investiga la muerte violenta de una mujer en L'Hospitalet (Barcelona).json",
+        "run_id": "ae4af400-92a6-4732-9251-cea7ded11a23",
+        "date": "2026-01-23T06:31:39+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ara.cat/societat/barcelona/dues-setmanes-penombra-veins-guinardo-pateixen-caigudes-constants-subministrament-electric_1_5625692.html",
+    "first_seen": "2026-01-23T10:31:27.021908+00:00",
+    "last_seen": "2026-01-23T10:36:55.249366+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "36-Dues setmanes en la penombra veïns del Guinardó pateixen caigudes constants del subministrament elè.json",
+        "run_id": "ae4af400-92a6-4732-9251-cea7ded11a23",
+        "date": "2026-01-23T06:01:38+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "36-Dues setmanes en la penombra veïns del Guinardó pateixen caigudes constants del subministrament elè.json",
+        "run_id": "47055665-f0e0-4d35-9c12-cc2a639f8001",
+        "date": "2026-01-23T06:01:38+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.seiscuarenta.es/",
+    "first_seen": "2026-01-23T10:31:40.965433+00:00",
+    "last_seen": "2026-01-23T10:31:40.965433+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "07-Una leyenda de elBulli abre en Barcelona una cervecería donde recupera tapas de toda la vida.json",
+        "run_id": "ae4af400-92a6-4732-9251-cea7ded11a23",
+        "date": "2026-01-23T05:30:00+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://elpais.com/espana/catalunya/2026-01-23/cataluna-recupera-el-servicio-de-trenes-de-rodalies-tras-dos-dias-de-caos.html",
+    "first_seen": "2026-01-23T10:32:19.763399+00:00",
+    "last_seen": "2026-01-23T10:32:19.763399+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "02-Cataluña recupera el servicio de trenes de Rodalies tras dos días de caos.json",
+        "run_id": "ae4af400-92a6-4732-9251-cea7ded11a23",
+        "date": "2026-01-23T06:51:54+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=KzVj1Jz-mQo",
+    "first_seen": "2026-01-23T10:36:30.816136+00:00",
+    "last_seen": "2026-01-23T10:36:30.816136+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-La Diputació de Barcelona presenta su oferta de cicloturismo en el Fitur ante el regreso del Tour de.json",
+        "run_id": "47055665-f0e0-4d35-9c12-cc2a639f8001",
+        "date": "2026-01-22T20:39:20+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/497126/mossos-desquadra-investiguen-mort-violenta-dona-hospitalet-llobregat",
+    "first_seen": "2026-01-23T10:37:06.362869+00:00",
+    "last_seen": "2026-01-23T10:37:06.362869+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "25-Mossos investiga la muerte violenta de una mujer en L'Hospitalet (Barcelona).json",
+        "run_id": "47055665-f0e0-4d35-9c12-cc2a639f8001",
+        "date": "2026-01-23T06:31:39+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://github.com/joypad-ai/joypad-os",
+    "first_seen": "2026-01-23T11:29:52.123577+00:00",
+    "last_seen": "2026-01-23T11:29:52.123577+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "retro_gaming"
+    ],
+    "article_refs": [
+      {
+        "id": "retro_gaming",
+        "filename": "251-This open source gamepad project lets you play Resident Evil 2 with a Fisher-Price Laugh & Learn.json",
+        "run_id": "ee9a02f4-5549-468e-85f2-e7df3f2285ab",
+        "date": "2026-01-21T19:50:39+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://retrohandhelds.gg/escape-2049-announced-for-sega-genesis-and-gba/",
+    "first_seen": "2026-01-23T11:30:02.925893+00:00",
+    "last_seen": "2026-01-23T15:23:21.728878+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "retro_gaming"
+    ],
+    "article_refs": [
+      {
+        "id": "retro_gaming",
+        "filename": "215-Escape 2049 Announced for Sega Genesis and GBA.json",
+        "run_id": "ee9a02f4-5549-468e-85f2-e7df3f2285ab",
+        "date": "2026-01-21T19:57:17+00:00"
+      },
+      {
+        "id": "retro_gaming",
+        "filename": "215-Escape 2049 Announced for Sega Genesis and GBA.json",
+        "date": "2026-01-21T19:57:17+00:00"
+      },
+      {
+        "id": "retro_gaming",
+        "filename": "215-Escape 2049 Announced for Sega Genesis and GBA.json",
+        "run_id": "8cc9d6b6-805a-44c0-a583-b34c7fb0f4a7",
+        "date": "2026-01-21T19:57:17+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=kte3yS6wVFo",
+    "first_seen": "2026-01-23T11:30:06.543534+00:00",
+    "last_seen": "2026-01-23T11:30:06.543534+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "retro_gaming"
+    ],
+    "article_refs": [
+      {
+        "id": "retro_gaming",
+        "filename": "46-Mega Cat Studios Reveals Three New NESSNES Cartridge Titles.json",
+        "run_id": "ee9a02f4-5549-468e-85f2-e7df3f2285ab",
+        "date": "2026-01-21T23:57:26-06:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.videogameschronicle.com/news/veteran-nintendo-producer-kensuke-tanabe-known-for-metroid-and-paper-mario-reportedly-confirms-retirement/",
+    "first_seen": "2026-01-23T11:31:11.437699+00:00",
+    "last_seen": "2026-01-23T11:31:11.437699+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "retro_gaming"
+    ],
+    "article_refs": [
+      {
+        "id": "retro_gaming",
+        "filename": "246-Veteran Nintendo producer Kensuke Tanabe, known for Metroid and Paper Mario, reportedly confirms ret.json",
+        "run_id": "ee9a02f4-5549-468e-85f2-e7df3f2285ab",
+        "date": "2026-01-21T17:56:49+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.llibertat.cat/pagina-no-trobada-404",
+    "first_seen": "2026-01-24T17:06:34.269414+00:00",
+    "last_seen": "2026-01-24T17:06:34.269414+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "117-Sancionen amb la ‘llei mordassa’ l’organitzador de la protesta contra els reis espanyols a Sant Mart.json",
+        "run_id": "bab24ea3-484e-42e5-9baa-e11dce33c583",
+        "date": "2026-01-23T11:33:36+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260123/generalitat-realoja-dias-quincena-migrantes-bajo-puente-c31-badalona-asentamiento-acerca-a-su-fin-125992697",
+    "first_seen": "2026-01-24T17:06:56.507657+00:00",
+    "last_seen": "2026-01-24T17:06:56.507657+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "05-La Generalitat realoja en dos días a una quincena de migrantes que malvivían bajo la C-31 en Badalon.json",
+        "run_id": "bab24ea3-484e-42e5-9baa-e11dce33c583",
+        "date": "2026-01-23T11:32:44+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/economia/20260123/catalunya-levantar-restricciones-crisis-ganaderas-peste-porcina-ordeig-126013106",
+    "first_seen": "2026-01-24T17:06:58.099365+00:00",
+    "last_seen": "2026-01-24T17:06:58.099365+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-Catalunya levanta nuevas restricciones impuestas por la peste porcina y la dermatosis que afecta a l.json",
+        "run_id": "bab24ea3-484e-42e5-9baa-e11dce33c583",
+        "date": "2026-01-23T18:29:11+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://ajuntament.barcelona.cat/ecologiaurbana/ca/que-fem-i-per-que/espai-public-de-qualitat/barcelona-dona-molt-de-joc",
+    "first_seen": "2026-01-24T17:07:01.957032+00:00",
+    "last_seen": "2026-01-24T17:07:01.957032+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "06-Un tobogán espectacular los parques infantiles de Barcelona en los que alucinarán tus hijos.json",
+        "run_id": "bab24ea3-484e-42e5-9baa-e11dce33c583",
+        "date": "2026-01-23T11:00:00+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.renfe.com/es/es/grupo/comunicacion/sala-de-prensa/afectaciones-importantes-en-el-servicio-de-rodalies",
+    "first_seen": "2026-01-24T17:09:44.794651+00:00",
+    "last_seen": "2026-01-24T17:09:44.794651+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "03-Los desperfectos que causó el temporal en la zona de vías del tren en Badalona obligan a reanudar el.json",
+        "run_id": "bab24ea3-484e-42e5-9baa-e11dce33c583",
+        "date": "2026-01-23T13:38:33+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.fotocasa.es/es/",
+    "first_seen": "2026-01-24T17:10:36.442932+00:00",
+    "last_seen": "2026-01-24T17:10:36.442932+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "132-Ni Madrid ni Barcelona el municipio más caro de toda España para alquilar habitación está a 20 minu.json",
+        "run_id": "bab24ea3-484e-42e5-9baa-e11dce33c583",
+        "date": "2026-01-23T19:43:03.350462"
+      }
+    ]
+  },
+  {
+    "url": "https://barcelonasecreta.com/ovnis-montserrat/",
+    "first_seen": "2026-01-24T17:10:37.400709+00:00",
+    "last_seen": "2026-01-24T17:10:37.400709+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "137-«Yo he visto ovnis ahí arriba» así son las quedadas para ver ovnis en Montserrat.json",
+        "run_id": "bab24ea3-484e-42e5-9baa-e11dce33c583",
+        "date": "2026-01-23T19:43:03.350660"
+      }
+    ]
+  },
+  {
+    "url": "https://www.barcelona.cat/infobarcelona/en/the-transformation-of-la-rambla-speeds-up-and-should-be-completed-in-2027_1270720.html",
+    "first_seen": "2026-01-24T17:11:08.096137+00:00",
+    "last_seen": "2026-01-24T17:11:08.096137+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "135-Por qué están moviendo farolas antiguas de las Ramblas a dónde se irá el alumbrado tradicional y el.json",
+        "run_id": "bab24ea3-484e-42e5-9baa-e11dce33c583",
+        "date": "2026-01-23T19:43:03.350580"
+      }
+    ]
+  },
+  {
+    "url": "https://beteve.cat/medi-ambient/sediments-rius-visibles-satelit-gener-2026/",
+    "first_seen": "2026-01-24T17:13:45.268940+00:00",
+    "last_seen": "2026-01-24T17:13:45.268940+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "150-Els sediments aportats pels rius catalans, plenament visibles des del satèl·lit.json",
+        "run_id": "bab24ea3-484e-42e5-9baa-e11dce33c583",
+        "date": "2026-01-23T15:39:01+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.europapress.es/catalunya/noticia-taxis-vtc-blablacar-experimentaron-gran-aumento-demanda-suspension-rodalies-20260123173141.html",
+    "first_seen": "2026-01-24T17:13:51.084090+00:00",
+    "last_seen": "2026-01-24T17:13:51.084090+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "51-Taxis, VTC y BlaBlaCar experimentaron gran aumento de la demanda durante la suspensión de Rodalies.json",
+        "run_id": "bab24ea3-484e-42e5-9baa-e11dce33c583",
+        "date": "2026-01-23T16:31:41+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elnacional.cat/es/barcelona/exito-tranvia-por-diagonal-hasta-verdaguer-aumento-30-usuarios-en-trambesos-en-2025_1541884_102.html",
+    "first_seen": "2026-01-24T17:15:02.663194+00:00",
+    "last_seen": "2026-01-24T17:15:02.663194+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "56-Éxito del tranvía por la Diagonal hasta Verdaguer aumento del 30% de usuarios en el TramBesòs en 20.json",
+        "run_id": "bab24ea3-484e-42e5-9baa-e11dce33c583",
+        "date": "2026-01-23T15:22:56+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elespanol.com/mundo/america/20230121/muertos-peru-protestas-gobierno-dina-boluarte/735426462_0.html",
+    "first_seen": "2026-01-24T17:15:28.947074+00:00",
+    "last_seen": "2026-01-24T17:15:28.947074+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "97-El Ministeri de Transports espanyol no preveu de reobrir completament la AP-7 fins d’ací a dues setm.json",
+        "run_id": "bab24ea3-484e-42e5-9baa-e11dce33c583",
+        "date": "2026-01-23T17:40:37+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260124/11447978/nuevos-controles-aeropuerto-barcelona-prolongan-colas-exterior.html",
+    "first_seen": "2026-01-25T10:52:38.081280+00:00",
+    "last_seen": "2026-01-25T10:52:38.081280+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "05-Los nuevos controles de acceso al aeropuerto de Barcelona prolongan las colas hasta el exterior.json",
+        "run_id": "e1aa9680-eaa5-4ffa-9933-e1fbed43a8b5",
+        "date": "2026-01-24T05:00:00+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/catalunya/20260124/11447824/reforma-juzgados-arranca-falta-jueces-funcionarios.html",
+    "first_seen": "2026-01-25T10:52:46.407147+00:00",
+    "last_seen": "2026-01-25T10:52:46.407147+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "06-La reforma de los juzgados arranca con falta de jueces y menos funcionarios.json",
+        "run_id": "e1aa9680-eaa5-4ffa-9933-e1fbed43a8b5",
+        "date": "2026-01-24T05:00:00+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.totbarcelona.cat/societat/els-maquinistes-prenen-sants-per-protestar-contra-el-despreniment-a-lr1-687573/",
+    "first_seen": "2026-01-25T10:52:48.295827+00:00",
+    "last_seen": "2026-01-25T10:52:48.295827+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "12-Els maquinistes prenen Sants per protestar contra el despreniment a l’R1.json",
+        "run_id": "e1aa9680-eaa5-4ffa-9933-e1fbed43a8b5",
+        "date": "2026-01-23T20:00:53+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.transportes.gob.es/organos-colegiados/ciaf/investigaciones-en-curso/expediente-01126",
+    "first_seen": "2026-01-25T10:52:53.008683+00:00",
+    "last_seen": "2026-01-25T10:52:53.008683+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "14-Primer informe de l’accident de Gelida el maquinista no va veure a temps el mur per la foscor i la.json",
+        "run_id": "e1aa9680-eaa5-4ffa-9933-e1fbed43a8b5",
+        "date": "2026-01-23T14:14:56+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://web.gencat.cat/ca/ciutadania/actualitat?id=445831",
+    "first_seen": "2026-01-25T11:11:08.661960+00:00",
+    "last_seen": "2026-01-25T11:11:08.661960+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "08-La nieve llega hasta Barcelona.json",
+        "run_id": "8c12556d-b170-41f9-b4e8-eb97851b91ba",
+        "date": "2026-01-24T15:17:23+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260124/11448336/detenido-71-personas-barcelona-acumulan-315-antecedentes.html",
+    "first_seen": "2026-01-25T11:11:32.380009+00:00",
+    "last_seen": "2026-01-25T11:11:32.380009+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "11-Se ha detenido a 71 personas en Barcelona que acumulan 315 antecedentes.json",
+        "run_id": "8c12556d-b170-41f9-b4e8-eb97851b91ba",
+        "date": "2026-01-24T10:51:38+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.institutmetropoli.cat/ca/",
+    "first_seen": "2026-01-25T11:11:52.204314+00:00",
+    "last_seen": "2026-01-25T11:11:52.204314+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "02-La Policia Local de Santa Coloma de Gramenet es la mejor valorada por los vecinos del área de Barcel.json",
+        "run_id": "8c12556d-b170-41f9-b4e8-eb97851b91ba",
+        "date": "2026-01-24T17:00:47+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.idescat.cat/pub/?id=rfdbc",
+    "first_seen": "2026-01-25T11:12:49.053699+00:00",
+    "last_seen": "2026-01-25T11:12:49.053699+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "03-Casas de un millón al lado de hogares con salarios de 16.000 en Barcelona la sorprendente frontera.json",
+        "run_id": "8c12556d-b170-41f9-b4e8-eb97851b91ba",
+        "date": "2026-01-24T10:04:25+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.totbarcelona.cat/cultura-i-oci/dues-cerveseries-barcelona-ranquing-estat-687306/",
+    "first_seen": "2026-01-25T11:15:59.994603+00:00",
+    "last_seen": "2026-01-25T11:15:59.994603+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "27-Dos bars de Barcelona, en el ‘top 10’ de les 100 millors cerveseries de l’Estat.json",
+        "run_id": "8c12556d-b170-41f9-b4e8-eb97851b91ba",
+        "date": "2026-01-24T08:24:08+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.totbarcelona.cat/successos/un-judici-destapa-la-filigrana-estructural-dels-narcopisos-ocupats-686977/",
+    "first_seen": "2026-01-25T11:16:10.774773+00:00",
+    "last_seen": "2026-01-25T11:16:10.774773+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "22-Un judici destapa la “filigrana estructural” dels narcopisos ocupats.json",
+        "run_id": "8c12556d-b170-41f9-b4e8-eb97851b91ba",
+        "date": "2026-01-24T17:27:58+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ara.cat/economia/immobiliari/realment-concentrada-propietat-dels-habitatges-barcelona_1_5624913.html",
+    "first_seen": "2026-01-25T11:17:08.509092+00:00",
+    "last_seen": "2026-01-25T11:17:08.509092+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "31-Està realment concentrada la propietat dels habitatges a Barcelona.json",
+        "run_id": "8c12556d-b170-41f9-b4e8-eb97851b91ba",
+        "date": "2026-01-24T15:00:25+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://premsa-estatics-prod.s3.eu-west-1.amazonaws.com/premsa/wp-content/uploads/2026/01/260125PEWellingtonCiutadellaDEF.pdf",
+    "first_seen": "2026-01-26T09:00:47.323155+00:00",
+    "last_seen": "2026-01-26T09:00:47.323155+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "09-Barcelona aprueba el proyecto para conectar Ciutat Vella y Vila Olímpica a través de la Ciutadella.json",
+        "run_id": "82997667-32c6-415a-8424-842e7d21fc33",
+        "date": "2026-01-25T12:36:53+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.vilaweb.cat/noticies/ajuntament-barcelona-atac-vandalic-tombes-jueves/",
+    "first_seen": "2026-01-26T09:01:08.681013+00:00",
+    "last_seen": "2026-01-26T09:01:08.681013+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "39-L’Ajuntament de Barcelona condemna l’atac vandàlic contra tombes jueves del cementiri de les Corts.json",
+        "run_id": "82997667-32c6-415a-8424-842e7d21fc33",
+        "date": "2026-01-25T17:05:57+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260125/11448884/muere-ciclista-choque-turismo-carretera-comarcal-paso-subirats.html",
+    "first_seen": "2026-01-26T09:01:44.469066+00:00",
+    "last_seen": "2026-01-26T09:01:44.469066+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "10-Muere un ciclista tras un choque con un turismo en una carretera comarcal a su paso por Subirats.json",
+        "run_id": "82997667-32c6-415a-8424-842e7d21fc33",
+        "date": "2026-01-25T10:54:55+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://beteve.cat/",
+    "first_seen": "2026-01-26T09:01:45.995803+00:00",
+    "last_seen": "2026-01-27T16:39:00.792904+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news",
+      "unknown"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "03-Barcelona retiró más de 350 pintadas y carteles de las calles cada día el año 2025.json",
+        "run_id": "82997667-32c6-415a-8424-842e7d21fc33",
+        "date": "2026-01-25T11:23:30+01:00"
+      },
+      {
+        "id": "unknown",
+        "filename": "37.Barcelonas-Fort-Pienc-Neighborhood-Schedules-2026-Carnival-Parade-with-Planned-R.json",
+        "run_id": "a4fd91ef-b2eb-41a9-8b1b-d1ea3387cbcb"
+      }
+    ]
+  },
+  {
+    "url": "https://diumenge.ara.cat/diumenge/100-anys-dels-cinemes-verdi-be-feina-sales-cine-no-moriran_130_5619710.html",
+    "first_seen": "2026-01-26T09:01:58.252667+00:00",
+    "last_seen": "2026-01-26T09:01:58.252667+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "38-100 anys dels Cinemes Verdi “Si fem bé la feina les sales de cine no moriran.json",
+        "run_id": "82997667-32c6-415a-8424-842e7d21fc33",
+        "date": "2026-01-25T18:00:44+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://govern.cat/salapremsa/notes-premsa/445831/mossos-desquadra-intensifiquen-patrullatge-preventiu-installacions-ferroviaries",
+    "first_seen": "2026-01-26T09:04:22.520850+00:00",
+    "last_seen": "2026-01-26T09:04:22.520850+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "14-Mossos intensifica los patrullajes en instalaciones ferroviarias para evitar vandalismo en trenes.json",
+        "run_id": "82997667-32c6-415a-8424-842e7d21fc33",
+        "date": "2026-01-25T16:00:55+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.totbarcelona.cat/societat/temporal-platja-sant-adria-contaminacio-687106/",
+    "first_seen": "2026-01-26T09:05:20.380733+00:00",
+    "last_seen": "2026-01-26T09:41:10.023138+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "29-La borrasca Harry reviu els fantasmes de la contaminació a la platja del Litoral.json",
+        "run_id": "82997667-32c6-415a-8424-842e7d21fc33",
+        "date": "2026-01-25T08:05:07+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "29-La borrasca Harry reviu els fantasmes de la contaminació a la platja del Litoral.json",
+        "run_id": "1171d27d-614e-4165-ad78-b4374fd20cd3",
+        "date": "2026-01-25T08:05:07+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.totbarcelona.cat/es/cultura-ocio/patrimonio/el-secreto-de-la-pedrera-un-pilar-ilegal-en-el-paseo-de-gracia-687726/",
+    "first_seen": "2026-01-26T09:05:38.492175+00:00",
+    "last_seen": "2026-01-26T09:05:38.492175+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "23-El secret de La Pedrera, un pilar il·legal al passeig de Gràcia.json",
+        "run_id": "82997667-32c6-415a-8424-842e7d21fc33",
+        "date": "2026-01-25T17:01:31+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lapedrera.com/en/",
+    "first_seen": "2026-01-26T09:38:35.060487+00:00",
+    "last_seen": "2026-01-26T09:38:35.060487+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "23-El secret de La Pedrera, un pilar il·legal al passeig de Gràcia.json",
+        "run_id": "1171d27d-614e-4165-ad78-b4374fd20cd3",
+        "date": "2026-01-25T17:01:31+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://x.com/semgencat/status/1750570800000000000",
+    "first_seen": "2026-01-26T17:36:11.056393+00:00",
+    "last_seen": "2026-01-26T17:36:11.056393+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "14-Al menos 34 heridos leves y 200 desalojados por una fuga de monóxido de carbono en un polideportivo.json",
+        "run_id": "8be64ba8-2f85-4aef-81ef-a46217567b8c",
+        "date": "2026-01-25T21:44:50+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260126/vertedero-seva-fito-tersa-incineradora-generalitat-investigacion-125930329",
+    "first_seen": "2026-01-26T17:36:32.858943+00:00",
+    "last_seen": "2026-01-26T17:36:32.858943+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "07-Basura mal quemada en la incineradora de Tersa se entierra en el vertedero de la trama corrupta de S.json",
+        "run_id": "8be64ba8-2f85-4aef-81ef-a46217567b8c",
+        "date": "2026-01-26T06:00:04+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260126/justicia-avala-reserva-40-plazas-mujeres-tribunal-superior-de-justicia-interior-generalitat-bomberos-125919454",
+    "first_seen": "2026-01-26T17:36:48.546624+00:00",
+    "last_seen": "2026-01-26T17:36:48.546624+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "05-La Justicia avala la reserva del 40% de plazas para mujeres en Bombers que impulsó la Generalitat pa.json",
+        "run_id": "8be64ba8-2f85-4aef-81ef-a46217567b8c",
+        "date": "2026-01-26T06:00:04+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260126/metro-barcelona-reduce-fraude-colarse-2025-126009305",
+    "first_seen": "2026-01-26T17:37:05.461427+00:00",
+    "last_seen": "2026-01-26T17:37:05.461427+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "08-El metro de Barcelona reduce el fraude del 3,5% al 2,4% en cinco años mientras crece un 17% en pasaj.json",
+        "run_id": "8be64ba8-2f85-4aef-81ef-a46217567b8c",
+        "date": "2026-01-26T06:00:01+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lasexta.com/noticias/sociedad/detenido-conductor-muerte-ciclista-dar-positivo-barcelona_202601256976756aeb223406e5aee818.html",
+    "first_seen": "2026-01-26T17:39:49.929489+00:00",
+    "last_seen": "2026-01-26T17:39:49.929489+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "15-Detenido un conductor por la muerte de un ciclista tras dar positivo en Barcelona.json",
+        "run_id": "8be64ba8-2f85-4aef-81ef-a46217567b8c",
+        "date": "2026-01-25T20:56:26+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.espublicogestiona.com/ca/",
+    "first_seen": "2026-01-27T16:32:27.510982+00:00",
+    "last_seen": "2026-01-27T16:32:27.510982+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "unknown"
+    ],
+    "article_refs": [
+      {
+        "id": "unknown",
+        "filename": "4.Casa-Batlls-facade-projection-show-to-disrupt-traffic-on-Barcelonas-Passeig-de-G.json",
+        "run_id": "a4fd91ef-b2eb-41a9-8b1b-d1ea3387cbcb"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ohb.cat/project/loferta-de-lloguer-de-temporada-a-barcelona-informe-preliminar/",
+    "first_seen": "2026-01-27T16:33:07.416777+00:00",
+    "last_seen": "2026-01-27T16:33:07.416777+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "unknown"
+    ],
+    "article_refs": [
+      {
+        "id": "unknown",
+        "filename": "6.Study-reveals-30-of-apartments-in-Barcelonas-Eixample-Dreta-district-lack-perman.json",
+        "run_id": "a4fd91ef-b2eb-41a9-8b1b-d1ea3387cbcb"
+      }
+    ]
+  },
+  {
+    "url": "https://www.idescat.cat/estad/",
+    "first_seen": "2026-01-27T16:35:16.850038+00:00",
+    "last_seen": "2026-01-27T16:35:16.850038+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "unknown"
+    ],
+    "article_refs": [
+      {
+        "id": "unknown",
+        "filename": "9.Barcelonas-Sants-Neighborhood-Faces-Economic-Hardship-Amid-Rising-Living-Costs-a.json",
+        "run_id": "a4fd91ef-b2eb-41a9-8b1b-d1ea3387cbcb"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ine.es/dyngs/Prensa/es/H0324.htm",
+    "first_seen": "2026-01-27T16:36:17.271782+00:00",
+    "last_seen": "2026-01-27T16:36:17.271782+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "unknown"
+    ],
+    "article_refs": [
+      {
+        "id": "unknown",
+        "filename": "23.Catalonia-mortgage-lending-surges-in-Q1-2024-despite-rising-interest-rates.json",
+        "run_id": "a4fd91ef-b2eb-41a9-8b1b-d1ea3387cbcb"
+      }
+    ]
+  },
+  {
+    "url": "https://premsaicub.bcn.cat/2026/01/19/bcnegra-el-festival-de-novella-negra-de-barcelona-arriba-a-la-21a-edicio-del-2-al-8-de-febrer-de-2026/",
+    "first_seen": "2026-01-27T16:38:26.947803+00:00",
+    "last_seen": "2026-01-27T16:38:26.947803+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "unknown"
+    ],
+    "article_refs": [
+      {
+        "id": "unknown",
+        "filename": "34.Barcelona-to-Host-BCNegra-2026-Crime-Fiction-Festival-in-February-as-Part-of-Cul.json",
+        "run_id": "a4fd91ef-b2eb-41a9-8b1b-d1ea3387cbcb"
+      }
+    ]
+  },
+  {
+    "url": "https://beteve.cat/un-pla-perfecte/nou-programa-cinema-un-pla-perfecte/",
+    "first_seen": "2026-01-28T09:06:52.612532+00:00",
+    "last_seen": "2026-01-28T10:04:44.335483+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "107-‘Un pla perfecte’, el nou programa de pel·lícules i sèries de betevé.json",
+        "run_id": "f7c13c8c-a8db-40e1-b31f-d2f13c80f892",
+        "date": "2026-01-27T16:50:45+00:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "107-‘Un pla perfecte’, el nou programa de pel·lícules i sèries de betevé.json",
+        "run_id": "b08c1672-080d-41a6-a808-f9f24ced2c56",
+        "date": "2026-01-27T16:50:45+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.assemblee-nationale.fr/dyn/17/textes/l17b2107_proposition-loi",
+    "first_seen": "2026-01-28T09:06:59.705475+00:00",
+    "last_seen": "2026-01-28T09:06:59.705475+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "93-Els menors de quinze anys tindran prohibides les xarxes socials a Catalunya Nord.json",
+        "run_id": "f7c13c8c-a8db-40e1-b31f-d2f13c80f892",
+        "date": "2026-01-27T12:33:53+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/trafico-y-transportes/20260127/rodalies-renfe-cataluna-barcelona-retrasos-trenes-incidencias-dv-loc-126129150",
+    "first_seen": "2026-01-28T09:07:06.247558+00:00",
+    "last_seen": "2026-01-28T09:07:06.247558+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "06-¿Dónde consultar en tiempo real los retrasos en los trenes de Rodalies en Barcelona Todas las webs.json",
+        "run_id": "f7c13c8c-a8db-40e1-b31f-d2f13c80f892",
+        "date": "2026-01-27T11:40:39+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ine.es/prensa/epa_prensa.htm",
+    "first_seen": "2026-01-28T09:07:34.976413+00:00",
+    "last_seen": "2026-01-28T09:07:34.976413+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "69-L'atur cau a Espanya per sota del 10% per primera vegada en divuit anys.json",
+        "run_id": "f7c13c8c-a8db-40e1-b31f-d2f13c80f892",
+        "date": "2026-01-27T08:12:54+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260127/monserrat-junyent-presidenta-api-catalanes-126103594",
+    "first_seen": "2026-01-28T09:07:40.599040+00:00",
+    "last_seen": "2026-01-28T10:05:23.762725+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "02-Monserrat Junyent, presidenta de los API catalanes Barcelona necesita más pisos pequeños, desde 30.json",
+        "run_id": "f7c13c8c-a8db-40e1-b31f-d2f13c80f892",
+        "date": "2026-01-27T19:05:26+01:00"
+      },
+      {
+        "id": "barcelona_news",
+        "filename": "02-Monserrat Junyent, presidenta de los API catalanes Barcelona necesita más pisos pequeños, desde 30.json",
+        "run_id": "b08c1672-080d-41a6-a808-f9f24ced2c56",
+        "date": "2026-01-27T19:05:26+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260127/11450733/el-ayuntamiento-de-santa-coloma-aprueba-una-ordenanza-para-regular-los-usos-del-parque-fluvial-del-besos-con-multas-de-hasta-3-000-euros-asd-epm.html",
+    "first_seen": "2026-01-28T09:13:29.855454+00:00",
+    "last_seen": "2026-01-28T09:13:29.855454+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "14-El Ayuntamiento de Santa Coloma aprueba una ordenanza para regular los usos del parque fluvial del B.json",
+        "run_id": "f7c13c8c-a8db-40e1-b31f-d2f13c80f892",
+        "date": "2026-01-27T16:49:37+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://barcelonasecreta.com/cau-bruixes-centelles/",
+    "first_seen": "2026-01-28T09:13:34.810038+00:00",
+    "last_seen": "2026-01-28T09:13:34.810038+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "101-Tarot, brujas, rituales y ‘correfocs’ el mercado más misterioso de Catalunya transforma este pueblo.json",
+        "run_id": "f7c13c8c-a8db-40e1-b31f-d2f13c80f892",
+        "date": "2026-01-27T19:38:41.348501"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260127/manifestacion-asentamiento-b9-corta-c31-badalona-retenciones-126155497",
+    "first_seen": "2026-01-28T09:14:22.817356+00:00",
+    "last_seen": "2026-01-28T09:14:22.817356+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "01-Una manifestación en contra del asentamiento del B9 corta la C-31 en Badalona.json",
+        "run_id": "f7c13c8c-a8db-40e1-b31f-d2f13c80f892",
+        "date": "2026-01-27T19:23:00+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.renfe.com/es/es/grupo-renfe/comunicacion/renfe-al-dia/sala-de-prensa/nuevos-abonos-gratuitos-para-rodalies-de-catalunya",
+    "first_seen": "2026-01-28T09:14:32.276667+00:00",
+    "last_seen": "2026-01-28T09:14:32.276667+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "07-Los usuarios de Rodalies empiezan a hacerse con los billetes gratuitos Este bono no me compensa.json",
+        "run_id": "f7c13c8c-a8db-40e1-b31f-d2f13c80f892",
+        "date": "2026-01-27T08:51:53+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.20minutos.es/cataluna/barcelona/detenido-un-menor-aeropuerto-barcelona-por-matar-un-hombre-un-bus-castelldefels-una-punalada-julio_6926557_0.html",
+    "first_seen": "2026-01-28T09:15:04.402816+00:00",
+    "last_seen": "2026-01-28T09:15:04.402816+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "10-Detenido un menor en el Aeropuerto de Barcelona por matar a un hombre en un bus de Castelldefels de.json",
+        "run_id": "f7c13c8c-a8db-40e1-b31f-d2f13c80f892",
+        "date": "2026-01-27T17:31:31+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.totbarcelona.cat/societat/investiguen-conseller-delegat-tmb-per-un-presumpte-cas-dassetjament-laboral-687987/",
+    "first_seen": "2026-01-28T09:18:40.798330+00:00",
+    "last_seen": "2026-01-28T09:18:40.798330+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "46-Investiguen el conseller delegat de TMB per un presumpte cas d’assetjament laboral.json",
+        "run_id": "f7c13c8c-a8db-40e1-b31f-d2f13c80f892",
+        "date": "2026-01-27T13:37:28+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.elperiodico.com/es/barcelona/20260127/pizzas-gratis-telepizza-barcelona-badalona-locales-tiendas-dv-loc-126134729",
+    "first_seen": "2026-01-28T09:18:51.976996+00:00",
+    "last_seen": "2026-01-28T09:18:51.976996+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "05-Pizzas gratis en Barcelona solo hasta este jueves en estos locales.json",
+        "run_id": "f7c13c8c-a8db-40e1-b31f-d2f13c80f892",
+        "date": "2026-01-27T13:00:48+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ara.cat/economia/l-licita-mes-1-000-m-concurs-gestio-l-aigua-vuit-municipis_1_5630408.html",
+    "first_seen": "2026-01-28T09:19:15.876585+00:00",
+    "last_seen": "2026-01-28T09:19:15.876585+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "67-L'AMB licita per més de 1.000 M€ el concurs de gestió de l'aigua a vuit municipis.json",
+        "run_id": "f7c13c8c-a8db-40e1-b31f-d2f13c80f892",
+        "date": "2026-01-27T18:06:03+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.renfe.com/es/es/grupo-renfe/comunicacion/sala-de-prensa/servicio-rodalies-martes-27-enero",
+    "first_seen": "2026-01-28T10:08:29.274289+00:00",
+    "last_seen": "2026-01-28T10:08:29.274289+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "06-¿Dónde consultar en tiempo real los retrasos en los trenes de Rodalies en Barcelona Todas las webs.json",
+        "run_id": "b08c1672-080d-41a6-a808-f9f24ced2c56",
+        "date": "2026-01-27T11:40:39+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ara.cat/economia/mercat-laboral/l-atur-cau-espanya-10-primera-vegada-18-anys_1_5629871.html",
+    "first_seen": "2026-01-28T10:14:27.342897+00:00",
+    "last_seen": "2026-01-28T10:14:27.342897+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "69-L'atur cau a Espanya per sota del 10% per primera vegada en divuit anys.json",
+        "run_id": "b08c1672-080d-41a6-a808-f9f24ced2c56",
+        "date": "2026-01-27T08:12:54+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://elpais.com/espana/catalunya/2026-01-28/el-instituto-vila-de-gracia-se-moviliza-en-contra-de-la-supresion-del-bachillerato-escenico.html",
+    "first_seen": "2026-01-28T18:18:16.169839+00:00",
+    "last_seen": "2026-01-28T18:18:16.169839+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "06-El instituto Vila de Gràcia se moviliza en contra de la supresión del bachillerato escénico.json",
+        "run_id": "be29ed79-0981-40c5-8f23-dbc4834e39e8",
+        "date": "2026-01-28T05:30:01+01:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260128/11450944/promesas-inversion-rodalies-15-anos-esperando-unicornio-rosa-nunca-llego.html",
+    "first_seen": "2026-01-28T18:18:25.522596+00:00",
+    "last_seen": "2026-01-28T18:18:25.522596+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "08-Promesas de inversión en Rodalies 15 años esperando un unicornio rosa que nunca llegó.json",
+        "run_id": "be29ed79-0981-40c5-8f23-dbc4834e39e8",
+        "date": "2026-01-28T05:00:00+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lavanguardia.com/local/barcelona/20260128/11450875/erc-psc-pactan-ayudas-compra-piso-asciendan-80-000-euros-barcelona.html",
+    "first_seen": "2026-01-28T18:21:51.316497+00:00",
+    "last_seen": "2026-01-28T18:21:51.316497+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "09-ERC y PSC pactan que las ayudas a la compra de un piso asciendan a 80.000 euros en Barcelona.json",
+        "run_id": "be29ed79-0981-40c5-8f23-dbc4834e39e8",
+        "date": "2026-01-28T05:00:00+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.totbarcelona.cat/urbanisme/alerta-permuta-parcial-can-raventos-687990/",
+    "first_seen": "2026-01-28T18:23:59.520827+00:00",
+    "last_seen": "2026-01-28T18:23:59.520827+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "33-L’Ajuntament recula i negocia ara una permuta parcial de Can Raventós.json",
+        "run_id": "be29ed79-0981-40c5-8f23-dbc4834e39e8",
+        "date": "2026-01-27T20:03:00+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ara.cat/societat/mobilitat/l-doblara-inversio-manteniment-rodalies-propers-cinc-anys_1_5630430.html",
+    "first_seen": "2026-01-28T18:26:15.187415+00:00",
+    "last_seen": "2026-01-28T18:26:15.187415+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "34-El pla de Rodalies pels propers cinc anys preveu doblar la inversió en manteniment.json",
+        "run_id": "be29ed79-0981-40c5-8f23-dbc4834e39e8",
+        "date": "2026-01-27T20:00:49+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://www.ara.cat/societat/justicia/cinc-condemnats-revendre-wallapop-tractaments-fertilitat-aconseguits-receptes-falses_1_5629374.html",
+    "first_seen": "2026-01-28T18:29:03.482799+00:00",
+    "last_seen": "2026-01-28T18:29:03.482799+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "38-Cinc condemnats per revendre per Wallapop tractaments de fertilitat aconseguits amb receptes falses.json",
+        "run_id": "be29ed79-0981-40c5-8f23-dbc4834e39e8",
+        "date": "2026-01-28T06:00:40+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://mengem.ara.cat/restaurants/llocs-menjar-macarrons-barcelona-plat-moda-dels-restaurants_1_5611877.html",
+    "first_seen": "2026-01-28T18:29:54.007960+00:00",
+    "last_seen": "2026-01-28T18:29:54.007960+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "40-Llocs per menjar macarrons a Barcelona el plat de moda dels restaurants.json",
+        "run_id": "be29ed79-0981-40c5-8f23-dbc4834e39e8",
+        "date": "2026-01-28T06:00:40+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://charts.ecmwf.int/products/sub-seasonal-precipitation-anomaly",
+    "first_seen": "2026-01-28T18:32:38.351856+00:00",
+    "last_seen": "2026-01-28T18:32:38.351856+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "64-Quan pararà de ploure a Barcelona Es veu algun canvi de tendència als mapes.json",
+        "run_id": "be29ed79-0981-40c5-8f23-dbc4834e39e8",
+        "date": "2026-01-27T20:01:37+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://beteve.cat/economia/barcelona-espera-ser-capital-europea-comerc-proximitat/",
+    "first_seen": "2026-01-28T18:33:27.514540+00:00",
+    "last_seen": "2026-01-28T18:33:27.514540+00:00",
+    "source_type": "news",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "68-Barcelona espera ser proclamada Capital Europea del Comerç de Proximitat 2026 aquest dimecres.json",
+        "run_id": "be29ed79-0981-40c5-8f23-dbc4834e39e8",
+        "date": "2026-01-27T19:06:54+00:00"
+      }
+    ]
+  },
+  {
+    "url": "https://cwp.cat/esdeveniment/connectai-industry-congress-2026/",
+    "first_seen": "2026-01-28T18:36:01.426655+00:00",
+    "last_seen": "2026-01-28T18:36:01.426655+00:00",
+    "source_type": "primary",
+    "article_ids": [
+      "barcelona_news"
+    ],
+    "article_refs": [
+      {
+        "id": "barcelona_news",
+        "filename": "69-ConnectAI Industry Congress quin és el futur de la indústria amb la intel·ligència artificial.json",
+        "run_id": "be29ed79-0981-40c5-8f23-dbc4834e39e8",
+        "date": "2026-01-27T19:04:28+00:00"
+      }
+    ]
+  }
+]

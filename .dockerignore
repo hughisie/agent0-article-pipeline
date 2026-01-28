@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Workspace data
+agent0_gui/workspace/
+agent0_gui.db
+
+# Node
+agent0_gui/web/node_modules/
+agent0_gui/web/dist/
+
+# Logs
+*.log
+
+# Config and secrets
+config.json
+
+# Output files
+output/
+current/
+
+# Source files
+*.json.research.md
+*.json.wp.json

@@ -1,0 +1,123 @@
+=================================================================
+IMPROVED PROMPT_RELATED_USER
+(Copy and paste this into the Related Articles User Prompt editor)
+=================================================================
+
+You will receive:
+  1. JSON describing a new story's article metadata and key analysis.
+  2. JSON describing its primary source.
+  3. A list of recent articles from the same site (title, URL, date, summary).
+
+Tasks:
+  - Identify 1-3 related articles that provide useful background, context, or continuation.
+  - Provide descriptive anchor text, a brief relevance note, and insertion placement.
+  - Prefer topical diversity; do not pick multiple links on the exact same subtopic.
+
+CRITICAL RELEVANCE REQUIREMENTS:
+  - Related articles MUST share the same core topic, policy area, or subject matter as the new article.
+  - Geographic or institutional proximity alone is NOT sufficient for relevance.
+  - Examples of GOOD relevance:
+    * New article about terrace heaters → Related: previous articles about terrace heater regulations, outdoor heating policies
+    * New article about metro expansion → Related: previous metro construction updates, public transport infrastructure
+  - Examples of BAD relevance (DO NOT LINK):
+    * New article about terrace heaters → DON'T link to: train evacuations, bureaucracy reforms, unrelated government announcements
+    * New article about beach rules → DON'T link to: traffic regulations, housing policies
+  - Ask yourself: "Would a reader interested in THIS specific topic find THAT article genuinely useful?"
+  - If the connection requires mental gymnastics or creative interpretation, DO NOT SELECT IT.
+  - Semantic topic overlap is REQUIRED: both articles must discuss the same industry, regulation type, or specific issue.
+  - It is better to return ZERO links than to return irrelevant ones.
+
+Constraints:
+  - Prefer articles from the last 2-3 months.
+  - You MAY choose older posts ONLY if they are clearly part of the same series or direct follow-up.
+  - URLs must be unique; do not repeat the same URL.
+  - Do not pick more than 3 total.
+  - The sentences must flow naturally in a neutral news style and refer to the site as "we" only if the original article clearly does so. Otherwise keep it impersonal.
+
+Return ONLY valid JSON in this exact structure:
+
+{
+  "related": [
+    {
+      "url": "string",
+      "title": "string",
+      "anchor_text": "string",
+      "why_relevant": "string",
+      "suggested_insertion": "intro" | "mid" | "later",
+      "style": "context" | "background" | "continue"
+    }
+  ]
+}
+
+If you cannot find any truly relevant article with strong semantic topic overlap, return an empty related list.
+
+NEW STORY (article + analysis):
+<ARTICLE_AND_ANALYSIS_JSON_HERE>
+
+PRIMARY SOURCE:
+<PRIMARY_SOURCE_JSON_HERE>
+
+RECENT POSTS:
+<RECENT_POSTS_JSON_HERE>
+
+
+=================================================================
+IMPROVED PROMPT_ARTICLE_USER SECTION FOR RELATED ARTICLES
+(Add this to your existing Article User Prompt where it discusses related articles)
+=================================================================
+
+You will also receive a JSON object describing some existing articles from this site that should be referenced in the new article when appropriate.
+For each entry, you will see: url, title, anchor_text, why_relevant, and suggested_insertion.
+
+Please:
+  - Weave up to 3 references into the article body in a natural way.
+  - Use standard HTML anchor tags for each hyperlink, e.g.:
+    <a href="URL">anchor_text</a>
+  - Place one link in the intro or early body if possible.
+  - Do not over-link: at most one link per related article.
+
+CRITICAL LINKING REQUIREMENTS:
+  - Each related article link MUST be introduced with a UNIQUE phrase or sentence structure.
+  - NEVER repeat the same linking pattern or sentence structure.
+  - Vary your linking style for each reference:
+    * First link: Natural contextual reference (e.g., "The city previously addressed similar concerns about...")
+    * Second link: Background reference (e.g., "This follows earlier action on...")
+    * Third link: Continuation reference (e.g., "The issue connects to broader questions about...")
+  - Use different sentence structures and vocabulary for each link.
+  - Avoid formulaic patterns like "we covered it in..." or "as we reported in..."
+  - Make each link introduction flow naturally from the surrounding paragraph's topic.
+  - If you cannot introduce a link naturally and uniquely, skip it rather than force it.
+
+EXAMPLES OF LINKING VARIETY:
+  ❌ BAD (repetitive - DO NOT DO THIS):
+    "That debate has been building for months — we covered it in streamlining municipal bureaucracy."
+    "That debate has been building for months — we covered it in scrutiny of public service operations."
+
+  ✅ GOOD (varied - DO THIS):
+    "The city previously addressed similar concerns when streamlining municipal bureaucracy."
+    "This follows earlier scrutiny of public service operations, which raised questions about oversight."
+    "Related questions emerged during recent discussions about transparency requirements."
+
+RELATED ARTICLES JSON:
+{related_json}
+
+
+=================================================================
+QUICK REFERENCE: WHERE TO UPDATE IN UI
+=================================================================
+
+1. Go to: http://localhost:9000
+2. Scroll to: "LLM Prompt Customization"
+3. Click: "Show Prompts"
+4. Expand: "Related Articles" section
+5. Click "Edit" on: PROMPT_RELATED_USER
+6. Replace the entire prompt with the improved version above
+7. Click "Save"
+
+8. Expand: "Article Writing" section
+9. Click "Edit" on: PROMPT_ARTICLE_USER
+10. Find the section about related articles (around line 90)
+11. Replace that section with the improved version above
+12. Click "Save"
+
+Test by re-processing the terrace heaters article or similar articles with related links.
