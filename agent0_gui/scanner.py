@@ -25,7 +25,9 @@ class ScanItem:
 
 
 def _load_headline_en(path: Path) -> str:
+    """Load English headline from cache or file. Returns empty string if not translated."""
     try:
+        # First check cache
         with get_conn() as conn:
             row = conn.execute(
                 "SELECT headline_en_gb FROM headline_cache WHERE file_path = ?",
@@ -33,6 +35,8 @@ def _load_headline_en(path: Path) -> str:
             ).fetchone()
             if row and row["headline_en_gb"]:
                 return row["headline_en_gb"]
+        
+        # Then check if file has been translated
         if path.suffix.lower() == ".json":
             try:
                 content = path.read_text(encoding="utf-8").strip()
@@ -40,7 +44,12 @@ def _load_headline_en(path: Path) -> str:
                     print(f"[WARNING] Empty JSON file during scan: {path}")
                     return ""
                 data = json.loads(content)
-                return data.get("headline_en_gb") or data.get("original_title") or data.get("title") or ""
+                # Only return headline_en_gb if it exists and is different from original
+                headline_en = data.get("headline_en_gb", "").strip()
+                if headline_en:
+                    return headline_en
+                # File hasn't been translated yet - return empty to signal this
+                return ""
             except json.JSONDecodeError as e:
                 print(f"[WARNING] Invalid JSON during scan: {path} - {e}")
                 return ""
@@ -108,6 +117,7 @@ def scan_paths(paths: list[str], skip_duplicates: bool = True) -> list[ScanItem]
         published_paths = {row["file_path"] for row in pub_rows if row["file_path"]}
 
     seen_names = set()
+    seen_headlines = {}  # Map normalized headline to first file path
     items = []
     idx = 1
     for path in sorted(all_paths, key=lambda p: str(p).lower()):
@@ -133,9 +143,41 @@ def scan_paths(paths: list[str], skip_duplicates: bool = True) -> list[ScanItem]
 
         headline_raw, _source = extract_headline_from_path(path)
         headline_en = _load_headline_en(path)
+        
+        # Check for duplicate headlines (same content, different filename)
+        if not is_duplicate and headline_raw:
+            # Normalize headline for comparison (lowercase, remove extra spaces, remove trailing numbers)
+            import re
+            normalized = re.sub(r'\s+', ' ', headline_raw.lower().strip())
+            normalized = re.sub(r'\s*\d+\s*$', '', normalized)  # Remove trailing numbers like " 2"
+            
+            if normalized in seen_headlines:
+                is_duplicate = True
+                duplicate_reason = f"duplicate headline (same as {seen_headlines[normalized]})"
+                print(f"[SCAN] Duplicate headline detected: '{headline_raw}' in {basename} (matches {seen_headlines[normalized]})")
+            else:
+                seen_headlines[normalized] = basename
+        
+        # Detect language more accurately
         language = "unknown"
-        if headline_raw:
-            language = "en" if headline_raw == headline_en else "unknown"
+        if headline_en:
+            # Has been translated
+            language = "en"
+        elif headline_raw:
+            # Not translated yet - detect from raw headline
+            import re
+            if re.search(r'[áéíóúñü]', headline_raw.lower()):
+                language = "es"  # Spanish
+            elif re.search(r'[àèéíòóúïüç]', headline_raw.lower()):
+                language = "ca"  # Catalan
+            else:
+                # Check if it looks like English
+                english_words = {'the', 'and', 'for', 'with', 'from', 'to', 'in', 'on', 'at'}
+                words = set(headline_raw.lower().split())
+                if words & english_words:
+                    language = "en"
+                else:
+                    language = "unknown"
 
         item = ScanItem(
             index=idx,
@@ -143,7 +185,7 @@ def scan_paths(paths: list[str], skip_duplicates: bool = True) -> list[ScanItem]
             basename=basename,
             article_no=extract_article_no(path),
             headline_raw=headline_raw,
-            headline_en_gb=headline_en or headline_raw,
+            headline_en_gb=headline_en or headline_raw,  # Show raw if not translated
             language=language,
             is_duplicate=is_duplicate,
             duplicate_reason=duplicate_reason,
