@@ -172,8 +172,17 @@ def build_gemini_article_prompt(
         "     - Written in British English for intelligent but busy readers.\n"
         "     - Optimised for mobile readability.\n"
         "     - Based on facts only; do not speculate.\n"
-        "     - Include at least one hyperlink to the primary source URL.\n"
         "     - Use the focus keyphrase in the first paragraph, at least one H2, and naturally throughout.\n\n"
+        "🔴 MANDATORY PRIMARY SOURCE LINK REQUIREMENT:\n"
+        "  - You MUST include at least ONE hyperlink to the PRIMARY SOURCE URL\n"
+        "  - The primary source URL is provided in the primary_source.url field of the PRIMARY SOURCE JSON\n"
+        "  - This is the ACTUAL SOURCE of the article's information - link to it naturally when citing data or facts\n"
+        "  - Example integrations:\n"
+        "    ✓ \"According to the <a href='[primary_source.url]'>official report</a>, the numbers show...\"\n"
+        "    ✓ \"The <a href='[primary_source.url]'>government announcement</a> confirmed that...\"\n"
+        "    ✓ \"Data from the <a href='[primary_source.url]'>survey results</a> revealed...\"\n"
+        "  - Place this link early in the article when first introducing key data or claims\n"
+        "  - If primary_source.url is null or empty, then DON'T add any external links (better no link than wrong link)\n\n"
         "CRITICAL EXTERNAL LINKING RULES:\n"
         "  - NEVER INVENT OR CONSTRUCT URLs - only use URLs that are explicitly provided in the input data\n"
         "  - If a URL is not provided in the article data, primary source data, or analysis, DO NOT CREATE ONE\n"
@@ -505,7 +514,7 @@ def generate_wp_article(
     analysis: dict,
     primary_source: dict,
     related_articles: dict | None = None,
-    model_name: str = "gemini-2.0-flash-exp",
+    model_name: str = "gemini-exp-1206",
     api_keys: dict | None = None,
 ) -> dict:
     if not api_keys or not api_keys.get("GEMINI_API_KEY"):

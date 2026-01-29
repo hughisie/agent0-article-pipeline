@@ -1080,8 +1080,11 @@ def api_get_profile_prompts(profile_id: int) -> dict:
             prompt_value = custom_data if isinstance(custom_data, str) else ""
             model_pref = "gemini-2.0-flash-exp"
             
-        # Set default model to cost-effective option
-        default_model = "gemini-2.0-flash-exp"
+        # Set default model based on prompt type
+        if key in ["PROMPT_ARTICLE_SYSTEM", "PROMPT_ARTICLE_USER"]:
+            default_model = "gemini-exp-1206"  # High quality for articles
+        else:
+            default_model = "gemini-2.0-flash-exp"  # Cost-effective for other operations
             
         prompts[key] = {
             "value": prompt_value if key in custom_prompts else default_prompts.get(key, ""),

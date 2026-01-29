@@ -200,9 +200,9 @@ def _review_analysis(article, model_choice: str, config: dict) -> dict:
 def _review_wp_article(original_article: dict, analysis: dict, primary: dict, related: dict | None, config: dict, is_rerun: bool) -> dict:
     while True:
         try:
-            model = "gemini-2.0-flash-exp"  # Use cheaper model by default
+            model = "gemini-exp-1206"  # Use high quality model for articles
             if is_rerun:
-                model = "gemini-2.0-flash-exp"
+                model = "gemini-2.0-flash-exp"  # Use cheaper model for reruns
             article_payload = generate_wp_article(
                 original_article=original_article,
                 analysis=analysis,
@@ -989,7 +989,7 @@ def main() -> None:
     if generate_article == "y":
         if args.non_interactive:
             # Get model preference from active profile
-            model_name = "gemini-2.0-flash-exp"  # default (cost-effective)
+            model_name = "gemini-exp-1206"  # default (high quality)
             try:
                 active_profile = get_active_profile()
                 if active_profile:
@@ -997,7 +997,7 @@ def main() -> None:
                     # Check PROMPT_ARTICLE_SYSTEM or PROMPT_ARTICLE_USER for model preference
                     for key in ["PROMPT_ARTICLE_SYSTEM", "PROMPT_ARTICLE_USER"]:
                         if key in profile_prompts and isinstance(profile_prompts[key], dict):
-                            model_name = profile_prompts[key].get("model", "gemini-2.0-flash-exp")
+                            model_name = profile_prompts[key].get("model", "gemini-exp-1206")
                             break
             except Exception:
                 pass  # Fall back to default if profile fetch fails
