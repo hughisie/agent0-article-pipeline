@@ -1,13 +1,19 @@
 import json
 from dataclasses import dataclass
 from pathlib import Path
+from datetime import datetime, timezone
 
 from agent0_scanner import scan_articles
-from agent0_translator import extract_headline_from_path
+from agent0_translator import extract_headline_from_path, translate_headline_json, translate_headline_md
 from agent0_utils import extract_article_no
 
 from .db import get_conn
 from .fingerprint import compute_fingerprint
+
+
+def now_iso() -> str:
+    """Return current UTC time in ISO format."""
+    return datetime.now(timezone.utc).isoformat()
 
 
 @dataclass
@@ -172,6 +178,41 @@ def scan_paths(paths: list[str], skip_duplicates: bool = True) -> list[ScanItem]
 
         headline_raw, _source = extract_headline_from_path(path)
         headline_en = _load_headline_en(path)
+        
+        # Auto-translate headline if not in English
+        if not headline_en and headline_raw:
+            # Check if headline looks like it needs translation (has Spanish/Catalan characters)
+            import re
+            needs_translation = bool(re.search(r'[áéíóúñüàèòïç]', headline_raw.lower()))
+            if needs_translation:
+                try:
+                    from config import load_config
+                    config = load_config()
+                    api_key = config.get("DEEPSEEK_API_KEY", "")
+                    
+                    if api_key and path.suffix.lower() == ".json":
+                        result = translate_headline_json(path, api_key=api_key)
+                        headline_en = result.headline_en_gb
+                        # Cache the translation
+                        with get_conn() as conn:
+                            conn.execute(
+                                "INSERT OR REPLACE INTO headline_cache (file_path, headline_en_gb, updated_at) VALUES (?, ?, ?)",
+                                (str(path), headline_en, now_iso())
+                            )
+                        print(f"[SCAN] Auto-translated: {basename} -> {headline_en}")
+                    elif api_key and path.suffix.lower() in {".md", ".markdown"}:
+                        result = translate_headline_md(path, api_key=api_key)
+                        headline_en = result.headline_en_gb
+                        # Cache the translation
+                        with get_conn() as conn:
+                            conn.execute(
+                                "INSERT OR REPLACE INTO headline_cache (file_path, headline_en_gb, updated_at) VALUES (?, ?, ?)",
+                                (str(path), headline_en, now_iso())
+                            )
+                        print(f"[SCAN] Auto-translated: {basename} -> {headline_en}")
+                except Exception as e:
+                    print(f"[SCAN] Translation failed for {basename}: {e}")
+                    # Continue with raw headline if translation fails
         
         # Check for duplicate headlines (same content, different filename)
         if not is_duplicate and headline_raw:
