@@ -94,6 +94,22 @@ def _is_scan_candidate(path: Path) -> bool:
         return False
     if ".research" in name:
         return False
+    
+    # Skip numbered duplicates from source (files ending with " 2.json", " 3.json", etc.)
+    import re
+    stem = path.stem  # filename without extension
+    if re.search(r'\s+\d+$', stem):
+        print(f"[SCAN] Skipping numbered duplicate: {path.name}")
+        return False
+    
+    # Skip empty files
+    try:
+        if path.stat().st_size == 0:
+            print(f"[SCAN] Skipping empty file: {path.name}")
+            return False
+    except OSError:
+        pass
+    
     return True
 
 
