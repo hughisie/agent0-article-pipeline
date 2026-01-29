@@ -214,8 +214,19 @@ def headline_needs_translation(
 
 def extract_headline_from_path(path: Path) -> tuple[str, str]:
     if path.suffix.lower() == ".json":
-        data = json.loads(path.read_text(encoding="utf-8"))
-        return extract_headline_source(data, path)
+        try:
+            content = path.read_text(encoding="utf-8").strip()
+            if not content:
+                print(f"[WARNING] Empty JSON file: {path}")
+                return _headline_from_filename(path), "filename"
+            data = json.loads(content)
+            return extract_headline_source(data, path)
+        except json.JSONDecodeError as e:
+            print(f"[WARNING] Invalid JSON in {path}: {e}")
+            return _headline_from_filename(path), "filename"
+        except Exception as e:
+            print(f"[WARNING] Error reading {path}: {e}")
+            return _headline_from_filename(path), "filename"
     content = path.read_text(encoding="utf-8")
     match = re.search(r"^#\s+(.+)$", content, re.MULTILINE)
     if match:
@@ -229,7 +240,13 @@ def translate_headline_json(
     model_name: str = "deepseek-chat",
     dry_run: bool = False,
 ) -> TranslationResult:
-    data = json.loads(path.read_text(encoding="utf-8"))
+    try:
+        content = path.read_text(encoding="utf-8").strip()
+        if not content:
+            raise TranslationError(f"Empty JSON file: {path}")
+        data = json.loads(content)
+    except json.JSONDecodeError as e:
+        raise TranslationError(f"Invalid JSON in {path}: {e}") from e
     headline, source_field = extract_headline_source(data, path)
     lang_hint = (data.get("original_language") or "").strip()
     try:

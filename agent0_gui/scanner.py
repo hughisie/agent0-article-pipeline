@@ -34,8 +34,16 @@ def _load_headline_en(path: Path) -> str:
             if row and row["headline_en_gb"]:
                 return row["headline_en_gb"]
         if path.suffix.lower() == ".json":
-            data = json.loads(path.read_text(encoding="utf-8"))
-            return data.get("headline_en_gb") or data.get("original_title") or data.get("title") or ""
+            try:
+                content = path.read_text(encoding="utf-8").strip()
+                if not content:
+                    print(f"[WARNING] Empty JSON file during scan: {path}")
+                    return ""
+                data = json.loads(content)
+                return data.get("headline_en_gb") or data.get("original_title") or data.get("title") or ""
+            except json.JSONDecodeError as e:
+                print(f"[WARNING] Invalid JSON during scan: {path} - {e}")
+                return ""
         elif path.suffix.lower() in {".md", ".markdown"}:
             # Extract title from markdown frontmatter
             content = path.read_text(encoding="utf-8")
