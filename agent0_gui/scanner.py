@@ -114,11 +114,18 @@ def _is_scan_candidate(path: Path) -> bool:
 
 
 def scan_paths(paths: list[str], skip_duplicates: bool = True) -> list[ScanItem]:
+    print(f"[SCAN] Starting file discovery in {len(paths)} path(s)...")
     all_paths = []
     for root in paths:
+        print(f"[SCAN] Scanning directory: {root}")
         all_paths.extend(scan_articles(root))
+    print(f"[SCAN] Found {len(all_paths)} total files")
+    
+    print(f"[SCAN] Filtering candidates...")
     all_paths = [path for path in all_paths if _is_scan_candidate(path)]
+    print(f"[SCAN] {len(all_paths)} files passed candidate filter")
 
+    print(f"[SCAN] Loading duplicate detection data from database...")
     processed = set()
     published = set()
     published_paths = set()
@@ -126,17 +133,23 @@ def scan_paths(paths: list[str], skip_duplicates: bool = True) -> list[ScanItem]
         # Check processed table
         rows = conn.execute("SELECT fingerprint FROM processed").fetchall()
         processed = {row["fingerprint"] for row in rows}
+        print(f"[SCAN] Loaded {len(processed)} processed fingerprints")
 
         # Check published_articles table
         pub_rows = conn.execute("SELECT fingerprint, file_path FROM published_articles WHERE fingerprint IS NOT NULL").fetchall()
         published = {row["fingerprint"] for row in pub_rows if row["fingerprint"]}
         published_paths = {row["file_path"] for row in pub_rows if row["file_path"]}
+        print(f"[SCAN] Loaded {len(published)} published fingerprints, {len(published_paths)} published paths")
 
+    print(f"[SCAN] Processing articles and extracting headlines...")
     seen_names = set()
     seen_headlines = {}  # Map normalized headline to first file path
     items = []
     idx = 1
-    for path in sorted(all_paths, key=lambda p: str(p).lower()):
+    for i, path in enumerate(sorted(all_paths, key=lambda p: str(p).lower()), 1):
+        # Progress update every 10 files
+        if i % 10 == 0:
+            print(f"[SCAN] Processing article {i}/{len(all_paths)}...")
         basename = path.name
         path_str = str(path.resolve())
         fingerprint = compute_fingerprint(path)
@@ -210,4 +223,7 @@ def scan_paths(paths: list[str], skip_duplicates: bool = True) -> list[ScanItem]
         if not (skip_duplicates and is_duplicate):
             items.append(item)
             idx += 1
+    
+    duplicates_found = len(all_paths) - len(items)
+    print(f"[SCAN] ✓ Scan complete: {len(items)} articles ready, {duplicates_found} duplicates skipped")
     return items
