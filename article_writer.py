@@ -505,7 +505,7 @@ def generate_wp_article(
     analysis: dict,
     primary_source: dict,
     related_articles: dict | None = None,
-    model_name: str = "gemini-3-pro-preview",
+    model_name: str = "gemini-2.0-flash-exp",
     api_keys: dict | None = None,
 ) -> dict:
     if not api_keys or not api_keys.get("GEMINI_API_KEY"):

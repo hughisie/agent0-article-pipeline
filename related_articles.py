@@ -136,7 +136,7 @@ def find_related_articles(
     analysis: dict,
     primary_source: dict,
     recent_posts: list[dict],
-    model_name: str = "gemini-2.5-pro",
+    model_name: str = "gemini-2.0-flash-exp",
     api_keys: dict | None = None,
 ) -> dict:
     if not api_keys or not api_keys.get("GEMINI_API_KEY"):

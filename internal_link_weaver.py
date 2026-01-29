@@ -141,7 +141,7 @@ def weave_internal_links_gemini(
     content: str,
     related: list[dict],
     api_key: str,
-    model_name: str = "gemini-2.5-pro",
+    model_name: str = "gemini-2.0-flash-exp",
 ) -> str:
     if not content or not related:
         return content
