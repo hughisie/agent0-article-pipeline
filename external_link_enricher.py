@@ -1,0 +1,620 @@
+"""
+External Link Enricher Module
+
+This module finds and inserts relevant external links into articles.
+It uses Perplexity Sonar for web-grounded search to find authoritative sources
+for key topics mentioned in the article.
+
+Link categories:
+  - Organization/association websites
+  - Government/municipal websites
+  - Google Maps links for locations mentioned
+  - Original source material
+  - Source attribution via title hover text
+"""
+
+import json
+import re
+import requests
+from typing import Optional
+from urllib.parse import urlparse, quote_plus
+
+from llm_clients import PerplexitySonarClient, GeminiClient, LLMError
+
+
+# Domains we never link to (news sites, Wikipedia, blogs)
+NEWS_DOMAINS = [
+    'wikipedia.org', 'news.google', 'elpais.', 'lavanguardia.', 'elperiodico.',
+    'ara.cat', 'beteve.', 'elnacional.', 'naciodigital.', 'vilaweb.',
+    '324.cat', 'ccma.cat', 'bbc.', 'guardian.', 'reuters.', 'cnn.',
+    'nytimes.', 'washingtonpost.', 'france24.', 'euronews.', 'publico.',
+    'eldiario.', 'larazon.', 'elmundo.', 'abc.es', 'totbarcelona.',
+    'timeout.', 'metropoliabierta.', 'cronicaglobal.',
+]
+
+# Well-known organization domains (used for relevance scoring, NOT to skip validation)
+KNOWN_ORG_DOMAINS = [
+    'barcelona.cat', 'ajuntament.barcelona.cat', 'gencat.cat', 'web.gencat.cat',
+    'govern.cat', 'lamoncloa.gob.es', 'mitma.gob.es', 'adif.es', 'renfe.com',
+    'tmb.cat', 'fgc.cat', 'aena.es', 'dgt.es', 'boe.es', 'ine.es',
+    'bombers.gencat.cat', 'mossos.gencat.cat', 'sem.gencat.cat',
+    'meteo.cat', 'aemet.es', 'proteciocivil.gencat.cat',
+    'europa.eu', 'ec.europa.eu',
+    'google.com', 'maps.google.com', 'www.google.com',
+]
+
+_BROWSER_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/121.0.0.0 Safari/537.36"
+    )
+}
+
+
+def _extract_plain_text(html_content: str, max_chars: int = 2000) -> str:
+    """Strip HTML/Gutenberg markup to plain text."""
+    text = re.sub(r'<!--[^>]+-->', '', html_content)
+    text = re.sub(r'<[^>]+>', '', text)
+    return ' '.join(text.split())[:max_chars]
+
+
+def _extract_locations(text: str) -> list[str]:
+    """Extract Barcelona/Catalonia location names from article text."""
+    # Well-known neighbourhoods, districts, landmarks
+    known_places = [
+        'Eixample', 'Gràcia', 'Barceloneta', 'Raval', 'Gótico', 'Born',
+        'Sants', 'Les Corts', 'Sarrià', 'Pedralbes', 'Horta', 'Guinardó',
+        'Sant Andreu', 'Sant Martí', 'Poblenou', 'Poble Sec', 'Montjuïc',
+        'Tibidabo', 'Collserola', 'Sagrada Família', 'Diagonal',
+        'La Rambla', 'Passeig de Gràcia', 'Plaça Catalunya', 'Plaça Espanya',
+        'Camp Nou', 'Estació de França', 'Sants Estació', 'Zona Franca',
+        'El Prat', 'L\'Hospitalet', 'Badalona', 'Santa Coloma',
+        'Castelldefels', 'Gavà', 'Sitges', 'Terrassa', 'Sabadell',
+        'Mataró', 'Girona', 'Tarragona', 'Lleida', 'Figueres',
+        'Montserrat', 'Costa Brava', 'Costa Daurada',
+    ]
+    found = []
+    text_lower = text.lower()
+    for place in known_places:
+        if place.lower() in text_lower:
+            found.append(place)
+    return found[:3]  # Max 3 locations
+
+
+def _extract_organizations(text: str) -> list[str]:
+    """Extract organization/institution names from article text."""
+    # Common patterns for organizations mentioned in Barcelona/Catalonia news
+    org_patterns = [
+        r"(?:the\s+)?Ajuntament\s+de\s+\w+",
+        r"(?:the\s+)?Generalitat\s+de\s+Catalunya",
+        r"(?:the\s+)?Diputaci[oó]\s+de\s+\w+",
+        r"(?:the\s+)?Mossos\s+d['']Esquadra",
+        r"(?:the\s+)?Bombers\s+de\s+(?:Barcelona|la\s+Generalitat)",
+        r"(?:the\s+)?TMB|Transports\s+Metropolitans",
+        r"(?:the\s+)?FGC|Ferrocarrils\s+de\s+la\s+Generalitat",
+        r"(?:the\s+)?RENFE|Rodalies",
+        r"(?:the\s+)?ADIF",
+        r"(?:the\s+)?AENA",
+        r"(?:the\s+)?Barcelona\s+City\s+Council",
+        r"(?:the\s+)?Catalan\s+(?:government|regional\s+government)",
+        r"(?:the\s+)?Servei\s+Meteorol[oò]gic",
+        r"(?:the\s+)?Protecci[oó]\s+Civil",
+        r"(?:the\s+)?Guàrdia\s+Urbana",
+        r"(?:the\s+)?(?:Cruz|Creu)\s+Roja",
+        r"(?:the\s+)?SEM|Servei\s+d['']Emerg[eè]ncies",
+    ]
+    found = []
+    for pattern in org_patterns:
+        matches = re.findall(pattern, text, re.IGNORECASE)
+        found.extend(matches)
+    return list(dict.fromkeys(found))[:5]  # Unique, max 5
+
+
+def _is_news_domain(url: str) -> bool:
+    """Check if URL belongs to a news/blocked domain."""
+    url_lower = url.lower()
+    return any(domain in url_lower for domain in NEWS_DOMAINS)
+
+
+def _is_homepage(url: str) -> bool:
+    """Check if URL is a generic homepage without specific content."""
+    parsed = urlparse(url)
+    path = parsed.path.rstrip('/')
+    if not path or path in ['', '/', '/en', '/es', '/ca', '/index.html', '/home']:
+        return True
+    # Very short paths that are likely homepages
+    if len(path) < 5 and '?' not in url:
+        return True
+    return False
+
+
+_SOFT_404_TITLE_PATTERNS = [
+    # Catalan
+    r'no\s+s.ha\s+trobat', r'p[àa]gina\s+no\s+trobad', r'contingut\s+no\s+disponible',
+    r'error\s+404', r'error\s+page',
+    # Spanish
+    r'no\s+encontrad', r'p[áa]gina\s+no\s+encontrad', r'contenido\s+no\s+disponible',
+    # English
+    r'not\s+found', r'page\s+not\s+found', r'404\s+error', r'404\s+not',
+]
+
+
+def _detect_soft_404(url: str, response: requests.Response) -> bool:
+    """Detect soft 404s — pages that return HTTP 200 but don't contain the expected content.
+    
+    Returns True if the page appears to be a soft 404.
+    """
+    # Check 1: Did the URL redirect to a significantly different path?
+    final_url = response.url
+    orig_path = urlparse(url).path.rstrip('/')
+    final_path = urlparse(final_url).path.rstrip('/')
+    # If redirected to a shorter parent path, likely a soft 404
+    if final_path and orig_path and len(final_path) < len(orig_path) * 0.5:
+        print(f"    ⚠️ Soft 404: redirected to parent path {final_path}")
+        return True
+
+    # Check 2: Examine page content for error indicators
+    try:
+        content = response.text[:5000] if hasattr(response, 'text') else ''
+    except Exception:
+        return False
+
+    if not content:
+        return False
+
+    # Extract <title> tag
+    title_match = re.search(r'<title[^>]*>(.*?)</title>', content, re.IGNORECASE | re.DOTALL)
+    title = title_match.group(1).strip().lower() if title_match else ''
+
+    # Check title for soft 404 patterns
+    for pattern in _SOFT_404_TITLE_PATTERNS:
+        if re.search(pattern, title, re.IGNORECASE):
+            print(f"    ⚠️ Soft 404: title contains '{pattern}'")
+            return True
+
+    # Check 3: For URLs with specific path segments (e.g., /notes-premsa/12345/...),
+    # verify the title isn't just the generic section name
+    path_parts = [p for p in orig_path.split('/') if p]
+    if len(path_parts) >= 3 and title:
+        # If URL has 3+ path segments but title is very short/generic, suspicious
+        # E.g., URL: /salapremsa/notes-premsa/445851/long-article-slug
+        # Title: "Sala de premsa - Govern.cat" (just the section name)
+        slug_words = set()
+        for part in path_parts[-2:]:  # Last 2 path segments
+            slug_words.update(part.replace('-', ' ').split())
+        slug_words = {w.lower() for w in slug_words if len(w) > 4}
+        title_words = set(title.lower().split())
+        # If none of the slug keywords appear in the title, likely a listing/fallback
+        if slug_words and not slug_words.intersection(title_words):
+            # Only flag if the path has a specific article slug (>20 chars)
+            if any(len(p) > 20 for p in path_parts):
+                print(f"    ⚠️ Soft 404: page title doesn't match URL slug")
+                return True
+
+    return False
+
+
+def _quick_validate_url(url: str, timeout: int = 12) -> bool:
+    """Strict HTTP validation - EVERY URL is checked with soft 404 detection.
+    
+    Returns True only if:
+    1. HTTP status < 400
+    2. Page is not a soft 404 (generic listing/error page)
+    
+    Google Maps search URLs are exempt.
+    """
+    if not url or not url.startswith('http'):
+        return False
+
+    # Google Maps search URLs always work (they redirect to maps)
+    if 'google.com/maps/search/' in url:
+        return True
+
+    try:
+        # Use GET (not HEAD) so we can check content for soft 404s
+        resp = requests.get(url, allow_redirects=True, timeout=timeout, headers=_BROWSER_HEADERS,
+                           stream=False)
+        if resp.status_code >= 400:
+            return False
+        # Check for soft 404s (HTTP 200 but page is actually an error/listing page)
+        if _detect_soft_404(url, resp):
+            return False
+        return True
+    except requests.RequestException:
+        return False
+
+
+def _parse_json_from_response(text: str) -> list:
+    """Extract JSON array from LLM response, handling markdown code blocks."""
+    clean = text
+    if '```json' in clean:
+        clean = clean.split('```json')[1].split('```')[0]
+    elif '```' in clean:
+        clean = clean.split('```')[1].split('```')[0]
+    match = re.search(r'\[[\s\S]*\]', clean)
+    if not match:
+        return []
+    try:
+        return json.loads(match.group())
+    except json.JSONDecodeError:
+        return []
+
+
+def _build_google_maps_url(place_name: str, city: str = "Barcelona") -> str:
+    """Build a Google Maps search URL for a location."""
+    query = f"{place_name}, {city}, Catalonia"
+    return f"https://www.google.com/maps/search/{quote_plus(query)}"
+
+
+def find_relevant_external_links(
+    article_content: str,
+    article_title: str,
+    primary_keyword: str,
+    api_key: str,
+    source_url: str = "",
+    source_name: str = "",
+    max_links: int = 3,
+) -> list[dict]:
+    """
+    Find relevant external links using Perplexity Sonar web-grounded search.
+
+    Searches for multiple link categories:
+      1. Official organization/association websites
+      2. Government/municipal pages
+      3. Google Maps for key locations
+      4. Source attribution metadata
+
+    Args:
+        api_key: Perplexity Sonar API key
+
+    Returns:
+        List of dicts: url, anchor_text, topic, link_type, source_attribution
+    """
+    if not api_key:
+        print("  ⚠️  No Perplexity API key for external link search")
+        return []
+
+    # Ensure primary_keyword is not empty
+    if not primary_keyword or not primary_keyword.strip():
+        primary_keyword = article_title.split()[0] if article_title and article_title.strip() else "Barcelona"
+
+    plain_text = _extract_plain_text(article_content)
+    locations = _extract_locations(plain_text)
+    organizations = _extract_organizations(plain_text)
+
+    client = PerplexitySonarClient(api_key=api_key)
+
+    prompt = f"""Find official, authoritative external links for this Barcelona/Catalonia news article.
+
+ARTICLE TITLE: {article_title}
+PRIMARY KEYWORD: {primary_keyword}
+ORGANIZATIONS MENTIONED: {', '.join(organizations) if organizations else 'None detected'}
+LOCATIONS MENTIONED: {', '.join(locations) if locations else 'None detected'}
+
+ARTICLE EXCERPT:
+{plain_text[:1500]}
+
+Find up to {max_links + 1} links to OFFICIAL sources that help readers:
+
+1. OFFICIAL ORGANIZATION WEBSITES - websites of organizations/institutions mentioned
+   (e.g., tmb.cat, renfe.com, ajuntament.barcelona.cat)
+2. GOVERNMENT/MUNICIPAL PAGES - specific gov pages about the topic
+   (e.g., barcelona.cat/mobilitat, gencat.cat pages)
+3. SPECIFIC TOPIC PAGES - official data, regulations, services pages
+
+CRITICAL RULES:
+- ONLY return URLs that ACTUALLY EXIST and are currently live
+- NO news sites, NO Wikipedia, NO blogs
+- Each URL must be a real, working page you can verify
+- Include the organization name for source attribution
+
+Return a JSON array:
+[
+  {{
+    "url": "https://example.cat/specific-page",
+    "anchor_text": "Short text for the link (2-5 words)",
+    "topic": "What this link covers",
+    "link_type": "organization|government|topic_page",
+    "source_attribution": "Name of the organization or publisher"
+  }}
+]
+
+If you cannot find real, verified sources, return [].
+"""
+
+    all_links = []
+
+    # --- Strategy 1: Perplexity Sonar web-grounded search ---
+    try:
+        response_text = client.generate(
+            system_prompt="You are a research assistant finding authoritative external links for news articles. Return only valid JSON arrays. Only include URLs you are confident actually exist.",
+            user_prompt=prompt,
+        ).strip()
+
+        # Strip Perplexity citation metadata if present
+        if '__CITATIONS__:' in response_text:
+            response_text = response_text.split('__CITATIONS__:')[0].strip()
+
+        links = _parse_json_from_response(response_text)
+
+        for link in links:
+            url = link.get('url', '')
+            if not url or not url.startswith('http'):
+                continue
+            if _is_news_domain(url):
+                print(f"    ⚠️ Skipping news domain: {url[:60]}")
+                continue
+            link.setdefault('link_type', 'organization')
+            link.setdefault('source_attribution', '')
+            all_links.append(link)
+
+    except Exception as e:
+        print(f"  ⚠️  External link search error: {e}")
+
+    # --- Strategy 2: Google Maps links for key locations ---
+    if locations:
+        top_location = locations[0]
+        maps_url = _build_google_maps_url(top_location)
+        all_links.append({
+            "url": maps_url,
+            "anchor_text": top_location,
+            "topic": f"Location: {top_location}",
+            "link_type": "google_maps",
+            "source_attribution": "Google Maps",
+        })
+        print(f"    📍 Added Google Maps link for: {top_location}")
+
+    # --- Validate and deduplicate ---
+    seen_domains = set()
+    verified = []
+    for link in all_links:
+        url = link.get('url', '')
+        parsed = urlparse(url)
+        domain = parsed.netloc.lower().lstrip('www.')
+        is_maps = link.get('link_type') == 'google_maps'
+
+        # Skip duplicate domains (but exempt google_maps links)
+        if domain in seen_domains and not is_maps:
+            continue
+
+        # Skip homepages unless it's an org or maps link
+        if _is_homepage(url) and link.get('link_type') not in ('organization', 'google_maps'):
+            continue
+
+        # Google Maps links are always valid
+        if is_maps or _quick_validate_url(url):
+            if not is_maps:
+                seen_domains.add(domain)
+            verified.append(link)
+            if len(verified) >= max_links:
+                break
+        else:
+            print(f"    ⚠️ Skipping broken URL: {url[:60]}...")
+
+    return verified
+
+
+def integrate_external_links(
+    content: str,
+    links: list[dict],
+    api_key: str,
+) -> tuple[str, int]:
+    """
+    Integrate external links naturally into the article content using Gemini.
+
+    Links include title attributes for source attribution on hover.
+    """
+    if not links or not api_key:
+        return content, 0
+
+    client = GeminiClient(api_key=api_key, model="gemini-2.5-flash")
+
+    # Build link specifications with hover text
+    link_specs = []
+    for link in links:
+        source_attr = link.get('source_attribution', '')
+        title_attr = f' title="Source: {source_attr}"' if source_attr else ''
+        link_specs.append({
+            "url": link['url'],
+            "anchor_text": link.get('anchor_text', ''),
+            "topic": link.get('topic', ''),
+            "link_type": link.get('link_type', ''),
+            "html_format": f'<a href="{link["url"]}"{title_attr} target="_blank" rel="noopener">[ANCHOR]</a>',
+        })
+
+    links_json = json.dumps(link_specs, indent=2)
+
+    prompt = f"""You are integrating external links into a news article.
+
+LINKS TO ADD:
+{links_json}
+
+ARTICLE CONTENT:
+{content}
+
+YOUR TASK:
+Integrate these links naturally into the article. For each link:
+
+1. Find a RELEVANT sentence where the link topic is mentioned
+2. Replace appropriate words with the linked version
+3. Use the exact html_format provided, replacing [ANCHOR] with natural anchor text (2-5 words)
+4. For Google Maps links: link the location name where it first appears
+
+STRICT RULES:
+- Links MUST be integrated WITHIN existing sentences
+- NEVER append links at the end of paragraphs
+- NEVER add "For more information" or "Visit the website" sentences
+- NEVER change article structure or add new paragraphs
+- If a link cannot be naturally integrated, SKIP it entirely
+- Preserve ALL existing links and content exactly
+
+REMOVE any existing sentences like:
+- "For more information on X, you can refer to Y"
+- "Visit the X website for more details"
+
+Return ONLY the updated article content, nothing else."""
+
+    try:
+        updated = client.generate(
+            system_prompt="You are an expert editor integrating links into news articles. Return only the updated content.",
+            user_prompt=prompt,
+        ).strip()
+
+        # Clean markdown wrappers
+        if '```html' in updated:
+            updated = updated.split('```html')[1].split('```')[0].strip()
+        elif '```' in updated:
+            parts = updated.split('```')
+            if len(parts) >= 3:
+                updated = parts[1].strip()
+
+        # Verify content validity
+        if '<!-- wp:' not in updated:
+            print("  ⚠️  Link integration returned invalid content, keeping original")
+            return content, 0
+
+        # Count links added
+        links_added = sum(1 for link in links if link.get('url') and link['url'] in updated)
+        return updated, links_added
+
+    except Exception as e:
+        print(f"  ⚠️  Link integration error: {e}")
+        return content, 0
+
+
+def add_source_attribution(content: str, source_url: str, source_name: str) -> str:
+    """
+    Add title hover text to source links for attribution.
+    Finds existing links to the source URL and adds title="Source: X" attribute.
+    """
+    if not content or not source_url or not source_name:
+        return content
+
+    # Find links to this source URL that don't already have a title
+    pattern = re.compile(
+        r'(<a\s+[^>]*href=["\']' + re.escape(source_url) + r'["\'])([^>]*>)',
+        re.IGNORECASE
+    )
+
+    def _add_title(match):
+        before_close = match.group(1)
+        after = match.group(2)
+        if 'title=' in before_close or 'title=' in after:
+            return match.group(0)  # Already has title
+        return f'{before_close} title="Source: {source_name}"{after}'
+
+    return pattern.sub(_add_title, content)
+
+
+def enrich_article_with_external_links(
+    content: str,
+    article_title: str,
+    primary_keyword: str,
+    api_key: str = "",
+    source_url: str = "",
+    source_name: str = "",
+    max_links: int = 3,
+    perplexity_api_key: str = "",
+    gemini_api_key: str = "",
+) -> tuple[str, dict]:
+    """
+    Main function to enrich an article with relevant external links.
+    Uses Perplexity Sonar for link discovery, Gemini for link integration.
+    All links are HTTP-validated before insertion.
+
+    Args:
+        api_key: Deprecated - use perplexity_api_key instead
+        perplexity_api_key: Perplexity Sonar API key for web search
+        gemini_api_key: Gemini API key for link integration into content
+    """
+    # Support both old api_key param and new specific params
+    search_key = perplexity_api_key or api_key
+    integration_key = gemini_api_key or api_key
+
+    report = {
+        "links_found": 0,
+        "links_added": 0,
+        "links": [],
+        "maps_links": 0,
+    }
+
+    print("--- External Link Enrichment (Perplexity Sonar) ---")
+
+    if not search_key:
+        print("  ⚠️  No Perplexity API key - skipping external link search")
+        return content, report
+
+    # Step 1: Find relevant links via Perplexity Sonar
+    print("  Searching for relevant external links...")
+    links = find_relevant_external_links(
+        article_content=content,
+        article_title=article_title,
+        primary_keyword=primary_keyword,
+        api_key=search_key,
+        source_url=source_url,
+        source_name=source_name,
+        max_links=max_links,
+    )
+
+    report["links_found"] = len(links)
+    report["links"] = links
+    report["maps_links"] = sum(1 for l in links if l.get('link_type') == 'google_maps')
+
+    if not links:
+        print("  No relevant external links found")
+        return content, report
+
+    print(f"  Found {len(links)} relevant links:")
+    for link in links:
+        ltype = link.get('link_type', '?')
+        print(f"    [{ltype}] {link.get('url', 'N/A')[:70]}")
+        print(f"      Anchor: {link.get('anchor_text', 'N/A')}")
+
+    # Step 2: Integrate links into content (uses Gemini for natural text editing)
+    print("  Integrating links into article...")
+    enriched, links_added = integrate_external_links(content, links, integration_key)
+
+    # Step 3: Add source attribution hover text
+    if source_url and source_name:
+        enriched = add_source_attribution(enriched, source_url, source_name)
+
+    report["links_added"] = links_added
+    print(f"  Links added: {links_added}")
+
+    return enriched, report
+
+
+def remove_generic_resource_sentences(content: str) -> str:
+    """
+    Remove generic "For more information" sentences that don't have actual links.
+    These sentences are unhelpful without hyperlinks and should be removed.
+    """
+    patterns = [
+        r'For more information[^.]*\.',
+        r'For broader context[^.]*\.',
+        r'For further context[^.]*\.',
+        r'Furthermore,?\s+you can learn more[^.]*\.',
+        r'You can learn more[^.]*\.',
+        r'Visit the[^.]*website[^.]*\.',
+        r'You can refer to[^.]*\.',
+        r'you can visit the[^.]*\.',
+        r'For further reading[^.]*\.',
+        r'More details can be found[^.]*\.',
+        r'To learn more about[^.]*\.',
+        r'For additional information[^.]*\.',
+        r'[,;]\s*see this[^.]*report[^.]*\.',
+        r'[Rr]efer to the[^.]*\.',
+    ]
+
+    for pattern in patterns:
+        matches = list(re.finditer(pattern, content, re.IGNORECASE))
+        for match in reversed(matches):
+            sentence = match.group()
+            if '<a href=' not in sentence:
+                content = content[:match.start()] + content[match.end():]
+
+    content = re.sub(r'<p>\s*</p>', '', content)
+    content = re.sub(r'<!-- wp:paragraph -->\s*<!-- /wp:paragraph -->', '', content)
+
+    return content

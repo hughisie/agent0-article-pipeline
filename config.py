@@ -20,6 +20,7 @@ def load_config() -> dict:
     env_keys = [
         "GEMINI_API_KEY",
         "DEEPSEEK_API_KEY",
+        "PERPLEXITY_API_KEY",
         "WP_BASE_URL",
         "WP_USERNAME",
         "WP_APPLICATION_PASSWORD",

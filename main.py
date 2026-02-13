@@ -46,6 +46,10 @@ from internal_link_weaver import (
     enforce_unique_internal_links,
     count_internal_links,
 )
+from link_integrator import integrate_internal_links, should_add_links
+from external_link_enricher import enrich_article_with_external_links, remove_generic_resource_sentences, add_source_attribution
+from image_pipeline import save_images_locally, deduplicate_images, select_featured_and_inline, insert_images_into_content
+from quality_validator import validate_article_quality, QualityReport
 from sitemap_client import fetch_post_urls_from_sitemap, filter_urls_by_category, SitemapError
 from wordpress_client import (
     WordPressError,
@@ -350,6 +354,11 @@ def _finalize_content(
         (article or {}).get("source_url"),
         primary,
     )
+    # Add source attribution hover text to source links
+    source_url = (article or {}).get("source_url", "")
+    source_name = (article or {}).get("source_name", "")
+    if source_url and source_name:
+        final_content = add_source_attribution(final_content, source_url, source_name)
     allowed_urls = set()
     source_url = (article or {}).get("source_url")
     if source_url:
@@ -719,19 +728,25 @@ def main() -> None:
         except TagGenerationError as exc:
             print(f"Warning: tag generation failed: {exc}")
 
+        # Randomly select ONE author from the pool
+        author_usernames = ["Barbara_Town", "admin", "Laia_Serra"]
+        selected_author = random.choice(author_usernames)
+        print(f"Selected author: {selected_author}")
+        
         author_id = None
-        for username in random.sample(["admin", "Barbara_Town", "Laia_Serra"], 3):
-            try:
-                author_id = get_user_id_by_username(
-                    base_url=config["WP_BASE_URL"],
-                    username=config["WP_USERNAME"],
-                    application_password=config["WP_APPLICATION_PASSWORD"],
-                    target_username=username,
-                )
-                if author_id:
-                    break
-            except WordPressError:
-                continue
+        try:
+            author_id = get_user_id_by_username(
+                base_url=config["WP_BASE_URL"],
+                username=config["WP_USERNAME"],
+                application_password=config["WP_APPLICATION_PASSWORD"],
+                target_username=selected_author,
+            )
+            if author_id:
+                print(f"  Author ID resolved: {author_id}")
+            else:
+                print(f"  WARNING: Author '{selected_author}' not found in WordPress - post will use API user")
+        except WordPressError as e:
+            print(f"Warning: Could not get author ID for {selected_author}: {e}")
 
         media_id = None
         raw_markdown = _read_raw_markdown(input_path)
@@ -838,19 +853,6 @@ def main() -> None:
             "alternatives": [],
             "reasoning_summary": "Primary source URL provided in article metadata.",
         }
-    elif is_rerun:
-        print("Rerun detected: skipping primary source lookup.")
-        primary = {
-            "primary_source": {
-                "url": None,
-                "title": None,
-                "publisher_guess": None,
-                "type_guess": None,
-                "confidence": 0.0,
-            },
-            "alternatives": [],
-            "reasoning_summary": "Skipped on rerun.",
-        }
     else:
         print("Searching for primary source...")
         print(f"  - Using Gemini 2.5 Flash with Google Search grounding")
@@ -858,10 +860,17 @@ def main() -> None:
         print(f"  - Publisher guess: {analysis.get('probable_primary_publisher', 'unknown')}")
 
         try:
-            primary = find_primary_source(article, analysis, config)
+            # Use simple, fast source finder with Gemini + Google Search
+            from primary_source_simple import find_primary_source_simple
+            primary = find_primary_source_simple(
+                title=article.title or article.original_title or "",
+                publisher=analysis.get("probable_primary_publisher", ""),
+                summary=article.main_content_body[:500] if article.main_content_body else "",
+                api_key=config.get("GEMINI_API_KEY", "")
+            )
             print(f"✓ Primary source search complete")
-        except LLMError as exc:
-            print(f"✗ Primary source search failed: {exc}")
+        except Exception as exc:
+            print(f"⚠️  Source search error: {exc}")
             primary = {
                 "primary_source": {
                     "url": None,
@@ -871,7 +880,7 @@ def main() -> None:
                     "confidence": 0.0,
                 },
                 "alternatives": [],
-                "reasoning_summary": "Primary source lookup failed; user chose to continue without one.",
+                "reasoning_summary": "Primary source lookup failed.",
             }
 
 
@@ -1135,39 +1144,56 @@ def main() -> None:
             if args.debug_links and related_list:
                 print(f"- Related links selected: {len(related_list)}")
                 print(json.dumps(related_list, indent=2, ensure_ascii=False))
-        if related_list:
-            weave_report = None
+        # PHASE 2: Optional internal link integration
+        # Only attempt if we have related articles and content is suitable
+        integration_report = None
+        if related_list and should_add_links(wp_article.get("wp_block_content", ""), related_list):
+            print("\n--- Phase 2: Internal Link Integration ---")
             try:
-                wp_article["wp_block_content"] = weave_internal_links_gemini(
+                updated_content, integration_report = integrate_internal_links(
                     wp_article.get("wp_block_content", ""),
                     related_list,
                     api_key=config["GEMINI_API_KEY"],
+                    max_links=2,  # Up to 2 natural internal links
                 )
-                inserted = [
-                    item.get("url")
-                    for item in related_list
-                    if item.get("url") and item.get("url") in (wp_article.get("wp_block_content") or "")
-                ]
-                weave_report = {"method": "gemini", "inserted": inserted}
-            except (GeminiWeaveError, LLMError) as exc:
-                print(f"Gemini link weaving failed; falling back to deterministic insert: {exc}")
-                wp_article["wp_block_content"], weave_report = weave_internal_links(
-                    wp_article.get("wp_block_content", ""),
-                    related_list,
-                )
-            wp_article["wp_block_content"] = enforce_unique_internal_links(
+                wp_article["wp_block_content"] = updated_content
+                
+                if integration_report:
+                    print(f"  Links added: {integration_report.get('links_added', 0)}")
+                    print(f"  Reason: {integration_report.get('reason', 'N/A')}")
+            except Exception as exc:
+                print(f"  Link integration skipped: {exc}")
+                integration_report = {"error": str(exc)}
+        else:
+            if args.debug_links:
+                print("  Skipping link integration (no suitable candidates)")
+        
+        # Ensure unique internal links
+        wp_article["wp_block_content"] = enforce_unique_internal_links(
+            wp_article.get("wp_block_content", "")
+        )
+
+        # PHASE 3: External link enrichment
+        # Find and add relevant external links to authoritative sources
+        try:
+            enriched_content, enrichment_report = enrich_article_with_external_links(
+                content=wp_article.get("wp_block_content", ""),
+                article_title=wp_article.get("meta_title", ""),
+                primary_keyword=wp_article.get("primary_keyword", ""),
+                source_url=article.source_url or "",
+                source_name=article.source_name or "",
+                max_links=3,
+                perplexity_api_key=config.get("PERPLEXITY_API_KEY", ""),
+                gemini_api_key=config.get("GEMINI_API_KEY", ""),
+            )
+            wp_article["wp_block_content"] = enriched_content
+            
+            # Also remove any generic "For more information" sentences without links
+            wp_article["wp_block_content"] = remove_generic_resource_sentences(
                 wp_article.get("wp_block_content", "")
             )
-            if args.debug_links:
-                if isinstance(weave_report, dict):
-                    print(f"- Internal links inserted (Gemini): {len(weave_report.get('inserted', []))}")
-                    print(json.dumps(weave_report.get("inserted", []), indent=2))
-                else:
-                    print(f"- Internal links inserted: {len(weave_report.inserted)}")
-                    if weave_report.inserted:
-                        print(json.dumps(weave_report.inserted, indent=2))
-        else:
-            weave_report = None
+        except Exception as exc:
+            print(f"  External link enrichment skipped: {exc}")
 
         used_keyphrases = load_used_keyphrases()
         try:
@@ -1183,27 +1209,10 @@ def main() -> None:
             print(f"Yoast optimisation failed: {exc}")
             wp_article["yoast_notes"] = f"Optimisation failed: {exc}"
 
-        if related_list:
-            wp_article["wp_block_content"], missing = ensure_internal_links_present(
-                wp_article.get("wp_block_content", ""),
-                related_list,
-            )
-            if missing:
-                print(f"Warning: Yoast removed internal links; reinserted missing URLs: {missing}")
-            wp_article["wp_block_content"] = enforce_unique_internal_links(
-                wp_article.get("wp_block_content", "")
-            )
-            if args.debug_links:
-                print(f"- Internal links in final content: {count_internal_links(wp_article.get('wp_block_content',''))}")
-            if not any(item.get("url") in (wp_article.get("wp_block_content", "") or "") for item in related_list):
-                print("Error: related links selected but none appear in final content; retrying weave once.")
-                wp_article["wp_block_content"], _ = weave_internal_links(
-                    wp_article.get("wp_block_content", ""),
-                    related_list,
-                )
-                wp_article["wp_block_content"] = enforce_unique_internal_links(
-                    wp_article.get("wp_block_content", "")
-                )
+        # Log internal link count (don't force links back in - quality over quantity)
+        internal_link_count = count_internal_links(wp_article.get("wp_block_content", ""))
+        if args.debug_links:
+            print(f"- Internal links in final content: {internal_link_count}")
 
         wp_article["wp_block_content"] = enforce_intro_structure(
             wp_article.get("wp_block_content", ""),
@@ -1212,20 +1221,45 @@ def main() -> None:
         )
         raw_markdown = _read_raw_markdown(input_path)
         image_urls = extract_image_urls_from_article(article.to_dict(), raw_markdown)
-        secondary_image_url = image_urls[1] if len(image_urls) > 1 else None
-        if secondary_image_url:
-            alt_text = build_alt_text(wp_article.get("primary_keyword"), analysis.get("core_topic"))
-            spacer_height = 24
-            try:
-                spacer_height = int(config.get("IMAGE_SPACER_HEIGHT_PX", 24))
-            except (TypeError, ValueError):
-                spacer_height = 24
-            wp_article["wp_block_content"] = add_inline_image_block(
-                wp_article.get("wp_block_content", ""),
-                secondary_image_url,
-                alt_text,
-                spacer_height=spacer_height,
+
+        # --- Enhanced Image Pipeline ---
+        # Download images locally, deduplicate, select featured vs inline
+        article_number = ""
+        name_match = re.match(r'^(\d+)-', Path(article_path).name)
+        if name_match:
+            article_number = name_match.group(1)
+
+        downloaded_images = []
+        if image_urls:
+            print("\n--- Image Pipeline ---")
+            downloaded_images = save_images_locally(
+                image_urls=image_urls,
+                article_path=article_path,
+                article_number=article_number,
             )
+            if downloaded_images:
+                featured_img, inline_imgs = select_featured_and_inline(downloaded_images)
+                print(f"  Featured: {featured_img.get('filename') if featured_img else 'none'}")
+                print(f"  Inline images: {len(inline_imgs)}")
+
+                # Insert inline images or gallery into content
+                if inline_imgs:
+                    alt_text = build_alt_text(wp_article.get("primary_keyword"), analysis.get("core_topic"))
+                    wp_article["wp_block_content"] = insert_images_into_content(
+                        content=wp_article.get("wp_block_content", ""),
+                        inline_images=inline_imgs,
+                        alt_text=alt_text,
+                        use_gallery=(len(inline_imgs) >= 3),
+                    )
+            else:
+                # Fallback: use original image_urls for basic inline image
+                if len(image_urls) > 1:
+                    alt_text = build_alt_text(wp_article.get("primary_keyword"), analysis.get("core_topic"))
+                    wp_article["wp_block_content"] = add_inline_image_block(
+                        wp_article.get("wp_block_content", ""),
+                        image_urls[1],
+                        alt_text,
+                    )
 
         final_content, link_report = _finalize_content(
             wp_article.get("wp_block_content", ""),
@@ -1235,6 +1269,11 @@ def main() -> None:
             platform=publisher.platform_name if publisher else "wordpress",
             profile_name=profile["name"] if profile else None,
         )
+        
+        # Final cleanup: remove any generic resource sentences that may have been added
+        # by Yoast optimization or other post-processing steps
+        final_content = remove_generic_resource_sentences(final_content)
+        
         wp_article["wp_block_content"] = final_content
         _log_final_content(final_content, link_report)
 
@@ -1250,12 +1289,26 @@ def main() -> None:
 
         print(f"\nSaved WordPress article JSON: {wp_output_path}")
 
+        # Quality validation before publishing
+        print("\n--- Quality Validation ---")
+        quality_report = validate_article_quality(
+            content=wp_article.get("wp_block_content", ""),
+            meta_title=wp_article.get("meta_title"),
+            meta_description=wp_article.get("meta_description"),
+            primary_keyword=wp_article.get("primary_keyword"),
+            primary_source_url=primary_source.get("url"),
+            strict=False,
+        )
+        print(quality_report)
+        wp_article["quality_report"] = quality_report.to_dict()
+
         print("\nArticle summary:")
 
         print(f"- Meta title: {wp_article.get('meta_title')}")
         print(f"- Primary keyword: {wp_article.get('primary_keyword')}")
         print(f"- Slug: {wp_article.get('slug')}")
         print(f"- Primary source: {primary_source.get('url')}")
+        print(f"- Quality check: {'✓ PASSED' if quality_report.passed else '✗ FAILED'}")
         if wp_article.get("yoast_notes"):
             print(f"- Yoast notes: {wp_article.get('yoast_notes')}")
         _summarise_related(related_articles)
@@ -1276,49 +1329,64 @@ def main() -> None:
             if missing:
                 print("Missing WordPress credentials; cannot publish draft.")
             else:
+                # Randomly select ONE author from the pool
+                author_usernames = ["Barbara_Town", "admin", "Laia_Serra"]
+                selected_author = random.choice(author_usernames)
+                print(f"Selected author: {selected_author}")
+                
                 author_id = None
-                for username in random.sample(["Laia_Serra", "Barbara_Town", "admin"], 3):
-                    try:
-                        author_id = get_user_id_by_username(
-                            base_url=config["WP_BASE_URL"],
-                            username=config["WP_USERNAME"],
-                            application_password=config["WP_APPLICATION_PASSWORD"],
-                            target_username=username,
-                        )
-                        if author_id:
-                            break
-                    except WordPressError:
-                        continue
+                try:
+                    author_id = get_user_id_by_username(
+                        base_url=config["WP_BASE_URL"],
+                        username=config["WP_USERNAME"],
+                        application_password=config["WP_APPLICATION_PASSWORD"],
+                        target_username=selected_author,
+                    )
+                    if author_id:
+                        print(f"  Author ID resolved: {author_id}")
+                    else:
+                        print(f"  WARNING: Author '{selected_author}' not found in WordPress - post will use API user")
+                except WordPressError as e:
+                    print(f"Warning: Could not get author ID for {selected_author}: {e}")
 
                 media_id = None
                 featured_image_url = None
-                if image_urls:
-                    # Filter out images smaller than 30KB (placeholders/icons)
-                    original_count = len(image_urls)
-                    image_urls = _filter_images_by_size(image_urls)
-                    if len(image_urls) < original_count:
-                        print(f"Filtered {original_count - len(image_urls)} images below 30KB minimum.")
 
-                if image_urls:
+                # Use deduplicated images from pipeline if available
+                upload_urls = []
+                if downloaded_images:
+                    deduped_featured, deduped_inline = select_featured_and_inline(downloaded_images)
+                    if deduped_featured:
+                        upload_urls.append(deduped_featured.get("url", ""))
+                    for img in deduped_inline:
+                        upload_urls.append(img.get("url", ""))
+                    upload_urls = [u for u in upload_urls if u]
+                else:
+                    # Fallback to original image_urls with size filter
+                    if image_urls:
+                        original_count = len(image_urls)
+                        upload_urls = _filter_images_by_size(image_urls)
+                        if len(upload_urls) < original_count:
+                            print(f"Filtered {original_count - len(upload_urls)} images below 30KB minimum.")
+
+                if upload_urls:
                     # Save images to Google Drive
                     try:
                         article_dict = article.to_dict()
                         article_date = article_dict.get("date_time", datetime.now().isoformat())
                         json_filename = Path(input_path).name
-                        # Extract article number from filename
-                        article_number = None
+                        article_number_gd = None
                         match = re.match(r'^(\d+)-', json_filename)
                         if match:
-                            article_number = match.group(1)
-                        # Get translated headline from wp_article (meta_title is the English headline)
+                            article_number_gd = match.group(1)
                         translated_headline = wp_article.get("meta_title") if wp_article else None
                         saved_paths = save_images_to_gdrive(
-                            image_urls,
+                            upload_urls,
                             article_date,
                             json_filename,
                             profile_id=profile_id,
                             translated_headline=translated_headline,
-                            article_number=article_number,
+                            article_number=article_number_gd,
                         )
                         if saved_paths:
                             print(f"Saved {len(saved_paths)} images to Google Drive.")
@@ -1330,15 +1398,13 @@ def main() -> None:
                     uploaded_ids = []
                     uploaded_urls = []
 
-                    for image_url in image_urls:
+                    for image_url in upload_urls:
                         try:
                             if publisher:
-                                # Use publisher abstraction
                                 media_result = publisher.upload_media(image_url, alt_text)
                                 uploaded_id = media_result.media_id
                                 uploaded_url = media_result.url
                             else:
-                                # Fallback to WordPress client
                                 uploaded_id, uploaded_url = upload_media_from_url(
                                     base_url=config["WP_BASE_URL"],
                                     username=config["WP_USERNAME"],
@@ -1346,7 +1412,6 @@ def main() -> None:
                                     image_url=image_url,
                                     alt_text=alt_text,
                                 )
-                            # Skip None results (e.g., from base64 data URIs)
                             if uploaded_id is not None:
                                 uploaded_ids.append(uploaded_id)
                                 uploaded_urls.append(uploaded_url)
@@ -1359,6 +1424,13 @@ def main() -> None:
                         media_id = uploaded_ids[0]
                         featured_image_url = uploaded_urls[0] if uploaded_urls else None
                         print(f"Using featured image media ID {media_id}.")
+
+                        # Replace inline image source URLs with WordPress-hosted URLs
+                        content_block = wp_article.get("wp_block_content", "")
+                        for i, orig_url in enumerate(upload_urls):
+                            if i < len(uploaded_urls) and orig_url in content_block:
+                                content_block = content_block.replace(orig_url, uploaded_urls[i])
+                        wp_article["wp_block_content"] = content_block
                 # Create tags or map existing IDs if needed
                 if taxonomy:
                     tag_ids = []
