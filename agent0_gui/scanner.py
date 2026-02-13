@@ -4,7 +4,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 from agent0_scanner import scan_articles
-from agent0_translator import extract_headline_from_path, translate_headline_json, translate_headline_md
+from agent0_translator import extract_headline_from_path, translate_headline_json, translate_headline_md, _is_still_non_english
 from agent0_utils import extract_article_no
 
 from .db import get_conn
@@ -40,7 +40,13 @@ def _load_headline_en(path: Path) -> str:
                 (str(path),),
             ).fetchone()
             if row and row["headline_en_gb"]:
-                return row["headline_en_gb"]
+                cached = row["headline_en_gb"]
+                # Quality check: if cached headline is still non-English, discard it
+                if _is_still_non_english(cached):
+                    print(f"[SCAN] Stale non-English cache for {path.name}, will re-translate")
+                    conn.execute("DELETE FROM headline_cache WHERE file_path = ?", (str(path),))
+                else:
+                    return cached
         
         # Then check if file has been translated
         if path.suffix.lower() == ".json":
@@ -50,10 +56,12 @@ def _load_headline_en(path: Path) -> str:
                     print(f"[WARNING] Empty JSON file during scan: {path}")
                     return ""
                 data = json.loads(content)
-                # Only return headline_en_gb if it exists and is different from original
+                # Only return headline_en_gb if it exists and is actually in English
                 headline_en = data.get("headline_en_gb", "").strip()
-                if headline_en:
+                if headline_en and not _is_still_non_english(headline_en):
                     return headline_en
+                elif headline_en:
+                    print(f"[SCAN] Stored headline_en_gb still non-English for {path.name}, will re-translate")
                 # File hasn't been translated yet - return empty to signal this
                 return ""
             except json.JSONDecodeError as e:
@@ -181,38 +189,46 @@ def scan_paths(paths: list[str], skip_duplicates: bool = True) -> list[ScanItem]
         
         # Auto-translate headline if not in English
         if not headline_en and headline_raw:
-            # Check if headline looks like it needs translation (has Spanish/Catalan characters)
-            import re
-            needs_translation = bool(re.search(r'[áéíóúñüàèòïç]', headline_raw.lower()))
-            if needs_translation:
-                try:
-                    from config import load_config
-                    config = load_config()
-                    api_key = config.get("DEEPSEEK_API_KEY", "")
+            try:
+                from config import load_config
+                from agent0_translator import headline_needs_translation
+                config = load_config()
+                api_key = config.get("DEEPSEEK_API_KEY", "")
+                
+                if api_key:
+                    # Use proper language detection (not just accent check)
+                    needs_translate, lang_detected, lang_conf = headline_needs_translation(
+                        headline_raw, None, api_key, "deepseek-chat"
+                    )
                     
-                    if api_key and path.suffix.lower() == ".json":
-                        result = translate_headline_json(path, api_key=api_key)
-                        headline_en = result.headline_en_gb
-                        # Cache the translation
-                        with get_conn() as conn:
-                            conn.execute(
-                                "INSERT OR REPLACE INTO headline_cache (file_path, headline_en_gb, updated_at) VALUES (?, ?, ?)",
-                                (str(path), headline_en, now_iso())
-                            )
-                        print(f"[SCAN] Auto-translated: {basename} -> {headline_en}")
-                    elif api_key and path.suffix.lower() in {".md", ".markdown"}:
-                        result = translate_headline_md(path, api_key=api_key)
-                        headline_en = result.headline_en_gb
-                        # Cache the translation
-                        with get_conn() as conn:
-                            conn.execute(
-                                "INSERT OR REPLACE INTO headline_cache (file_path, headline_en_gb, updated_at) VALUES (?, ?, ?)",
-                                (str(path), headline_en, now_iso())
-                            )
-                        print(f"[SCAN] Auto-translated: {basename} -> {headline_en}")
-                except Exception as e:
-                    print(f"[SCAN] Translation failed for {basename}: {e}")
-                    # Continue with raw headline if translation fails
+                    if needs_translate:
+                        if path.suffix.lower() == ".json":
+                            result = translate_headline_json(path, api_key=api_key)
+                            headline_en = result.headline_en_gb
+                            # Cache the translation
+                            with get_conn() as conn:
+                                conn.execute(
+                                    "INSERT OR REPLACE INTO headline_cache (file_path, headline_en_gb, updated_at) VALUES (?, ?, ?)",
+                                    (str(path), headline_en, now_iso())
+                                )
+                            print(f"[SCAN] Auto-translated ({lang_detected}): {basename} -> {headline_en}")
+                        elif path.suffix.lower() in {".md", ".markdown"}:
+                            result = translate_headline_md(path, api_key=api_key)
+                            headline_en = result.headline_en_gb
+                            # Cache the translation
+                            with get_conn() as conn:
+                                conn.execute(
+                                    "INSERT OR REPLACE INTO headline_cache (file_path, headline_en_gb, updated_at) VALUES (?, ?, ?)",
+                                    (str(path), headline_en, now_iso())
+                                )
+                            print(f"[SCAN] Auto-translated ({lang_detected}): {basename} -> {headline_en}")
+                    else:
+                        # Already in English - use raw headline
+                        headline_en = headline_raw
+                        print(f"[SCAN] Already English: {basename}")
+            except Exception as e:
+                print(f"[SCAN] Translation failed for {basename}: {e}")
+                # Continue with raw headline if translation fails
         
         # Check for duplicate headlines (same content, different filename)
         if not is_duplicate and headline_raw:

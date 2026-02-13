@@ -120,6 +120,14 @@ def _detect_language_llm(text: str, api_key: str, model_name: str) -> tuple[str,
     return lang, conf_val
 
 
+def _is_still_non_english(text: str) -> bool:
+    """Check if translated text still appears to be in Spanish or Catalan."""
+    if not text:
+        return True
+    lang, conf = _infer_language_simple(text)
+    return lang in {"es", "ca"} and conf >= 0.7
+
+
 def _translate_headline(text: str, api_key: str, model_name: str) -> str:
     config = load_config()
     system_prompt = config.get("PROMPT_HEADLINE_SYSTEM") or (
@@ -139,6 +147,25 @@ def _translate_headline(text: str, api_key: str, model_name: str) -> str:
     line = raw.strip().splitlines()[0].strip()
     line = line.strip("\"'“”")
     line = re.sub(r"[!?\\.]{2,}$", "", line).strip()
+
+    # Quality check: if the result still looks like Spanish/Catalan, retry with a stronger prompt
+    if _is_still_non_english(line):
+        print(f"  Translation still non-English, retrying with stronger prompt...")
+        retry_prompt = (
+            "The following headline is in Spanish or Catalan. "
+            "You MUST translate it fully into English. Do NOT return the original text. "
+            "Every word must be in English (except proper nouns like place names or person names).\n\n"
+            f"Original headline:\n{text}\n\n"
+            "English translation:"
+        )
+        raw2 = call_deepseek_chat(model_name, system_prompt, retry_prompt, api_key)
+        line2 = raw2.strip().splitlines()[0].strip()
+        line2 = line2.strip("\"'""")
+        line2 = re.sub(r"[!?\\.]{2,}$", "", line2).strip()
+        if line2 and not _is_still_non_english(line2):
+            return line2
+        print(f"  Retry also returned non-English, using best attempt")
+
     return line
 
 
