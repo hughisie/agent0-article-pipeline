@@ -2,7 +2,7 @@ import json
 import re
 import unicodedata
 
-from llm_clients import GeminiClient, LLMError, parse_json_response
+from llm_clients import GeminiClient, LLMClient, LLMError, ContentModerationError, parse_json_response
 from prompts import resolve_prompt
 
 
@@ -134,16 +134,42 @@ def build_gemini_article_prompt(
     original_article: dict,
     analysis: dict,
     primary_source: dict,
-    related_articles: dict | None = None,
+    related_articles: dict | None = None,  # Now ignored - handled in Phase 2
     prompt_overrides: dict | None = None,
 ) -> dict:
+    """
+    Build the article generation prompt.
+    
+    PHASE 1: Pure content generation - NO internal links.
+    Internal links are added in Phase 2 by link_integrator.py.
+    """
     system_message = (
-        "You are a professional news journalist writing clear, modern articles for intelligent but busy readers.\n"
-        "You write in British English with clarity, flow, and readability as top priorities.\n"
-        "Your writing is factual, concrete, and accessible—like something published in a major newspaper, not a policy report.\n"
-        "You follow Yoast SEO best practices for focus keyphrase, meta title, meta description, headings and readability.\n"
+        "You are a senior journalist at The Guardian, writing for an English-speaking audience in Barcelona/Catalonia.\n"
+        "Your writing is engaging, conversational, and reads like quality British journalism.\n"
         "You respond ONLY with valid JSON and no extra commentary.\n"
-        "Do not fabricate facts. If a detail is unknown, leave it out."
+        "Do not fabricate facts. If a detail is unknown, leave it out.\n\n"
+        "YOAST SEO REQUIREMENTS (MUST SCORE GREEN):\n"
+        "  - Focus keyphrase in meta title (near the start)\n"
+        "  - Focus keyphrase in meta description\n"
+        "  - Focus keyphrase in first paragraph\n"
+        "  - Focus keyphrase in at least one H2 subheading\n"
+        "  - Focus keyphrase density: 0.5-2.5% (use naturally 3-8 times in 500 words)\n"
+        "  - Meta title: 50-60 characters\n"
+        "  - Meta description: 120-155 characters\n"
+        "  - Paragraphs under 150 words each\n"
+        "  - Sentences under 20 words on average\n"
+        "  - Use transition words (however, therefore, additionally, moreover)\n"
+        "  - Use subheadings every 300 words\n\n"
+        "LINKING RULES:\n"
+        "  - MUST include ONE link to the primary source URL if provided in the PRIMARY SOURCE JSON\n"
+        "  - SHOULD include 1-2 links to KEY ORGANIZATIONS mentioned in the article (city councils, cooperatives, etc.)\n"
+        "  - DO NOT add internal links to other news articles - these will be added separately\n"
+        "  - DO NOT link to Wikipedia or generic news sites\n"
+        "  - NEVER add generic 'For more information' sentences like:\n"
+        "    ❌ 'For more information, visit the WHO website'\n"
+        "    ❌ 'You can learn more about X from the British Museum'\n"
+        "    ❌ 'For broader context, see this European Central Bank report'\n"
+        "  - NEVER add links to generic authoritative sources (WHO, World Bank, ECB, British Museum, etc.) unless directly cited in the original\n"
     )
 
     original_json = json.dumps(_normalise_unicode(original_article), ensure_ascii=False, indent=2)
@@ -183,27 +209,30 @@ def build_gemini_article_prompt(
         "    ✓ \"Data from the <a href='[primary_source.url]'>survey results</a> revealed...\"\n"
         "  - Place this link early in the article when first introducing key data or claims\n"
         "  - If primary_source.url is null or empty, then DON'T add any external links (better no link than wrong link)\n\n"
-        "CRITICAL EXTERNAL LINKING RULES:\n"
-        "  - NEVER INVENT OR CONSTRUCT URLs - only use URLs that are explicitly provided in the input data\n"
-        "  - If a URL is not provided in the article data, primary source data, or analysis, DO NOT CREATE ONE\n"
-        "  - NEVER guess URL paths, filenames, or IDs - even if they seem logical\n"
-        "    ❌ FORBIDDEN: Constructing 'https://lamoncloa.gob.es/.../160126-afiliacion-extranjeros.aspx' from context\n"
-        "    ✓ CORRECT: Only link to the primary_source.url provided, or don't link at all\n"
-        "  - NEVER include links with placeholder IDs like 'XXXXX' or '/status/XXXXX'\n"
-        "  - NEVER link to generic homepages without a specific page:\n"
-        "    ❌ FORBIDDEN: https://www.icao.int/\n"
-        "    ❌ FORBIDDEN: https://www.example.com/\n"
-        "    ✓ ALLOWED: https://www.icao.int/security/safeguarding/pages/default.aspx (specific page)\n"
-        "  - If you mention an external organization but don't have a specific relevant URL, do NOT add a link\n"
-        "  - Only add external links if ALL of these are true:\n"
-        "    1. The URL was PROVIDED in the input data (not constructed by you)\n"
-        "    2. The URL is complete and specific (not just a domain homepage)\n"
-        "    3. The URL directly supports the specific claim being made\n"
-        "  - When referencing government reports, ministry statements, or official data:\n"
-        "    ✓ CORRECT: \"According to the Ministry of Inclusion, foreign workers now represent 14.1% of contributors.\"\n"
-        "    ❌ WRONG: \"<a href='https://lamoncloa.gob.es/...[invented path]'>According to the Ministry</a>...\"\n"
-        "  - When mentioning organizations for context, do NOT add generic homepage links:\n"
-        "    ✓ CORRECT: \"...as outlined by international aviation security protocols.\"\n"
+        "🔵 ORGANIZATION/INSTITUTION LINKING (IMPORTANT):\n"
+        "  - When you mention a KEY ORGANIZATION or INSTITUTION by name, you SHOULD link to their official website\n"
+        "  - This applies to: city councils, cooperatives, government bodies, companies, NGOs, universities\n"
+        "  - Use their OFFICIAL HOMEPAGE URL (this is an exception to the 'no homepage' rule for organizations)\n"
+        "  - Examples of good organization links:\n"
+        "    ✓ \"The <a href='https://www.elprat.cat/' target='_blank' rel='noopener'>El Prat de Llobregat City Council</a> announced...\"\n"
+        "    ✓ \"...led by the <a href='https://www.cov.cat/' target='_blank' rel='noopener'>Cooperativa Obrera de Viviendas</a>.\"\n"
+        "    ✓ \"The <a href='https://ajuntament.barcelona.cat/' target='_blank' rel='noopener'>Barcelona City Council</a> confirmed...\"\n"
+        "  - For Catalan/Spanish organizations, search for their official .cat, .es, or .org domain\n"
+        "  - Common patterns:\n"
+        "    - City councils: ajuntament.[city].cat or www.[city].cat\n"
+        "    - Cooperatives: www.[name].cat or www.[name].coop\n"
+        "    - Government: gencat.cat, govern.cat, lamoncloa.gob.es\n"
+        "  - Link at FIRST MENTION of the organization in the article\n"
+        "  - Maximum 2-3 organization links per article (don't overdo it)\n"
+        "  - If you're unsure of the exact URL, you may use well-known official domains\n\n"
+        "LINK SUMMARY (WHAT TO INCLUDE):\n"
+        "  1. PRIMARY SOURCE: Link to primary_source.url from the JSON (MANDATORY if URL exists)\n"
+        "  2. ORGANIZATIONS: Link 1-2 key organizations to their official .cat/.es/.org homepages\n"
+        "  3. NO OTHER LINKS: No Wikipedia, no news sites, no invented URLs\n\n"
+        "FORBIDDEN LINKS:\n"
+        "  - NEVER invent URLs or guess paths (e.g., don't construct lamoncloa.gob.es/... paths)\n"
+        "  - NEVER link to Twitter/X with guessed status IDs\n"
+        "  - NEVER link to Wikipedia or other news sites\n"
         "    ❌ WRONG: \"...from the <a href='https://www.icao.int/'>International Civil Aviation Organization</a>.\"\n"
         "  - If you cannot find a specific, verified URL in the provided data, it's better to have NO link than an invented link\n\n"
         "SOCIAL MEDIA LINKS (STRICT RULES):\n"
@@ -254,7 +283,18 @@ def build_gemini_article_prompt(
         "   - NO academic framing\n"
         "   - NEVER use: \"the objective is\", \"the ambition is\", \"this demonstrates that\"\n"
         "   - NEVER use: \"marks a significant milestone\", \"in an exciting development\"\n\n"
-        "10. BRITISH ENGLISH SPELLING (MANDATORY):\n"
+        "10. PUNCTUATION RULES:\n"
+        "    - NEVER use em dashes (—) in the article\n"
+        "    - Use hyphens (-) for compound words\n"
+        "    - Use commas, full stops, and semicolons for sentence structure\n"
+        "    - Use parentheses ( ) for asides if needed\n\n"
+        "10b. FORMATTING RULES (STRICT):\n"
+        "    - NEVER use <strong> or <b> bold tags in the article body\n"
+        "    - NEVER use bold for emphasis, key terms, names, or statistics\n"
+        "    - The ONLY exception is the H1 title and H2/H3 subheadings (which are already bold by default)\n"
+        "    - Professional news articles (Guardian, BBC) do not bold random phrases\n"
+        "    - Let the writing speak for itself without typographic emphasis\n\n"
+        "11. BRITISH ENGLISH SPELLING (MANDATORY):\n"
         "    - ALWAYS use British spelling, NEVER American:\n"
         "      ✓ organised, NOT organized\n"
         "      ✓ recognised, NOT recognized\n"
@@ -297,13 +337,23 @@ def build_gemini_article_prompt(
         "    ❌ \"lever for change\"\n"
         "    ❌ \"the ambition is to\"\n"
         "    ❌ \"the objective is to\"\n"
-        "    ❌ \"this demonstrates that\"\n\n"
-        "12. CLOSING PARAGRAPH / CALL-TO-ACTION RULES:\n"
-        "    - NEVER end with generic \"For more information, visit [organization] website\" linking to a homepage\n"
-        "    - FORBIDDEN closing patterns:\n"
-        "      ❌ \"For more information on Barcelona's cultural venues, visit the Barcelona City Council website.\" (links to https://www.barcelona.cat/)\n"
+        "    ❌ \"this demonstrates that\"\n"
+        "    ❌ \"For more information on\" (NEVER start closing sentences this way)\n"
+        "    ❌ \"For further reading\" (ABSOLUTELY BANNED - NEVER USE)\n"
+        "    ❌ \"consider the [X] website\" (BANNED - no generic website suggestions)\n"
+        "    ❌ \"visit [organization]'s coverage\" (BANNED - no vague link suggestions)\n\n"
+        "12. CLOSING PARAGRAPH / CALL-TO-ACTION RULES (STRICT - NEVER VIOLATE):\n"
+        "    - ABSOLUTELY FORBIDDEN: Generic \"For more information\" patterns with or without links\n"
+        "    - FORBIDDEN PATTERNS (NEVER USE THESE):\n"
+        "      ❌ \"For more information on [topic], you can read [organization]'s coverage...\" (NO LINK)\n"
+        "      ❌ \"For more information on [topic], visit [organization].\" (https://example.com/)\n"
+        "      ❌ \"For more information on transport disruptions, you can read the BBC's coverage of European transport news.\" (No link)\n"
+        "      ❌ \"For more information on transport policy, visit the UK Government's transport department.\" (https://www.gov.uk/transport)\n"
         "      ❌ \"Visit the official website for more details.\" (links to homepage)\n"
         "      ❌ \"More information is available at [organization].\" (links to homepage)\n"
+        "      ❌ \"Read more about [topic] at [organization].\" (any pattern)\n"
+        "    - ABSOLUTELY BANNED: Any closing sentence starting with \"For more information\"\n"
+        "    - ABSOLUTELY BANNED: Generic organization mentions with suggested links you don't have\n"
         "    - ACCEPTABLE closing approaches (in order of preference):\n"
         "      1. End with a relevant fact, quote, or forward-looking statement about the story\n"
         "         ✓ \"The new measures will take effect from March 2026.\"\n"
@@ -358,39 +408,9 @@ def build_gemini_article_prompt(
     user_message = user_message.replace("<ANALYSIS_JSON_HERE>", analysis_json)
     user_message = user_message.replace("<PRIMARY_SOURCE_JSON_HERE>", primary_json)
 
-    if related_articles is not None:
-        related_json = json.dumps(_normalise_unicode(related_articles), ensure_ascii=False, indent=2)
-        user_message += (
-            "\n\nYou will also receive a JSON object describing some existing articles from this site that should be referenced in the new article when appropriate.\n"
-            "For each entry, you will see: url, title, anchor_text, why_relevant, and suggested_insertion.\n\n"
-            "Please:\n"
-            "  - Weave up to 3 references into the article body in a natural way.\n"
-            "  - Use standard HTML anchor tags for each hyperlink, e.g.:\n"
-            "    <a href=\"URL\">anchor_text</a>\n"
-            "  - Place one link in the intro or early body if possible.\n"
-            "  - Do not over-link: at most one link per related article.\n\n"
-            "CRITICAL LINKING REQUIREMENTS:\n"
-            "  - Each related article link MUST be introduced with a UNIQUE phrase or sentence structure.\n"
-            "  - NEVER repeat the same linking pattern or sentence structure.\n"
-            "  - Vary your linking style for each reference:\n"
-            "    * First link: Natural contextual reference (e.g., \"The city previously addressed similar concerns about...\")\n"
-            "    * Second link: Background reference (e.g., \"This follows earlier action on...\")\n"
-            "    * Third link: Continuation reference (e.g., \"The issue connects to broader questions about...\")\n"
-            "  - Use different sentence structures and vocabulary for each link.\n"
-            "  - Avoid formulaic patterns like \"we covered it in...\" or \"as we reported in...\"\n"
-            "  - Make each link introduction flow naturally from the surrounding paragraph's topic.\n"
-            "  - If you cannot introduce a link naturally and uniquely, skip it rather than force it.\n\n"
-            "EXAMPLES OF LINKING VARIETY:\n"
-            "  ❌ BAD (repetitive - DO NOT DO THIS):\n"
-            "    \"That debate has been building for months — we covered it in streamlining municipal bureaucracy.\"\n"
-            "    \"That debate has been building for months — we covered it in scrutiny of public service operations.\"\n\n"
-            "  ✅ GOOD (varied - DO THIS):\n"
-            "    \"The city previously addressed similar concerns when streamlining municipal bureaucracy.\"\n"
-            "    \"This follows earlier scrutiny of public service operations, which raised questions about oversight.\"\n"
-            "    \"Related questions emerged during recent discussions about transparency requirements.\"\n\n"
-            "RELATED ARTICLES JSON:\n"
-            f"{related_json}"
-        )
+    # NOTE: related_articles is now ignored in Phase 1.
+    # Internal links are added in Phase 2 by link_integrator.py after the article is generated.
+    # This separation ensures the LLM focuses 100% on content quality first.
 
     return {"system_message": system_message, "user_message": user_message}
 
@@ -480,6 +500,178 @@ def _ensure_intro_paragraphs(content: str, primary_keyword: str | None, excerpt:
     return before + insert + content[idx:]
 
 
+def _remove_em_dashes(text: str) -> str:
+    """Replace em dashes with hyphens or commas as appropriate."""
+    if not text:
+        return text
+    # Replace em dash with comma for lists/asides
+    text = re.sub(r'\s+—\s+', ', ', text)
+    # Replace em dash without spaces with hyphen
+    text = re.sub(r'—', '-', text)
+    return text
+
+
+def _strip_generic_link_patterns(content: str) -> str:
+    """Remove ALL generic link patterns including 'For further reading', 'For more information', etc."""
+    if not content:
+        return content
+    
+    # Patterns to completely remove (paragraph blocks with generic patterns)
+    generic_patterns = [
+        # "For more information" patterns
+        r'<!--\s*wp:paragraph\s*-->\s*<p>[^<]*?For more information[^<]*?</p>\s*<!--\s*/wp:paragraph\s*-->',
+        r'<p>[^<]*?For more information[^<]*?</p>',
+        
+        # "For further reading" patterns
+        r'<!--\s*wp:paragraph\s*-->\s*<p>[^<]*?For further reading[^<]*?</p>\s*<!--\s*/wp:paragraph\s*-->',
+        r'<p>[^<]*?For further reading[^<]*?</p>',
+        
+        # "For authoritative guidance" patterns (UK HSE style)
+        r'<!--\s*wp:paragraph\s*-->\s*<p>[^<]*?For authoritative guidance[^<]*?</p>\s*<!--\s*/wp:paragraph\s*-->',
+        r'<p>[^<]*?For authoritative guidance[^<]*?</p>',
+        
+        # "refer to the" patterns
+        r'<!--\s*wp:paragraph\s*-->\s*<p>[^<]*?refer to the[^<]*?</p>\s*<!--\s*/wp:paragraph\s*-->',
+        r'<p>[^<]*?refer to the[^<]*?</p>',
+        
+        # "Visit the X website" patterns
+        r'<!--\s*wp:paragraph\s*-->\s*<p>[^<]*?Visit the[^<]*?website[^<]*?</p>\s*<!--\s*/wp:paragraph\s*-->',
+        r'<p>[^<]*?Visit the[^<]*?website[^<]*?</p>',
+        
+        # "consider the X website" patterns
+        r'<!--\s*wp:paragraph\s*-->\s*<p>[^<]*?consider the[^<]*?website[^<]*?</p>\s*<!--\s*/wp:paragraph\s*-->',
+        r'<p>[^<]*?consider the[^<]*?website[^<]*?</p>',
+        
+        # Generic "Read more" patterns
+        r'<!--\s*wp:paragraph\s*-->\s*<p>[^<]*?Read more about[^<]*?</p>\s*<!--\s*/wp:paragraph\s*-->',
+        r'<p>[^<]*?Read more about[^<]*?</p>',
+        
+        # "More information is available" patterns
+        r'<!--\s*wp:paragraph\s*-->\s*<p>[^<]*?More information is available[^<]*?</p>\s*<!--\s*/wp:paragraph\s*-->',
+        r'<p>[^<]*?More information is available[^<]*?</p>',
+        
+        # Patterns with "(No link)" text
+        r'<!--\s*wp:paragraph\s*-->\s*<p>[^<]*?\(No link\)[^<]*?</p>\s*<!--\s*/wp:paragraph\s*-->',
+        r'<p>[^<]*?\(No link\)[^<]*?</p>',
+        
+        # Patterns mentioning specific sites without actual links
+        r'<!--\s*wp:paragraph\s*-->\s*<p>[^<]*?(?:ArchDaily|Guardian|BBC|Reuters)[^<]*?coverage[^<]*?</p>\s*<!--\s*/wp:paragraph\s*-->',
+        r'<p>[^<]*?(?:ArchDaily|Guardian|BBC|Reuters)[^<]*?coverage[^<]*?</p>',
+        
+        # "official X website" patterns
+        r'<!--\s*wp:paragraph\s*-->\s*<p>[^<]*?official[^<]*?website[^<]*?</p>\s*<!--\s*/wp:paragraph\s*-->',
+        r'<p>[^<]*?official[^<]*?website[^<]*?</p>',
+        
+        # "For more information on X, visit Y" patterns (without actual links)
+        r'For more information on[^.]+,\s*visit[^.]+\.',
+        r'For more information,\s*visit[^.]+\.',
+    ]
+    
+    for pattern in generic_patterns:
+        content = re.sub(pattern, '', content, flags=re.IGNORECASE | re.DOTALL)
+    
+    # Clean up multiple blank lines
+    content = re.sub(r'\n{3,}', '\n\n', content)
+    
+    return content.strip()
+
+
+def _strip_bold_formatting(content: str) -> str:
+    """Remove all bold formatting (<strong>, <b>) from article body paragraphs.
+    
+    Professional news articles don't bold random phrases. Headings are already bold by default.
+    """
+    if not content:
+        return content
+    # Remove <strong>...</strong> tags, keeping inner content
+    content = re.sub(r'<strong>(.*?)</strong>', r'\1', content, flags=re.DOTALL)
+    # Remove <b>...</b> tags, keeping inner content
+    content = re.sub(r'<b>(.*?)</b>', r'\1', content, flags=re.DOTALL)
+    return content
+
+
+def _strip_irrelevant_external_links(content: str) -> str:
+    """Remove links to non-Spanish/Catalan sources that are irrelevant for Barcelona news."""
+    if not content:
+        return content
+    
+    # Domains that should NEVER appear in Barcelona/Catalonia news articles
+    forbidden_domains = [
+        r'hse\.gov\.uk',           # UK Health and Safety Executive
+        r'gov\.uk',                # UK Government
+        r'cdc\.gov',               # US CDC
+        r'epa\.gov',               # US EPA
+        r'fda\.gov',               # US FDA
+        r'\.gov(?!\.es)',          # Any .gov that's not Spanish (.gov.es)
+        r'nhs\.uk',                # UK NHS
+        r'canada\.ca',             # Canadian government
+        r'\.gov\.au',              # Australian government
+    ]
+    
+    for domain in forbidden_domains:
+        # Remove entire anchor tags with forbidden domains
+        pattern = rf'<a\s+[^>]*href=["\'][^"\']*{domain}[^"\']*["\'][^>]*>([^<]*)</a>'
+        content = re.sub(pattern, r'\1', content, flags=re.IGNORECASE)
+    
+    return content
+
+
+def _strip_dangling_links(content: str) -> str:
+    """Remove links that are just appended at the end of paragraphs without integration."""
+    if not content:
+        return content
+    
+    # Pattern: sentence ending with period, then a standalone link phrase ending with period
+    # e.g., "...solar radiation exposure. <a href="...">Catalan exports to India</a>."
+    # This catches: ". <a ...>text</a>." where the link is a dangling phrase
+    dangling_pattern = r'\.\s*<a\s+href=["\'][^"\']+["\'][^>]*>([^<]{3,50})</a>\s*\.'
+    
+    def check_dangling(match):
+        link_text = match.group(1).strip()
+        # If the link text is a short phrase (likely a title), it's probably dangling
+        # Real integrated links would have surrounding sentence context
+        words = link_text.split()
+        if len(words) <= 6:  # Short phrases are likely dangling
+            return '.'  # Remove the dangling link, keep the period
+        return match.group(0)  # Keep longer, likely integrated links
+    
+    content = re.sub(dangling_pattern, check_dangling, content)
+    
+    return content
+
+
+def _strip_repetitive_link_sentences(content: str) -> str:
+    """Remove repetitive link insertion patterns that break article flow."""
+    if not content:
+        return content
+    
+    # Patterns that are repetitive and should be removed
+    repetitive_patterns = [
+        # "The city previously addressed" - ALL VARIANTS (THE MAIN OFFENDER)
+        r'The city previously addressed[^.]*\.',
+        r'[A-Z][^.]*the city previously addressed[^.]*\.',
+        
+        # "Related questions emerged during discussions about X"
+        r'Related questions emerged during discussions about[^.]*\.',
+        
+        # "The wider context is explained in our earlier piece on X"
+        r'The wider context is explained in our earlier piece on[^.]*\.',
+        
+        # "This follows earlier action on X"
+        r'This follows earlier action on\s*<a[^>]*>[^<]*</a>\.',
+    ]
+    
+    for pattern in repetitive_patterns:
+        content = re.sub(pattern, '', content, flags=re.IGNORECASE)
+    
+    # Clean up any double spaces or orphaned punctuation
+    content = re.sub(r'\s+\.', '.', content)
+    content = re.sub(r'\s{2,}', ' ', content)
+    content = re.sub(r'\n{3,}', '\n\n', content)
+    
+    return content
+
+
 def _estimate_tokens(text: str) -> int:
     return max(1, len(text) // 4)
 
@@ -527,16 +719,44 @@ def generate_wp_article(
         related_articles,
         prompt_overrides=api_keys,
     )
+
+    # Use direct GeminiClient for specific model selection with Claude failover
+    # This allows fine-grained model control while still supporting failover
     client = GeminiClient(api_key=api_keys["GEMINI_API_KEY"], model=model_name)
 
     for attempt in range(2):
-        raw = client.generate(prompt["system_message"], prompt["user_message"], timeout=240)
+        try:
+            raw = client.generate(prompt["system_message"], prompt["user_message"], timeout=240)
+        except ContentModerationError as e:
+            # Content blocked - failover to Claude if available
+            if "ANTHROPIC_API_KEY" in api_keys:
+                print(f"\n⚠️  Gemini blocked content: {str(e)[:100]}")
+                print(f"🔄 Failing over to Claude Sonnet 4.5 for sensitive content...")
+                from llm_clients import AnthropicClient
+                claude_client = AnthropicClient(api_key=api_keys["ANTHROPIC_API_KEY"])
+                raw = claude_client.generate(prompt["system_message"], prompt["user_message"])
+                print(f"✓ Claude successfully generated article")
+            else:
+                # No failover available
+                raise
         try:
             payload = _normalise_unicode(parse_json_response(raw))
             payload = _validate_article_payload(payload)
             content = payload.get("wp_block_content", "")
             content = _ensure_single_h1_block(content, payload.get("meta_title"))
             content = _ensure_intro_paragraphs(content, payload.get("primary_keyword"), payload.get("excerpt"))
+            # Remove em dashes
+            content = _remove_em_dashes(content)
+            # Strip bold formatting from article body
+            content = _strip_bold_formatting(content)
+            # Strip generic link patterns
+            content = _strip_generic_link_patterns(content)
+            # Remove irrelevant external links (UK/US gov sites for Barcelona news)
+            content = _strip_irrelevant_external_links(content)
+            # Remove repetitive link sentences like "The city previously addressed..."
+            content = _strip_repetitive_link_sentences(content)
+            # Remove dangling links that were just appended at end of paragraphs
+            content = _strip_dangling_links(content)
             # Convert any American spellings to British English
             content = convert_to_british_english(content)
             payload["wp_block_content"] = content

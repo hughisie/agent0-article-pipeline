@@ -19,7 +19,7 @@ import requests
 from typing import Optional
 from urllib.parse import urlparse, quote_plus
 
-from llm_clients import PerplexitySonarClient, GeminiClient, LLMError
+from llm_clients import PerplexitySonarClient, GeminiClient, GeminiSearchClient, LLMError
 
 
 # Domains we never link to (news sites, Wikipedia, blogs)
@@ -247,6 +247,45 @@ def _build_google_maps_url(place_name: str, city: str = "Barcelona") -> str:
     return f"https://www.google.com/maps/search/{quote_plus(query)}"
 
 
+def _extract_entities(text: str, title: str) -> list[str]:
+    """Extract specific named entities (businesses, venues, streets, landmarks) from article text.
+    
+    Goes beyond organizations to find restaurants, shops, streets, parks, buildings etc.
+    that readers would want to look up.
+    """
+    entities = []
+    combined = f"{title} {text}"
+    
+    # Pattern: "Can X" (common Catalan restaurant/venue naming)
+    for m in re.finditer(r'\bCan\s+([A-Z][a-zà-ÿ]+)', combined):
+        entities.append(f"Can {m.group(1)}")
+    
+    # Pattern: "Cal X" / "Ca l'X" (Catalan restaurant naming)
+    for m in re.finditer(r"\bCa[l]?\s+(?:l')?([A-Z][a-zà-ÿ]+)", combined):
+        entities.append(f"Cal {m.group(1)}")
+    
+    # Pattern: "Mercat de X" / "Mercat del X"
+    for m in re.finditer(r'\bMercat\s+(?:de\s+(?:la\s+)?|del?\s+)([A-Z][a-zà-ÿ]+(?:\s+[A-Z][a-zà-ÿ]+)?)', combined):
+        entities.append(f"Mercat de {m.group(1)}")
+    
+    # Pattern: "Carrer de X" / "Carrer X" / "Torrent de X"
+    for m in re.finditer(r'\b(?:Carrer|Torrent|Avinguda|Passeig|Rambla)\s+(?:de\s+(?:la\s+|l\')?|del?\s+)?([A-Z][^\s,\.]{2,}(?:\s+[A-Z][^\s,\.]+)?)', combined):
+        entities.append(m.group(0))
+    
+    # Pattern: "Palau X" / "Museu X" / "Parc X" / "Hospital X"
+    for m in re.finditer(r'\b(?:Palau|Museu|Parc|Hospital|Teatre|Fundació)\s+(?:de\s+(?:la\s+)?|del?\s+)?([A-Z][^\s,\.]{2,}(?:\s+[^\s,\.]+){0,3})', combined):
+        entities.append(m.group(0))
+    
+    # Deduplicate preserving order
+    seen = set()
+    unique = []
+    for e in entities:
+        if e.lower() not in seen:
+            seen.add(e.lower())
+            unique.append(e)
+    return unique[:6]
+
+
 def find_relevant_external_links(
     article_content: str,
     article_title: str,
@@ -255,24 +294,25 @@ def find_relevant_external_links(
     source_url: str = "",
     source_name: str = "",
     max_links: int = 3,
+    gemini_api_key: str = "",
 ) -> list[dict]:
     """
-    Find relevant external links using Perplexity Sonar web-grounded search.
-
-    Searches for multiple link categories:
-      1. Official organization/association websites
-      2. Government/municipal pages
+    Find relevant external links using dual-engine search:
+      1. Perplexity Sonar for authoritative/government links
+      2. Gemini Flash with Google Search for entity-specific links (businesses, venues, local pages)
       3. Google Maps for key locations
-      4. Source attribution metadata
+
+    All discovered URLs are strictly HTTP-validated with soft 404 detection.
 
     Args:
         api_key: Perplexity Sonar API key
+        gemini_api_key: Gemini API key for Google Search grounding (optional secondary engine)
 
     Returns:
         List of dicts: url, anchor_text, topic, link_type, source_attribution
     """
-    if not api_key:
-        print("  ⚠️  No Perplexity API key for external link search")
+    if not api_key and not gemini_api_key:
+        print("  ⚠️  No API keys for external link search")
         return []
 
     # Ensure primary_keyword is not empty
@@ -282,32 +322,40 @@ def find_relevant_external_links(
     plain_text = _extract_plain_text(article_content)
     locations = _extract_locations(plain_text)
     organizations = _extract_organizations(plain_text)
+    entities = _extract_entities(plain_text, article_title)
 
-    client = PerplexitySonarClient(api_key=api_key)
+    all_links = []
 
-    prompt = f"""Find official, authoritative external links for this Barcelona/Catalonia news article.
+    # --- Strategy 1: Perplexity Sonar web-grounded search ---
+    if api_key:
+        try:
+            client = PerplexitySonarClient(api_key=api_key)
+            perplexity_prompt = f"""Find official, authoritative external links for this Barcelona/Catalonia news article.
 
 ARTICLE TITLE: {article_title}
-PRIMARY KEYWORD: {primary_keyword}
 ORGANIZATIONS MENTIONED: {', '.join(organizations) if organizations else 'None detected'}
 LOCATIONS MENTIONED: {', '.join(locations) if locations else 'None detected'}
+SPECIFIC ENTITIES (businesses, venues, streets): {', '.join(entities) if entities else 'None detected'}
 
 ARTICLE EXCERPT:
 {plain_text[:1500]}
 
-Find up to {max_links + 1} links to OFFICIAL sources that help readers:
+Find up to {max_links + 2} links. Search for ALL of these categories:
 
-1. OFFICIAL ORGANIZATION WEBSITES - websites of organizations/institutions mentioned
+1. BUSINESS/VENUE WEBSITES - official website or social media of any business, restaurant, venue, or shop mentioned
+   (e.g., their .com, .cat, .es website, or their Facebook/Instagram page)
+2. OFFICIAL ORGANIZATION WEBSITES - websites of organizations/institutions mentioned
    (e.g., tmb.cat, renfe.com, ajuntament.barcelona.cat)
-2. GOVERNMENT/MUNICIPAL PAGES - specific gov pages about the topic
-   (e.g., barcelona.cat/mobilitat, gencat.cat pages)
-3. SPECIFIC TOPIC PAGES - official data, regulations, services pages
+3. LOCAL NEIGHBOURHOOD/DISTRICT PAGES - Barcelona district pages for locations mentioned
+   (e.g., ajuntament.barcelona.cat/gracia, meet.barcelona.cat pages)
+4. GOVERNMENT/MUNICIPAL PAGES - specific gov pages about the topic
 
 CRITICAL RULES:
 - ONLY return URLs that ACTUALLY EXIST and are currently live
 - NO news sites, NO Wikipedia, NO blogs
+- Facebook pages of specific businesses ARE acceptable
 - Each URL must be a real, working page you can verify
-- Include the organization name for source attribution
+- Include the organization/business name for source attribution
 
 Return a JSON array:
 [
@@ -315,44 +363,90 @@ Return a JSON array:
     "url": "https://example.cat/specific-page",
     "anchor_text": "Short text for the link (2-5 words)",
     "topic": "What this link covers",
-    "link_type": "organization|government|topic_page",
+    "link_type": "business|organization|government|neighbourhood|topic_page",
     "source_attribution": "Name of the organization or publisher"
   }}
 ]
 
 If you cannot find real, verified sources, return [].
 """
+            response_text = client.generate(
+                system_prompt="You are a research assistant finding authoritative external links for news articles. Return only valid JSON arrays. Only include URLs you are confident actually exist.",
+                user_prompt=perplexity_prompt,
+            ).strip()
 
-    all_links = []
+            if '__CITATIONS__:' in response_text:
+                response_text = response_text.split('__CITATIONS__:')[0].strip()
 
-    # --- Strategy 1: Perplexity Sonar web-grounded search ---
-    try:
-        response_text = client.generate(
-            system_prompt="You are a research assistant finding authoritative external links for news articles. Return only valid JSON arrays. Only include URLs you are confident actually exist.",
-            user_prompt=prompt,
-        ).strip()
+            links = _parse_json_from_response(response_text)
+            for link in links:
+                url = link.get('url', '')
+                if not url or not url.startswith('http'):
+                    continue
+                if _is_news_domain(url):
+                    continue
+                link.setdefault('link_type', 'organization')
+                link.setdefault('source_attribution', '')
+                link['_source'] = 'perplexity'
+                all_links.append(link)
+            print(f"    Perplexity found {len(all_links)} candidate links")
 
-        # Strip Perplexity citation metadata if present
-        if '__CITATIONS__:' in response_text:
-            response_text = response_text.split('__CITATIONS__:')[0].strip()
+        except Exception as e:
+            print(f"  ⚠️  Perplexity search error: {e}")
 
-        links = _parse_json_from_response(response_text)
+    # --- Strategy 2: Gemini Flash with Google Search grounding (entity-focused) ---
+    if gemini_api_key and entities:
+        try:
+            gemini_search = GeminiSearchClient(api_key=gemini_api_key)
+            entity_list = ', '.join(entities[:4])
+            gemini_prompt = f"""Search for the official websites of these specific entities mentioned in a Barcelona news article:
 
-        for link in links:
-            url = link.get('url', '')
-            if not url or not url.startswith('http'):
-                continue
-            if _is_news_domain(url):
-                print(f"    ⚠️ Skipping news domain: {url[:60]}")
-                continue
-            link.setdefault('link_type', 'organization')
-            link.setdefault('source_attribution', '')
-            all_links.append(link)
+ENTITIES TO SEARCH: {entity_list}
+ARTICLE CONTEXT: {article_title}
 
-    except Exception as e:
-        print(f"  ⚠️  External link search error: {e}")
+For EACH entity, find:
+- Their official website (.com, .cat, .es, .org)
+- Their Facebook page if they have one
+- Their page on Barcelona tourism/district sites
 
-    # --- Strategy 2: Google Maps links for key locations ---
+Return a JSON array with ONLY real, verified URLs you found via search:
+[
+  {{
+    "url": "https://...",
+    "anchor_text": "Short link text (2-5 words)",
+    "topic": "What this link covers",
+    "link_type": "business|organization|neighbourhood",
+    "source_attribution": "Entity name"
+  }}
+]
+
+CRITICAL: Only include URLs you actually found. Do NOT invent URLs. Return [] if nothing found.
+"""
+            gemini_response = gemini_search.generate(
+                system_prompt="Find real URLs via Google Search. Return valid JSON only.",
+                user_prompt=gemini_prompt,
+            ).strip()
+
+            gemini_links = _parse_json_from_response(gemini_response)
+            existing_urls = {link.get('url', '').lower() for link in all_links}
+            for link in gemini_links:
+                url = link.get('url', '')
+                if not url or not url.startswith('http'):
+                    continue
+                if url.lower() in existing_urls:
+                    continue
+                if _is_news_domain(url):
+                    continue
+                link.setdefault('link_type', 'business')
+                link.setdefault('source_attribution', '')
+                link['_source'] = 'gemini'
+                all_links.append(link)
+            print(f"    Gemini added {sum(1 for l in all_links if l.get('_source') == 'gemini')} additional candidates")
+
+        except Exception as e:
+            print(f"  ⚠️  Gemini entity search error: {e}")
+
+    # --- Strategy 3: Google Maps links for key locations ---
     if locations:
         top_location = locations[0]
         maps_url = _build_google_maps_url(top_location)
@@ -378,21 +472,23 @@ If you cannot find real, verified sources, return [].
         if domain in seen_domains and not is_maps:
             continue
 
-        # Skip homepages unless it's an org or maps link
-        if _is_homepage(url) and link.get('link_type') not in ('organization', 'google_maps'):
+        # Skip homepages unless it's an org, business, or maps link
+        if _is_homepage(url) and link.get('link_type') not in ('organization', 'business', 'google_maps'):
             continue
 
         # Google Maps links are always valid
         if is_maps or _quick_validate_url(url):
             if not is_maps:
                 seen_domains.add(domain)
+            # Clean up internal tracking field
+            link.pop('_source', None)
             verified.append(link)
-            if len(verified) >= max_links:
+            if len(verified) >= max_links + 1:  # Allow one extra for better selection
                 break
         else:
             print(f"    ⚠️ Skipping broken URL: {url[:60]}...")
 
-    return verified
+    return verified[:max_links]
 
 
 def integrate_external_links(
@@ -539,13 +635,13 @@ def enrich_article_with_external_links(
         "maps_links": 0,
     }
 
-    print("--- External Link Enrichment (Perplexity Sonar) ---")
+    print("--- External Link Enrichment (Dual Engine: Perplexity + Gemini) ---")
 
-    if not search_key:
-        print("  ⚠️  No Perplexity API key - skipping external link search")
+    if not search_key and not integration_key:
+        print("  ⚠️  No API keys - skipping external link search")
         return content, report
 
-    # Step 1: Find relevant links via Perplexity Sonar
+    # Step 1: Find relevant links via dual-engine search
     print("  Searching for relevant external links...")
     links = find_relevant_external_links(
         article_content=content,
@@ -555,6 +651,7 @@ def enrich_article_with_external_links(
         source_url=source_url,
         source_name=source_name,
         max_links=max_links,
+        gemini_api_key=integration_key,
     )
 
     report["links_found"] = len(links)
