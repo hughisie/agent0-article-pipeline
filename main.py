@@ -348,6 +348,9 @@ def _finalize_content(
     platform: str = "wordpress",
     profile_name: str = None,
 ) -> tuple[str, dict]:
+    # Safety net: strip any bold formatting that survived earlier stages
+    content = re.sub(r'<strong>(.*?)</strong>', r'\1', content, flags=re.DOTALL)
+    content = re.sub(r'<b>(.*?)</b>', r'\1', content, flags=re.DOTALL)
     final_content = add_footer_cta(content, platform=platform, profile_name=profile_name)
     final_content = finalise_source_credits(
         final_content,

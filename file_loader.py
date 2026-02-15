@@ -21,6 +21,7 @@ class Article:
     external_references: list[dict] = field(default_factory=list)  # Social media posts and external links
     profile_name: Optional[str] = None
     primary_source_url: Optional[str] = None  # Primary source URL if provided in metadata
+    additional_context: Optional[str] = None  # Extra context for URL-to-article generation
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -78,6 +79,7 @@ def _load_from_json(path: Path) -> Article:
         external_references=external_refs,
         profile_name=raw.get("profile_name"),
         primary_source_url=primary_source_url,
+        additional_context=raw.get("additional_context"),
     )
 
 

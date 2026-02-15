@@ -408,6 +408,15 @@ def build_gemini_article_prompt(
     user_message = user_message.replace("<ANALYSIS_JSON_HERE>", analysis_json)
     user_message = user_message.replace("<PRIMARY_SOURCE_JSON_HERE>", primary_json)
 
+    # Inject additional_context if provided (URL-to-article or user-specified focus)
+    additional_context = original_article.get("additional_context")
+    if additional_context:
+        user_message += (
+            f"\n\nADDITIONAL CONTEXT FROM USER:\n"
+            f"{additional_context}\n"
+            f"Use this context to guide your article focus and angle."
+        )
+
     # NOTE: related_articles is now ignored in Phase 1.
     # Internal links are added in Phase 2 by link_integrator.py after the article is generated.
     # This separation ensures the LLM focuses 100% on content quality first.
