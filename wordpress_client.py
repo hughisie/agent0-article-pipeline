@@ -238,10 +238,20 @@ def upload_media_from_url(
     parsed = urlparse(image_url)
     original_filename = parsed.path.rsplit("/", 1)[-1] or "image.jpg"
 
+    # Auto-crop banners (red/yellow strips from El Nacional and other sources)
+    raw_content = download.content
+    try:
+        from image_pipeline import detect_and_crop_banner
+        raw_content, banner_cropped = detect_and_crop_banner(raw_content)
+        if banner_cropped:
+            print(f"Banner auto-cropped from image before upload")
+    except ImportError:
+        pass
+
     # Convert AVIF/WebP to JPG for better compatibility with social media (X/Twitter cards)
     print(f"Converting image from {original_filename} to JPG format...")
     try:
-        img = Image.open(BytesIO(download.content))
+        img = Image.open(BytesIO(raw_content))
         print(f"Image opened successfully. Format: {img.format}, Mode: {img.mode}, Size: {img.size}")
 
         # Convert to RGB if needed (for JPG compatibility)
@@ -281,7 +291,7 @@ def upload_media_from_url(
         print(f"ERROR: Image conversion failed, using original format: {e}")
         import traceback
         traceback.print_exc()
-        image_data = download.content
+        image_data = raw_content
         filename = original_filename
         content_type = download.headers.get("Content-Type")
         if not content_type:
@@ -403,13 +413,24 @@ def get_user_id_by_username(
 ) -> int | None:
     headers = _basic_auth_header(username, application_password)
     url = f"{base_url.rstrip('/')}/wp-json/wp/v2/users"
-    params = {"search": target_username, "per_page": 100}
+    params = {"search": target_username.replace("_", " "), "per_page": 100}
     response = requests.get(url, headers=headers, params=params, timeout=30)
     if response.status_code != 200:
         raise WordPressError(f"Failed to fetch users: {response.status_code} {response.text}")
     data = response.json()
+    
+    # Normalize target for comparison (lowercase, replace underscores with hyphens)
+    target_normalized = target_username.lower().replace("_", "-")
+    target_with_spaces = target_username.lower().replace("_", " ")
+    
     for user in data:
-        if user.get("slug") == target_username or user.get("name") == target_username:
+        slug = (user.get("slug") or "").lower()
+        name = (user.get("name") or "").lower()
+        # Match against slug, name, or normalized versions
+        if (slug == target_normalized or 
+            slug == target_username.lower() or
+            name == target_with_spaces or
+            name == target_username.lower()):
             return user.get("id")
     return None
 

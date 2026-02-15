@@ -1154,7 +1154,7 @@ def main() -> None:
                     wp_article.get("wp_block_content", ""),
                     related_list,
                     api_key=config["GEMINI_API_KEY"],
-                    max_links=2,  # Up to 2 natural internal links
+                    max_links=3,  # Up to 3 natural internal links
                 )
                 wp_article["wp_block_content"] = updated_content
                 
@@ -1182,7 +1182,7 @@ def main() -> None:
                 primary_keyword=wp_article.get("primary_keyword", ""),
                 source_url=article.source_url or "",
                 source_name=article.source_name or "",
-                max_links=3,
+                max_links=5,
                 perplexity_api_key=config.get("PERPLEXITY_API_KEY", ""),
                 gemini_api_key=config.get("GEMINI_API_KEY", ""),
             )

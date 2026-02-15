@@ -100,15 +100,41 @@ def _extract_organizations(text: str) -> list[str]:
         r"(?:the\s+)?Catalan\s+(?:government|regional\s+government)",
         r"(?:the\s+)?Servei\s+Meteorol[oò]gic",
         r"(?:the\s+)?Protecci[oó]\s+Civil",
-        r"(?:the\s+)?Guàrdia\s+Urbana",
+        r"(?:the\s+)?Gu[aà]rdia\s+Urbana",
         r"(?:the\s+)?(?:Cruz|Creu)\s+Roja",
         r"(?:the\s+)?SEM|Servei\s+d['']Emerg[eè]ncies",
+        # Urban planning / ecology
+        r"(?:the\s+)?Directorate\s+of\s+[\w\s]+Services",
+        r"(?:the\s+)?Ecologia\s+Urbana",
+        r"(?:the\s+)?[AÀ]rea\s+(?:de\s+)?(?:Ecologia|Mobilitat|Urbanisme)[\w\s]*",
+        # Education / culture
+        r"(?:the\s+)?Escola\s+Industrial",
+        r"(?:the\s+)?Escola\s+[A-Z][\w]+",
+        r"(?:the\s+)?Universitat\s+(?:de\s+|Polit[eè]cnica|Aut[oò]noma|Pompeu)[\w\s]*",
+        # Neighbourhood associations
+        r"(?:the\s+)?(?:AVV|Associaci[oó])\s+de\s+Ve[ïi]n[sa]\s+[\w\s']+",
+        r"Dreta\s+(?:de\s+l')?Eixample",
+        r"Esquerra\s+(?:de\s+l')?Eixample",
+        r"Nova\s+Esquerra",
+        r"Antiga\s+Esquerra",
+        # Police / emergency
+        r"(?:the\s+)?Guardia\s+Urbana",
+        r"Polic[ií]a\s+Local",
+        # Commerce / tourism
+        r"Portal\s+de\s+l'[ÀA]ngel",
+        r"(?:the\s+)?Tur[iy]?sme\s+de\s+Barcelona",
+        r"Visit\s*Barcelona",
+        # Superilla / green axes
+        r"[Ss]uperilla",
+        r"[Ss]uperblock",
+        r"green\s+ax[ei]s?",
+        r"eix(?:os)?\s+verd[se]?",
     ]
     found = []
     for pattern in org_patterns:
         matches = re.findall(pattern, text, re.IGNORECASE)
         found.extend(matches)
-    return list(dict.fromkeys(found))[:5]  # Unique, max 5
+    return list(dict.fromkeys(found))[:8]  # Unique, max 8
 
 
 def _is_news_domain(url: str) -> bool:
@@ -268,22 +294,49 @@ def _extract_entities(text: str, title: str) -> list[str]:
     for m in re.finditer(r'\bMercat\s+(?:de\s+(?:la\s+)?|del?\s+)([A-Z][a-zà-ÿ]+(?:\s+[A-Z][a-zà-ÿ]+)?)', combined):
         entities.append(f"Mercat de {m.group(1)}")
     
-    # Pattern: "Carrer de X" / "Carrer X" / "Torrent de X"
-    for m in re.finditer(r'\b(?:Carrer|Torrent|Avinguda|Passeig|Rambla)\s+(?:de\s+(?:la\s+|l\')?|del?\s+)?([A-Z][^\s,\.]{2,}(?:\s+[A-Z][^\s,\.]+)?)', combined):
+    # Pattern: Street names - "Carrer de X" / "Carrer X" / "Torrent de X"
+    for m in re.finditer(r'\b(?:Carrer|Torrent|Avinguda|Passeig|Rambla)\s+(?:de\s+(?:la\s+|l\')?|del?\s+)?([A-Z][^\s,\.]{2,}(?:\s+(?:de\s+(?:la\s+)?)?[A-Z][^\s,\.]+)*)', combined):
         entities.append(m.group(0))
     
-    # Pattern: "Palau X" / "Museu X" / "Parc X" / "Hospital X"
-    for m in re.finditer(r'\b(?:Palau|Museu|Parc|Hospital|Teatre|Fundació)\s+(?:de\s+(?:la\s+)?|del?\s+)?([A-Z][^\s,\.]{2,}(?:\s+[^\s,\.]+){0,3})', combined):
+    # Pattern: Named streets without prefix (common BCN streets)
+    _KNOWN_STREETS = [
+        'Consell de Cent', 'Rocafort', 'Borrell', 'Comte Borrell',
+        'Girona', 'Enric Granados', 'Arag[oó]', 'Mallorca',
+        'Val[eè]ncia', 'Proven[çc]a', 'Rossell[oó]', 'C[oò]rsega',
+        'Balmes', 'Muntaner', 'Aribau', 'Urgell', 'Villarroel',
+        'Calabria', 'Tamarit', 'Manso', 'Parallel',
+    ]
+    for street in _KNOWN_STREETS:
+        if re.search(rf'\b{street}\b', combined, re.IGNORECASE):
+            # Use the clean version without regex chars
+            clean = re.sub(r'\[.*?\]', lambda m: m.group(0)[1], street)
+            entities.append(clean)
+    
+    # Pattern: "Palau X" / "Museu X" / "Parc X" / "Hospital X" / "Escola X"
+    for m in re.finditer(r'\b(?:Palau|Museu|Parc|Hospital|Teatre|Fundaci[oó]|Escola|Biblioteca|Centre)\s+(?:de\s+(?:la\s+)?|del?\s+)?([A-Z][a-zà-ÿA-Z]+(?:\s+[A-Z][a-zà-ÿA-Z]*){0,2})', combined):
+        entities.append(m.group(0))
+    
+    # Pattern: "Portal de l'Àngel" / "Plaça X" / "Parc X"
+    for m in re.finditer(r'\b(?:Portal|Pla[çc]a|Jardins|Jard[ií])\s+(?:de\s+(?:la\s+|l\')?|del?\s+)?([A-Z][^\s,\.]{2,}(?:\s+[^\s,\.]+){0,2})', combined):
+        entities.append(m.group(0))
+    
+    # Pattern: Neighbourhood associations - "Dreta", "Esquerra de l'Eixample"
+    for m in re.finditer(r'\b(?:Dreta|Esquerra|Nova\s+Esquerra|Antiga\s+Esquerra)(?:\s+(?:de\s+l\')?Eixample)?', combined):
+        entities.append(m.group(0))
+    
+    # Pattern: Superilla / Superblock references
+    for m in re.finditer(r'\b[Ss]uperilla(?:\s+(?:de\s+(?:la\s+|l\')?)?\w+)?', combined):
         entities.append(m.group(0))
     
     # Deduplicate preserving order
     seen = set()
     unique = []
     for e in entities:
-        if e.lower() not in seen:
-            seen.add(e.lower())
-            unique.append(e)
-    return unique[:6]
+        e_clean = e.strip()
+        if e_clean.lower() not in seen and len(e_clean) > 2:
+            seen.add(e_clean.lower())
+            unique.append(e_clean)
+    return unique[:10]
 
 
 def find_relevant_external_links(
@@ -338,24 +391,30 @@ LOCATIONS MENTIONED: {', '.join(locations) if locations else 'None detected'}
 SPECIFIC ENTITIES (businesses, venues, streets): {', '.join(entities) if entities else 'None detected'}
 
 ARTICLE EXCERPT:
-{plain_text[:1500]}
+{plain_text[:2000]}
 
-Find up to {max_links + 2} links. Search for ALL of these categories:
+Find up to {max_links + 4} links. Search THOROUGHLY across ALL categories:
 
 1. BUSINESS/VENUE WEBSITES - official website or social media of any business, restaurant, venue, or shop mentioned
    (e.g., their .com, .cat, .es website, or their Facebook/Instagram page)
 2. OFFICIAL ORGANIZATION WEBSITES - websites of organizations/institutions mentioned
    (e.g., tmb.cat, renfe.com, ajuntament.barcelona.cat)
-3. LOCAL NEIGHBOURHOOD/DISTRICT PAGES - Barcelona district pages for locations mentioned
-   (e.g., ajuntament.barcelona.cat/gracia, meet.barcelona.cat pages)
-4. GOVERNMENT/MUNICIPAL PAGES - specific gov pages about the topic
+3. BARCELONA CITY COUNCIL PROJECT PAGES - specific ajuntament.barcelona.cat pages for projects, districts, or services
+   (e.g., ajuntament.barcelona.cat/superilla, ajuntament.barcelona.cat/ecologiaurbana)
+4. NEIGHBOURHOOD / DISTRICT PAGES - Barcelona district or neighbourhood association websites
+   (e.g., ajuntament.barcelona.cat/eixample, avvdretaeixample.cat, avveixample.cat)
+5. TOURISM / VISITOR PAGES - visitbarcelona.com or meet.barcelona pages for locations mentioned
+6. SPECIFIC STREET/PROJECT PAGES - pages about specific streets, green axes, superblocks
+   (e.g., barcelona.cat/en/living-in-bcn/moving-around-the-city/streets/)
 
 CRITICAL RULES:
 - ONLY return URLs that ACTUALLY EXIST and are currently live
 - NO news sites, NO Wikipedia, NO blogs
 - Facebook pages of specific businesses ARE acceptable
+- Neighbourhood association homepages (.cat domains) ARE acceptable
 - Each URL must be a real, working page you can verify
 - Include the organization/business name for source attribution
+- Prefer specific sub-pages over generic homepages
 
 Return a JSON array:
 [
@@ -363,7 +422,7 @@ Return a JSON array:
     "url": "https://example.cat/specific-page",
     "anchor_text": "Short text for the link (2-5 words)",
     "topic": "What this link covers",
-    "link_type": "business|organization|government|neighbourhood|topic_page",
+    "link_type": "business|organization|government|neighbourhood|topic_page|street_project",
     "source_attribution": "Name of the organization or publisher"
   }}
 ]
@@ -394,33 +453,40 @@ If you cannot find real, verified sources, return [].
         except Exception as e:
             print(f"  ⚠️  Perplexity search error: {e}")
 
-    # --- Strategy 2: Gemini Flash with Google Search grounding (entity-focused) ---
-    if gemini_api_key and entities:
+    # --- Strategy 2: Gemini Flash with Google Search grounding ---
+    # Always run Gemini Search as secondary engine - it uses Google's index
+    # and finds entity-specific links that Perplexity may miss
+    if gemini_api_key:
         try:
             gemini_search = GeminiSearchClient(api_key=gemini_api_key)
-            entity_list = ', '.join(entities[:4])
-            gemini_prompt = f"""Search for the official websites of these specific entities mentioned in a Barcelona news article:
+            # Build search context from entities, orgs, locations, and title
+            search_items = entities[:6] + organizations[:3] + locations[:2]
+            search_context = ', '.join(search_items) if search_items else article_title
+            gemini_prompt = f"""Search Google for the official websites and pages related to these items from a Barcelona/Catalonia news article:
 
-ENTITIES TO SEARCH: {entity_list}
-ARTICLE CONTEXT: {article_title}
+ITEMS TO SEARCH: {search_context}
+ARTICLE TITLE: {article_title}
+ARTICLE EXCERPT: {plain_text[:1000]}
 
-For EACH entity, find:
+For EACH item, search Google and find:
 - Their official website (.com, .cat, .es, .org)
-- Their Facebook page if they have one
-- Their page on Barcelona tourism/district sites
+- Their page on ajuntament.barcelona.cat (city council project pages, district pages)
+- Their page on visitbarcelona.com or meet.barcelona
+- Neighbourhood association websites (e.g., avvdretaeixample.cat)
+- Facebook/Instagram pages of businesses
 
-Return a JSON array with ONLY real, verified URLs you found via search:
+Return a JSON array with ONLY real URLs you found via Google Search:
 [
   {{
     "url": "https://...",
     "anchor_text": "Short link text (2-5 words)",
     "topic": "What this link covers",
-    "link_type": "business|organization|neighbourhood",
+    "link_type": "business|organization|government|neighbourhood|street_project",
     "source_attribution": "Entity name"
   }}
 ]
 
-CRITICAL: Only include URLs you actually found. Do NOT invent URLs. Return [] if nothing found.
+CRITICAL: Only include URLs you actually found in Google Search results. Do NOT invent URLs. Return [] if nothing found.
 """
             gemini_response = gemini_search.generate(
                 system_prompt="Find real URLs via Google Search. Return valid JSON only.",
@@ -472,8 +538,8 @@ CRITICAL: Only include URLs you actually found. Do NOT invent URLs. Return [] if
         if domain in seen_domains and not is_maps:
             continue
 
-        # Skip homepages unless it's an org, business, or maps link
-        if _is_homepage(url) and link.get('link_type') not in ('organization', 'business', 'google_maps'):
+        # Skip homepages unless it's an org, business, neighbourhood, or maps link
+        if _is_homepage(url) and link.get('link_type') not in ('organization', 'business', 'neighbourhood', 'google_maps', 'street_project'):
             continue
 
         # Google Maps links are always valid
@@ -483,7 +549,7 @@ CRITICAL: Only include URLs you actually found. Do NOT invent URLs. Return [] if
             # Clean up internal tracking field
             link.pop('_source', None)
             verified.append(link)
-            if len(verified) >= max_links + 1:  # Allow one extra for better selection
+            if len(verified) >= max_links + 2:  # Allow extras for better selection
                 break
         else:
             print(f"    ⚠️ Skipping broken URL: {url[:60]}...")
