@@ -22,9 +22,10 @@ from urllib.parse import urlparse, quote_plus
 from llm_clients import PerplexitySonarClient, GeminiClient, GeminiSearchClient, LLMError
 
 
-# Domains we never link to (news sites, Wikipedia, blogs)
+# Domains we never link to (news sites, blogs)
+# NOTE: wikipedia.org is NOT blocked — it's allowed for non-English term definitions
 NEWS_DOMAINS = [
-    'wikipedia.org', 'news.google', 'elpais.', 'lavanguardia.', 'elperiodico.',
+    'news.google', 'elpais.', 'lavanguardia.', 'elperiodico.',
     'ara.cat', 'beteve.', 'elnacional.', 'naciodigital.', 'vilaweb.',
     '324.cat', 'ccma.cat', 'bbc.', 'guardian.', 'reuters.', 'cnn.',
     'nytimes.', 'washingtonpost.', 'france24.', 'euronews.', 'publico.',
@@ -143,6 +144,22 @@ def _is_news_domain(url: str) -> bool:
     return any(domain in url_lower for domain in NEWS_DOMAINS)
 
 
+# Tourism site patterns that are low-value generic district pages
+_TOURISM_HOMEPAGE_PATTERNS = [
+    r'barcelonaturisme\.com/.*/sants-montjuic',
+    r'barcelonaturisme\.com/.*/eixample',
+    r'barcelonaturisme\.com/.*/ciutat-vella',
+    r'barcelonaturisme\.com/.*/gracia',
+    r'barcelonaturisme\.com/.*/les-corts',
+    r'barcelonaturisme\.com/.*/sarria',
+    r'barcelonaturisme\.com/.*/sant-andreu',
+    r'barcelonaturisme\.com/.*/sant-marti',
+    r'barcelonaturisme\.com/.*/horta',
+    r'barcelonaturisme\.com/.*/nou-barris',
+    r'timeout\.com',
+]
+
+
 def _is_homepage(url: str) -> bool:
     """Check if URL is a generic homepage without specific content."""
     parsed = urlparse(url)
@@ -151,6 +168,10 @@ def _is_homepage(url: str) -> bool:
         return True
     # Very short paths that are likely homepages
     if len(path) < 5 and '?' not in url:
+        return True
+    # Tourism generic district pages (low value for readers)
+    url_lower = url.lower()
+    if any(re.search(p, url_lower) for p in _TOURISM_HOMEPAGE_PATTERNS):
         return True
     return False
 
@@ -328,6 +349,44 @@ def _extract_entities(text: str, title: str) -> list[str]:
     for m in re.finditer(r'\b[Ss]uperilla(?:\s+(?:de\s+(?:la\s+|l\')?)?\w+)?', combined):
         entities.append(m.group(0))
     
+    # Pattern: Business/Brand + Location (e.g., "DiR Tuset", "DiR Diagonal", "Gym Holmes Place")
+    # Catches capitalized brand names followed by a known location or street name
+    _LOCATION_SUFFIXES = [
+        'Tuset', 'Diagonal', 'Sants', 'Eixample', 'Poblenou', 'Gr[aà]cia',
+        'Born', 'Raval', 'G[oò]tic', 'Barceloneta', 'Pedralbes', 'Sarri[aà]',
+        'Les Corts', 'Horta', 'Sant Gervasi', 'Bonanova', 'Putxet',
+        'Mandri', 'Balmes', 'Muntaner', 'Aribau', 'Rocafort',
+    ]
+    for suffix in _LOCATION_SUFFIXES:
+        for m in re.finditer(rf'\b([A-Z][A-Za-zÀ-ÿ]{{1,15}})\s+{suffix}\b', combined):
+            full_match = m.group(0)
+            brand = m.group(1)
+            # Skip common words that aren't brand names
+            if brand.lower() not in {'the', 'and', 'for', 'via', 'del', 'des', 'from', 'near', 'next'}:
+                entities.append(full_match)
+    
+    # Pattern: Repeated capitalized name that's likely a brand (appears 3+ times)
+    # This catches business names like "DiR" that appear throughout the article
+    words = re.findall(r'\b([A-Z][A-Za-zÀ-ÿ]{1,20})\b', combined)
+    word_counts = {}
+    for w in words:
+        if len(w) >= 2 and w.lower() not in {
+            'the', 'and', 'for', 'but', 'not', 'was', 'has', 'had', 'its',
+            'new', 'said', 'also', 'will', 'been', 'from', 'with', 'this',
+            'that', 'they', 'their', 'more', 'than', 'about', 'which',
+            'would', 'could', 'should', 'into', 'over', 'after', 'before',
+            'barcelona', 'catalonia', 'catalan', 'spain', 'spanish',
+            'monday', 'tuesday', 'wednesday', 'thursday', 'friday',
+            'saturday', 'sunday', 'january', 'february', 'march', 'april',
+            'may', 'june', 'july', 'august', 'september', 'october',
+            'november', 'december', 'according', 'however', 'meanwhile',
+        }:
+            word_counts[w] = word_counts.get(w, 0) + 1
+    already_found = {e.strip().lower() for e in entities}
+    for word, count in word_counts.items():
+        if count >= 3 and word.lower() not in already_found:
+            entities.append(word)
+    
     # Deduplicate preserving order
     seen = set()
     unique = []
@@ -403,18 +462,27 @@ Find up to {max_links + 4} links. Search THOROUGHLY across ALL categories:
    (e.g., ajuntament.barcelona.cat/superilla, ajuntament.barcelona.cat/ecologiaurbana)
 4. NEIGHBOURHOOD / DISTRICT PAGES - Barcelona district or neighbourhood association websites
    (e.g., ajuntament.barcelona.cat/eixample, avvdretaeixample.cat, avveixample.cat)
-5. TOURISM / VISITOR PAGES - visitbarcelona.com or meet.barcelona pages for locations mentioned
-6. SPECIFIC STREET/PROJECT PAGES - pages about specific streets, green axes, superblocks
+5. WIKIPEDIA TERM DEFINITIONS - if the article mentions a non-English cultural term or concept
+   (e.g., botellón, castellera, diada, calçotada, correfoc), link to its Wikipedia page
+   ONLY for explaining foreign/cultural terms readers may not know, NOT for general topics
+6. GOOGLE MAPS FOR SPECIFIC LOCATIONS - for specific streets, paths, parks, or venues mentioned
+   (e.g., Camí de la Foixarda, Carrer de Consell de Cent) — use Google Maps search URLs
+7. SPECIFIC STREET/PROJECT PAGES - pages about specific streets, green axes, superblocks
    (e.g., barcelona.cat/en/living-in-bcn/moving-around-the-city/streets/)
 
 CRITICAL RULES:
 - ONLY return URLs that ACTUALLY EXIST and are currently live
-- NO news sites, NO Wikipedia, NO blogs
+- NO news sites (except the business's OWN blog/news page is OK)
+- Wikipedia is ONLY acceptable for explaining non-English cultural terms (e.g., botellón, castellera)
 - Facebook pages of specific businesses ARE acceptable
 - Neighbourhood association homepages (.cat domains) ARE acceptable
 - Each URL must be a real, working page you can verify
 - Include the organization/business name for source attribution
 - Prefer specific sub-pages over generic homepages
+- Prefer Google Maps over tourism websites for district/neighbourhood links
+- Do NOT link to barcelonaturisme.com generic district pages
+- If the article is ABOUT a specific business/company, their official website is the HIGHEST PRIORITY link
+- For businesses with multiple locations, include Google Maps links to specific branches mentioned
 
 Return a JSON array:
 [
@@ -422,7 +490,7 @@ Return a JSON array:
     "url": "https://example.cat/specific-page",
     "anchor_text": "Short text for the link (2-5 words)",
     "topic": "What this link covers",
-    "link_type": "business|organization|government|neighbourhood|topic_page|street_project",
+    "link_type": "business|organization|government|neighbourhood|topic_page|street_project|wikipedia_term|google_maps",
     "source_attribution": "Name of the organization or publisher"
   }}
 ]
@@ -512,18 +580,37 @@ CRITICAL: Only include URLs you actually found in Google Search results. Do NOT 
         except Exception as e:
             print(f"  ⚠️  Gemini entity search error: {e}")
 
-    # --- Strategy 3: Google Maps links for key locations ---
-    if locations:
-        top_location = locations[0]
-        maps_url = _build_google_maps_url(top_location)
+    # --- Strategy 3: Google Maps links for key locations and specific entities ---
+    maps_added = 0
+    for loc in locations[:2]:
+        maps_url = _build_google_maps_url(loc)
         all_links.append({
             "url": maps_url,
-            "anchor_text": top_location,
-            "topic": f"Location: {top_location}",
+            "anchor_text": loc,
+            "topic": f"Location: {loc}",
             "link_type": "google_maps",
             "source_attribution": "Google Maps",
         })
-        print(f"    📍 Added Google Maps link for: {top_location}")
+        maps_added += 1
+        print(f"    📍 Added Google Maps link for: {loc}")
+    # Also add maps links for specific street/venue entities not already covered
+    for entity in entities[:3]:
+        if maps_added >= 3:
+            break
+        entity_lower = entity.lower()
+        if any(entity_lower == loc.lower() for loc in locations[:2]):
+            continue
+        if any(kw in entity_lower for kw in ['carrer', 'camí', 'avinguda', 'passeig', 'rambla', 'plaça', 'parc', 'jardins', 'club', 'gym', 'centre', 'center', 'hotel', 'restaurant', 'mercat', 'museu', 'teatre', 'cinema', 'hospital']):
+            maps_url = _build_google_maps_url(entity)
+            all_links.append({
+                "url": maps_url,
+                "anchor_text": entity,
+                "topic": f"Location: {entity}",
+                "link_type": "google_maps",
+                "source_attribution": "Google Maps",
+            })
+            maps_added += 1
+            print(f"    📍 Added Google Maps link for entity: {entity}")
 
     # --- Validate and deduplicate ---
     seen_domains = set()
@@ -538,8 +625,8 @@ CRITICAL: Only include URLs you actually found in Google Search results. Do NOT 
         if domain in seen_domains and not is_maps:
             continue
 
-        # Skip homepages unless it's an org, business, neighbourhood, or maps link
-        if _is_homepage(url) and link.get('link_type') not in ('organization', 'business', 'neighbourhood', 'google_maps', 'street_project'):
+        # Skip homepages unless it's an org, business, neighbourhood, maps, or wikipedia link
+        if _is_homepage(url) and link.get('link_type') not in ('organization', 'business', 'neighbourhood', 'google_maps', 'street_project', 'wikipedia_term'):
             continue
 
         # Google Maps links are always valid

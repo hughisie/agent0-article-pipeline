@@ -101,25 +101,29 @@ class GeminiClient:
                     content = candidate.get("content", {})
                     parts = content.get("parts", [])
                     
+                    # Collect text from ALL parts (grounded search may have
+                    # functionCall parts before/between text parts)
+                    text_parts = []
                     if parts:
-                        # Try to get text from first part
-                        first_part = parts[0]
-                        if isinstance(first_part, dict) and "text" in first_part:
-                            return first_part["text"]
-                        elif isinstance(first_part, str):
-                            return first_part
+                        for part in parts:
+                            if isinstance(part, dict) and "text" in part:
+                                text_parts.append(part["text"])
+                            elif isinstance(part, str):
+                                text_parts.append(part)
                     
-                    # Fallback: check for grounded response structure
+                    if text_parts:
+                        return "\n".join(text_parts)
+                    
+                    # Fallback: check for grounded response with searchEntryPoint
                     if "groundingMetadata" in candidate:
-                        # For grounded search, text might be in a different location
                         grounding = candidate.get("groundingMetadata", {})
-                        if "webSearchQueries" in grounding:
-                            # The actual text response should still be in parts
-                            pass
+                        # Try to get rendered content from grounding
+                        rendered = grounding.get("searchEntryPoint", {}).get("renderedContent", "")
+                        if rendered:
+                            return rendered
                     
                     # If we got here, try to extract any text we can find
                     if content:
-                        # Sometimes the response is just the content dict
                         if isinstance(content, str):
                             return content
                     
