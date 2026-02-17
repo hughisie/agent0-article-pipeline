@@ -1,0 +1,340 @@
+{
+  "domains": {
+    "gencat.cat": {
+      "name": "Generalitat de Catalunya",
+      "priority": "high",
+      "press_paths": [
+        "/ca/actualitat/",
+        "/ca/noticies/",
+        "/ca/comunicats/"
+      ],
+      "url_patterns": [
+        "/ca/actualitat/\\d{4}/\\d{2}/\\d{2}/[a-z0-9-]+",
+        "/ca/noticies/\\d{6,}"
+      ],
+      "date_format": "YYYY/MM/DD",
+      "common_paths": {
+        "press": "/ca/actualitat/",
+        "news": "/ca/noticies/",
+        "documents": "/ca/detalls/",
+        "publications": "/ca/publicacions/"
+      },
+      "typical_content_types": ["html", "pdf"],
+      "language": "ca"
+    },
+    "govern.cat": {
+      "name": "Govern de Catalunya",
+      "priority": "high",
+      "press_paths": [
+        "/ca/noticies/",
+        "/ca/comunicats/",
+        "/ca/actualitat/"
+      ],
+      "url_patterns": [
+        "/ca/noticies/\\d{6,}",
+        "/ca/comunicats/\\d{6,}"
+      ],
+      "common_paths": {
+        "press": "/ca/noticies/",
+        "announcements": "/ca/comunicats/"
+      },
+      "typical_content_types": ["html"],
+      "language": "ca"
+    },
+    "web.gencat.cat": {
+      "name": "Web Gencat",
+      "priority": "high",
+      "press_paths": [
+        "/ca/actualitat/",
+        "/ca/noticies/"
+      ],
+      "url_patterns": [
+        "/ca/actualitat/detall/[A-Za-z0-9-]+",
+        "/ca/noticies/\\d{6,}"
+      ],
+      "language": "ca"
+    },
+    "ajuntament.barcelona.cat": {
+      "name": "Ajuntament de Barcelona",
+      "priority": "high",
+      "press_paths": [
+        "/premsa/",
+        "/notespremsa/",
+        "/ca/noticia/",
+        "/ca/actualitat/"
+      ],
+      "url_patterns": [
+        "/premsa/\\d{4}/\\d{2}/\\d{2}/[a-z0-9-]+",
+        "/notespremsa/\\d{4}/[a-z0-9-]+"
+      ],
+      "date_format": "YYYY/MM/DD",
+      "common_paths": {
+        "press": "/premsa/",
+        "news": "/ca/noticia/"
+      },
+      "language": "ca"
+    },
+    "badalona.cat": {
+      "name": "Ajuntament de Badalona",
+      "priority": "medium",
+      "press_paths": [
+        "/ca/noticies/",
+        "/ca/actualitat/"
+      ],
+      "url_patterns": [
+        "/ca/noticies/[a-z0-9-]+"
+      ],
+      "language": "ca"
+    },
+    "lamoncloa.gob.es": {
+      "name": "La Moncloa - Gobierno de España",
+      "priority": "high",
+      "press_paths": [
+        "/serviciosdeprensa/",
+        "/actualidad/",
+        "/notasprensa/"
+      ],
+      "url_patterns": [
+        "/serviciosdeprensa/notasprensa/[a-z0-9-]+",
+        "/actualidad/\\d{4}/\\d{2}/[a-z0-9-]+"
+      ],
+      "language": "es"
+    },
+    "gob.es": {
+      "name": "Gobierno de España",
+      "priority": "high",
+      "press_paths": [
+        "/prensa/",
+        "/actualidad/",
+        "/noticias/"
+      ],
+      "url_patterns": [
+        "/prensa/\\d{4}/\\d{2}/[a-z0-9-]+",
+        "/noticias/[a-z0-9-]+"
+      ],
+      "language": "es"
+    },
+    "ceo.gencat.cat": {
+      "name": "Centre d'Estudis d'Opinió",
+      "priority": "high",
+      "press_paths": [
+        "/ca/barometre/",
+        "/ca/estudis/",
+        "/ca/publicacions/"
+      ],
+      "url_patterns": [
+        "/ca/barometre/detall/index.html\\?id=\\d+",
+        "/ca/estudis/[a-z0-9-]+"
+      ],
+      "typical_content_types": ["html", "pdf"],
+      "language": "ca",
+      "artifact_types": ["survey", "barometer", "study"]
+    },
+    "idescat.cat": {
+      "name": "Institut d'Estadística de Catalunya",
+      "priority": "high",
+      "press_paths": [
+        "/noticies/",
+        "/actualitat/"
+      ],
+      "url_patterns": [
+        "/noticies/\\?id=\\d+",
+        "/actualitat/\\d{4}/[a-z0-9-]+"
+      ],
+      "typical_content_types": ["html", "pdf"],
+      "language": "ca",
+      "artifact_types": ["statistics", "data", "report"]
+    },
+    "parlament.cat": {
+      "name": "Parlament de Catalunya",
+      "priority": "medium",
+      "press_paths": [
+        "/web/actualitat/",
+        "/web/noticies/"
+      ],
+      "url_patterns": [
+        "/web/actualitat/noticies/[a-z0-9-]+",
+        "/document/[a-z0-9-]+\\.pdf"
+      ],
+      "language": "ca"
+    },
+    "transit.gencat.cat": {
+      "name": "Servei Català de Trànsit",
+      "priority": "high",
+      "press_paths": [
+        "/ca/noticies/",
+        "/ca/actualitat/"
+      ],
+      "url_patterns": [
+        "/ca/noticies/[a-z0-9-]+",
+        "/ca/actualitat/[a-z0-9-]+"
+      ],
+      "language": "ca",
+      "artifact_types": ["traffic_accident", "road_closure", "traffic_incident"]
+    },
+    "interior.gencat.cat": {
+      "name": "Departament d'Interior - Generalitat",
+      "priority": "high",
+      "press_paths": [
+        "/ca/noticies/",
+        "/ca/detalls/"
+      ],
+      "url_patterns": [
+        "/ca/noticies/[a-z0-9-]+"
+      ],
+      "language": "ca",
+      "artifact_types": ["police", "emergency", "security"]
+    },
+    "bombers.gencat.cat": {
+      "name": "Bombers de la Generalitat",
+      "priority": "high",
+      "press_paths": [
+        "/ca/noticies/",
+        "/ca/actualitat/"
+      ],
+      "url_patterns": [
+        "/ca/noticies/[a-z0-9-]+"
+      ],
+      "language": "ca",
+      "artifact_types": ["fire", "rescue", "emergency"]
+    },
+    "mossos.gencat.cat": {
+      "name": "Mossos d'Esquadra",
+      "priority": "high",
+      "press_paths": [
+        "/ca/noticies/",
+        "/ca/comunicats/"
+      ],
+      "url_patterns": [
+        "/ca/noticies/[a-z0-9-]+"
+      ],
+      "language": "ca",
+      "artifact_types": ["police", "crime", "security"]
+    },
+    "sem.gencat.cat": {
+      "name": "Servei d'Emergències Mèdiques",
+      "priority": "medium",
+      "press_paths": [
+        "/ca/noticies/"
+      ],
+      "url_patterns": [
+        "/ca/noticies/[a-z0-9-]+"
+      ],
+      "language": "ca",
+      "artifact_types": ["medical_emergency", "ambulance"]
+    },
+    "guardiaurbana.bcn.cat": {
+      "name": "Guàrdia Urbana de Barcelona",
+      "priority": "medium",
+      "press_paths": [],
+      "url_patterns": [],
+      "language": "ca",
+      "artifact_types": ["police", "traffic", "urban_safety"],
+      "social_media": {
+        "twitter": "@BCN_GUB"
+      }
+    },
+    "sipfepol.cat": {
+      "name": "SIP-FEPOL (Sindicat Independent de Policia)",
+      "priority": "medium",
+      "press_paths": [
+        "/sipweb/article"
+      ],
+      "url_patterns": [
+        "/sipweb/article\\?item=.+"
+      ],
+      "language": "ca",
+      "artifact_types": ["police", "union", "labour"],
+      "publisher_keywords": ["sip-fepol", "sipfepol", "sindicat independent de policia"]
+    }
+  },
+  "search_strategies": {
+    "government_press_release": {
+      "priority_domains": [
+        "gencat.cat",
+        "govern.cat",
+        "web.gencat.cat",
+        "lamoncloa.gob.es",
+        "gob.es"
+      ],
+      "query_templates": [
+        "site:{domain} {publisher} comunicat {title}",
+        "site:{domain}/ca/noticies/ {title}",
+        "site:{domain}/ca/actualitat/ {title}"
+      ]
+    },
+    "municipal_announcement": {
+      "priority_domains": [
+        "ajuntament.barcelona.cat",
+        "badalona.cat"
+      ],
+      "query_templates": [
+        "site:{domain}/premsa/ {title}",
+        "site:{domain}/ca/noticia/ {title}"
+      ]
+    },
+    "statistical_report": {
+      "priority_domains": [
+        "idescat.cat",
+        "ceo.gencat.cat"
+      ],
+      "query_templates": [
+        "site:{domain} {title} filetype:pdf",
+        "site:{domain}/ca/estudis/ {title}",
+        "site:{domain}/ca/barometre/ {title}"
+      ]
+    },
+    "survey_barometer": {
+      "priority_domains": [
+        "ceo.gencat.cat"
+      ],
+      "query_templates": [
+        "site:ceo.gencat.cat {title}",
+        "site:ceo.gencat.cat/ca/barometre/ {title}"
+      ]
+    },
+    "emergency_services": {
+      "priority_domains": [
+        "bombers.gencat.cat",
+        "mossos.gencat.cat",
+        "interior.gencat.cat",
+        "sem.gencat.cat",
+        "transit.gencat.cat"
+      ],
+      "query_templates": [
+        "site:{domain} {title}",
+        "site:{domain}/ca/noticies/ {title}"
+      ]
+    },
+    "government_press_room": {
+      "priority_domains": [
+        "govern.cat"
+      ],
+      "query_templates": [
+        "site:govern.cat/salapremsa/notes-premsa/ {title}",
+        "site:govern.cat/salapremsa/ {title}"
+      ]
+    }
+  },
+  "validation_rules": {
+    "forbidden_paths": [
+      "/",
+      "/index",
+      "/home",
+      "/about",
+      "/qui-som",
+      "/quienes-somos",
+      "/nosotros",
+      "/associacio",
+      "/asociacion",
+      "/contact",
+      "/contacte",
+      "/contacto",
+      "/ca/",
+      "/es/",
+      "/en/"
+    ],
+    "required_path_depth": 3,
+    "min_specific_segments": 1
+  }
+}

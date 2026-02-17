@@ -59,6 +59,8 @@ def _get_priority_domains(publisher: str, artifact_type: str = None) -> list[str
         "govern": ["govern.cat"],
         "generalitat": ["govern.cat", "gencat.cat"],
         "ajuntament": ["ajuntament.barcelona.cat"],
+        "sip-fepol": ["sipfepol.cat"],
+        "sipfepol": ["sipfepol.cat"],
     }
     for keyword, kw_domains in _PUBLISHER_KEYWORDS.items():
         if keyword in publisher_lower:
@@ -66,12 +68,18 @@ def _get_priority_domains(publisher: str, artifact_type: str = None) -> list[str
                 if d not in priority:
                     priority.append(d)
     
-    # Match by publisher name in knowledge base
+    # Match by publisher name or publisher_keywords in knowledge base
     for domain, info in domains.items():
         name_lower = info.get("name", "").lower()
         if publisher_lower and (publisher_lower in name_lower or name_lower in publisher_lower):
             if domain not in priority:
                 priority.append(domain)
+        # Also check publisher_keywords field
+        for kw in info.get("publisher_keywords", []):
+            if kw.lower() in publisher_lower:
+                if domain not in priority:
+                    priority.insert(0, domain)
+                break
     
     # Always include govern.cat/salapremsa for government press releases
     if "govern.cat" not in priority:
@@ -83,22 +91,25 @@ def _get_priority_domains(publisher: str, artifact_type: str = None) -> list[str
         if d not in priority:
             priority.append(d)
     
-    # If publisher looks like a short business name (not a descriptive phrase),
-    # try to infer their domain. Only for short names (likely actual brand names).
-    if publisher_lower and not any(kw in publisher_lower for kw in {
-        'ajuntament', 'generalitat', 'govern', 'mossos', 'bombers',
-        'guardia', 'guàrdia', 'transit', 'trànsit', 'sem',
-        'government', 'council', 'department', 'authority', 'police',
-        'municipal', 'ministry', 'junta', 'diputació',
-    }):
-        # Only infer domain for short names (<=15 chars) — actual brand names
-        # Skip descriptive publisher names like "Barcelona municipal government"
-        publisher_slug = re.sub(r'[^a-z0-9]', '', publisher_lower)
-        if publisher_slug and 2 <= len(publisher_slug) <= 15:
-            for tld in ['.cat', '.com', '.es']:
-                candidate = f"{publisher_slug}{tld}"
-                if candidate not in priority:
-                    priority.insert(0, candidate)  # Prepend business domain
+    # Try to infer the publisher's own domain.
+    # Extract short name before parentheses: "SIP-FEPOL (police union)" → "SIP-FEPOL"
+    if publisher_lower:
+        short_name = re.split(r'\s*[\(\[/,–—]', publisher_lower)[0].strip()
+        # Only check government keywords against the short name, not descriptions
+        is_govt = any(kw in short_name for kw in {
+            'ajuntament', 'generalitat', 'govern', 'mossos', 'bombers',
+            'guardia', 'guàrdia', 'transit', 'trànsit', 'sem',
+            'government', 'council', 'department', 'authority',
+            'municipal', 'ministry', 'junta', 'diputació', 'policia',
+        })
+        if not is_govt:
+            # Keep hyphens (common in org domains like sip-fepol.cat)
+            publisher_slug = re.sub(r'[^a-z0-9\-]', '', short_name).strip('-')
+            if publisher_slug and 2 <= len(publisher_slug) <= 20:
+                for tld in ['.cat', '.com', '.es']:
+                    candidate = f"{publisher_slug}{tld}"
+                    if candidate not in priority:
+                        priority.insert(0, candidate)
     
     return priority[:7]  # Limit to top 7
 

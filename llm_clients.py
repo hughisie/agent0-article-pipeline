@@ -127,13 +127,23 @@ class GeminiClient:
                         if isinstance(content, str):
                             return content
                     
-                    raise KeyError("No text found in response")
+                    # Empty response (no parts/no text) — retryable
+                    if attempt < max_retries - 1:
+                        import json as json_module
+                        print(f"  ⚠️ Gemini returned empty response (no text parts), retrying ({attempt + 1}/{max_retries})...")
+                        print(f"  ⚠️ Gemini response debug: {json_module.dumps(data, indent=2)[:500]}")
+                        time.sleep(5 * (2 ** attempt))
+                        continue
+                    raise KeyError("No text found in response after retries")
                     
                 except (KeyError, IndexError, TypeError) as exc:
-                    # Log the actual response structure for debugging
                     import json as json_module
                     print(f"  ⚠️ Gemini response debug: {json_module.dumps(data, indent=2)[:500]}")
-                    raise LLMError(f"Unexpected Gemini response structure: {exc}")
+                    if "No text found" in str(exc) or attempt >= max_retries - 1:
+                        raise LLMError(f"Unexpected Gemini response structure: {exc}")
+                    print(f"  ⚠️ Gemini parse error, retrying ({attempt + 1}/{max_retries})...")
+                    time.sleep(5 * (2 ** attempt))
+                    continue
                     
             except requests.exceptions.ReadTimeout as e:
                 last_error = e
