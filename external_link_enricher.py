@@ -483,6 +483,8 @@ CRITICAL RULES:
 - Do NOT link to barcelonaturisme.com generic district pages
 - If the article is ABOUT a specific business/company, their official website is the HIGHEST PRIORITY link
 - For businesses with multiple locations, include Google Maps links to specific branches mentioned
+- NEVER link to the website of a person or organisation portrayed NEGATIVELY in the article (criminals, fraudsters, defendants, suspects)
+- If someone is accused, convicted, or criticised in the article, do NOT link to their website or business
 
 Return a JSON array:
 [
@@ -555,6 +557,7 @@ Return a JSON array with ONLY real URLs you found via Google Search:
 ]
 
 CRITICAL: Only include URLs you actually found in Google Search results. Do NOT invent URLs. Return [] if nothing found.
+NEVER link to the website of a person or entity portrayed NEGATIVELY (criminals, defendants, suspects, fraudsters).
 """
             gemini_response = gemini_search.generate(
                 system_prompt="Find real URLs via Google Search. Return valid JSON only.",

@@ -192,22 +192,42 @@ def analyse_readability(html_content: str) -> dict:
     passes_passive = passive_pct <= 10.0
     passes_length = long_pct <= 25.0
     passes_transitions = transition_pct >= 30.0
+    transitions_not_overstuffed = transition_pct <= 50.0
+
+    # Detect consecutive transition word stacking (3+ in a row)
+    consecutive_stacks = 0
+    max_consecutive = 0
+    current_run = 0
+    for s in sentences:
+        if has_transition_word(s):
+            current_run += 1
+            max_consecutive = max(max_consecutive, current_run)
+        else:
+            if current_run >= 3:
+                consecutive_stacks += 1
+            current_run = 0
+    if current_run >= 3:
+        consecutive_stacks += 1
 
     return {
         "total_sentences": total,
         "passive_count": len(passive_sentences),
         "passive_pct": round(passive_pct, 1),
-        "passive_sentences": passive_sentences[:5],  # Top 5 for rewrite prompt
+        "passive_sentences": passive_sentences[:5],
         "long_count": len(long_sentences),
         "long_pct": round(long_pct, 1),
         "long_sentences": long_sentences[:5],
         "transition_count": len(transition_sentences),
         "transition_pct": round(transition_pct, 1),
+        "transitions_overstuffed": not transitions_not_overstuffed,
+        "consecutive_stacks": consecutive_stacks,
+        "max_consecutive_transitions": max_consecutive,
         "word_count": word_count,
         "passes_passive": passes_passive,
         "passes_length": passes_length,
         "passes_transitions": passes_transitions,
-        "all_pass": passes_passive and passes_length and passes_transitions,
+        "passes_transition_cap": transitions_not_overstuffed,
+        "all_pass": passes_passive and passes_length and passes_transitions and transitions_not_overstuffed,
     }
 
 
@@ -224,6 +244,18 @@ def build_readability_fix_prompt(
         return None
 
     issues = []
+
+    if analysis.get("transitions_overstuffed") or analysis.get("consecutive_stacks", 0) > 0:
+        issues.append(
+            f"TRANSITION WORD OVERUSE: Currently {analysis['transition_pct']}% (must be 30-45%, NOT higher).\n"
+            f"  The writing sounds robotic because too many sentences start with transition words.\n"
+            f"  REMOVE transition words from some sentences to bring usage down to 35-40%.\n"
+            f"  - Remove transition words where the sentence makes sense without them\n"
+            f"  - Keep transition words only where they genuinely connect ideas\n"
+            f"  - NEVER have 3+ consecutive sentences starting with transition words\n"
+            f"  - BAD: 'Consequently, X. Furthermore, Y. Moreover, Z. Additionally, W.'\n"
+            f"  - GOOD: 'X happened. Consequently, Y occurred. Z followed. Moreover, W emerged.'"
+        )
 
     if not analysis["passes_passive"]:
         passive_examples = "\n".join(
@@ -255,14 +287,12 @@ def build_readability_fix_prompt(
             f'    → "The fire broke out at the station on Monday afternoon. Emergency services arrived within minutes and quickly extinguished the blaze."'
         )
 
-    if not analysis["passes_transitions"]:
+    if not analysis["passes_transitions"] and not analysis.get("transitions_overstuffed"):
         issues.append(
-            f"TRANSITION WORDS: Currently {analysis['transition_pct']}% (must be above 30%).\n"
-            f"  Add transition words at the START of sentences. Choose from:\n"
-            f"    however, meanwhile, therefore, additionally, moreover, furthermore,\n"
-            f"    as a result, consequently, in addition, nevertheless, subsequently,\n"
-            f"    for instance, in particular, notably, indeed, specifically\n"
-            f"  Add them naturally — don't force them where they don't fit."
+            f"TRANSITION WORDS: Currently {analysis['transition_pct']}% (must be 30-45%).\n"
+            f"  Add transition words at the START of some sentences. Choose from:\n"
+            f"    however, meanwhile, therefore, additionally, moreover, consequently\n"
+            f"  Add them naturally — maximum 2 consecutive transition-word openers."
         )
 
     issues_text = "\n\n".join(issues)

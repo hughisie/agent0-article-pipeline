@@ -40,8 +40,8 @@ CRITICAL SEO CHECKS (these are the most commonly failing):
   4. META DESCRIPTION LENGTH: 120-150 characters. NEVER exceed 155 characters.
   5. KEYPHRASE IN INTRODUCTION: The exact keyphrase MUST appear in the FIRST paragraph of the article body.
      If it doesn't, rewrite the first paragraph to naturally include it.
-  6. KEYPHRASE DENSITY: The exact keyphrase must appear 4-8 times in the article body.
-     If density is too low, naturally weave the keyphrase into existing sentences.
+  6. KEYPHRASE DENSITY: The exact keyphrase must appear 3-6 times in the article body.
+     If density is too low, naturally weave the keyphrase into 1-2 more sentences. Do NOT force it into every paragraph.
   7. KEYPHRASE IN SUBHEADINGS: At least one H2 heading must contain the keyphrase.
   8. KEYPHRASE IN IMAGE ALT: If there are <img> tags, at least one must have an alt attribute containing the keyphrase.
   9. KEYPHRASE IN SLUG: The slug must contain the keyphrase words.
@@ -60,9 +60,13 @@ READABILITY CHECKS (EQUALLY CRITICAL — these must also score GREEN):
       - Remove unnecessary qualifiers and filler words
       - Example: 'The fire broke out at the station on Monday afternoon and was quickly extinguished by emergency services who arrived within minutes.' (25 words)
         → 'The fire broke out on Monday afternoon. Emergency services arrived within minutes and extinguished the blaze.' (7+10 words)
-  13. TRANSITION WORDS: Must appear in >35% of sentences. Add at sentence starts:
-      however, meanwhile, therefore, additionally, moreover, furthermore, consequently,
-      as a result, nevertheless, subsequently, notably, indeed, in addition, for instance
+  13. TRANSITION WORDS: Must appear in 30-45% of sentences (NOT more than 45%!):
+      however, meanwhile, therefore, additionally, moreover, consequently
+      - NEVER start more than 2 consecutive sentences with transition words
+      - NEVER use the same transition word twice in one section
+      - If transition word usage is ABOVE 45%, REMOVE excess transition words to sound natural
+      - BAD: 'Consequently, X. Furthermore, Y. Moreover, Z. Additionally, W.' (robotic)
+      - GOOD: 'X happened. Consequently, Y occurred. Z followed. Moreover, W emerged.' (natural)
   14. Previously used keyphrase: choose a keyphrase not exactly used before
 
 Additionally:
@@ -73,7 +77,11 @@ Additionally:
   - Do NOT add generic resource sentences like "For more information, visit X" or "You can learn more about X from Y" or "For broader context, see this report".
   - Do NOT add links to Wikipedia, WHO, World Bank, European Central Bank, British Museum, or other generic authoritative sources unless they are directly cited in the original article.
   - You may adjust or insert image alt attributes to include the keyphrase, but keep alt text meaningful.
-  - Prefer shorter sentences and add clear transition words (however, meanwhile, therefore, in addition).
+  - Prefer shorter sentences. Only add transition words if usage is below 30%.
+  - If transition words exceed 45%, REMOVE some to avoid robotic writing.
+  - NEVER start 3+ consecutive sentences with transition words.
+  - Do NOT repeat the keyphrase in every paragraph or every H2. Use it in intro, one H2, and 1-2 body paragraphs.
+  - Vary sentence openers: mix subject-first, time-first, place-first, and transition-word openers.
 
 Make minimal structural changes to the Gutenberg blocks. Prefer editing the text inside blocks rather than reflowing the entire structure.
 

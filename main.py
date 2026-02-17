@@ -610,6 +610,8 @@ def main() -> None:
 
     input_path = Path(article_path).expanduser()
     original_source_url = article.source_url
+    if not original_source_url:
+        print(f"⚠️ No source_url in article metadata — 'Link to original article' footer will be missing")
     if original_source_url:
         validated_source_url, source_reason = validate_original_source_url(original_source_url)
         if validated_source_url:
@@ -1259,6 +1261,10 @@ def main() -> None:
             print(f"  Passive voice: {readability['passive_pct']}% ({'PASS' if readability['passes_passive'] else 'FAIL — max 10%'})")
             print(f"  Long sentences: {readability['long_pct']}% ({'PASS' if readability['passes_length'] else 'FAIL — max 25%'})")
             print(f"  Transition words: {readability['transition_pct']}% ({'PASS' if readability['passes_transitions'] else 'FAIL — min 30%'})")
+            if readability.get('transitions_overstuffed'):
+                print(f"  ⚠️ Transition OVERUSE: {readability['transition_pct']}% (max 50%) — will remove excess")
+            if readability.get('consecutive_stacks', 0) > 0:
+                print(f"  ⚠️ Consecutive transition stacking detected: {readability['consecutive_stacks']} runs of 3+")
 
             if not readability["all_pass"]:
                 fix_prompt = build_readability_fix_prompt(

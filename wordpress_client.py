@@ -210,6 +210,7 @@ def upload_media_from_url(
     application_password: str,
     image_url: str,
     alt_text: Optional[str] = None,
+    caption: Optional[str] = None,
 ) -> int:
     from PIL import Image
     from io import BytesIO
@@ -321,16 +322,45 @@ def upload_media_from_url(
     if source_url and source_url.endswith('.avif'):
         print(f"WARNING: WordPress saved image as .avif despite JPG upload. This may cause Twitter/X card issues.")
 
-    if alt_text:
+    if alt_text or caption:
         update_url = f"{base_url.rstrip('/')}/wp-json/wp/v2/media/{media_id}"
         update_headers = {"Content-Type": "application/json"}
         update_headers.update(_basic_auth_header(username, application_password))
-        update_payload = json.dumps({"alt_text": alt_text})
+        update_data = {}
+        if alt_text:
+            update_data["alt_text"] = alt_text
+        if caption:
+            update_data["caption"] = caption
+        update_payload = json.dumps(update_data)
         update_resp = requests.post(update_url, headers=update_headers, data=update_payload, timeout=30)
         if update_resp.status_code not in {200, 201}:
-            raise WordPressError(f"Failed to set alt text: {update_resp.status_code} {update_resp.text}")
+            raise WordPressError(f"Failed to set media metadata: {update_resp.status_code} {update_resp.text}")
 
     return int(media_id), source_url
+
+
+def _check_existing_slug(
+    base_url: str,
+    username: str,
+    application_password: str,
+    slug: str,
+) -> Optional[int]:
+    """Check if a draft or published post with this slug already exists. Returns post ID or None."""
+    if not slug:
+        return None
+    headers = {"Content-Type": "application/json"}
+    headers.update(_basic_auth_header(username, application_password))
+    api_url = f"{base_url.rstrip('/')}/wp-json/wp/v2/posts"
+    for status in ["draft", "publish"]:
+        try:
+            resp = requests.get(api_url, headers=headers, params={"slug": slug, "status": status}, timeout=15)
+            if resp.status_code == 200:
+                posts = resp.json()
+                if posts:
+                    return posts[0].get("id")
+        except Exception:
+            pass
+    return None
 
 
 def create_draft_post(
@@ -341,12 +371,20 @@ def create_draft_post(
     media_id: Optional[int] = None,
     author_id: Optional[int] = None,
 ) -> dict:
+    slug = meta.get("slug")
+
+    # Check for existing post with same slug to avoid -2 suffix
+    existing_id = _check_existing_slug(base_url, username, application_password, slug)
+    if existing_id:
+        print(f"  ⚠️ Post with slug '{slug}' already exists (ID {existing_id}), updating instead of creating duplicate")
+        return update_post(base_url, username, application_password, existing_id, meta, media_id, author_id)
+
     payload = {
         "title": meta.get("meta_title"),
         "content": meta.get("wp_block_content") or meta.get("wp_html_content"),
         "excerpt": meta.get("excerpt"),
         "status": "draft",
-        "slug": meta.get("slug"),
+        "slug": slug,
     }
     if media_id is not None:
         payload["featured_media"] = media_id

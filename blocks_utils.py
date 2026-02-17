@@ -22,9 +22,8 @@ FOOTER_CTA_BLOCKS_BARCELONA = [
 """,
     """<!-- wp:html -->
 <p>
-  Apply to join our community of Entrepreneurs, Senior Executives and Founders at
   <a href="https://www.bizcelona.com/" target="_blank" rel="noopener">
-    Bizcelona
+    Apply to join our community of Entrepreneurs, Senior Executives and Founders at Bizcelona
   </a>.
 </p>
 <!-- /wp:html -->
@@ -168,7 +167,24 @@ def finalise_source_credits(
     if not content:
         return content
     source_url = (source_url or "").strip()
+
+    # Fallback: if no source_url, try to use primary source URL for attribution
     if not source_url:
+        try:
+            ps = (primary_source or {}).get("primary_source") or {}
+            ps_url = (ps.get("url") or "").strip()
+            ps_title = (ps.get("title") or "").strip()
+            if ps_url:
+                label = ps_title or "Original source"
+                block = (
+                    "<!-- wp:paragraph -->\n"
+                    f"<p><a href=\"{ps_url}\" target=\"_blank\" rel=\"noopener\">"
+                    f"{label}</a></p>\n"
+                    "<!-- /wp:paragraph -->\n"
+                )
+                return content.rstrip() + "\n\n" + block
+        except Exception:
+            pass
         return content
 
     def _remove_block(content_text: str, label: str) -> str:
@@ -215,7 +231,12 @@ def finalise_source_credits(
     return content
 
 
-YOAST_BREADCRUMB_BLOCK = "<!-- wp:yoast-seo/breadcrumbs /-->\n"
+YOAST_BREADCRUMB_BLOCK = """<!-- wp:yoast-seo/breadcrumbs /-->
+
+<!-- wp:spacer {"height":"24px"} -->
+<div style="height:24px" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+"""
 
 PROMO_BLOCK = """<!-- wp:html -->
 <a class="bnn-amazon-deals" href="https://whatsapp.com/channel/0029VbBd3cR5PO18Qtyxp22I" target="_blank" rel="noopener" style="display:block;transform-origin:center;">
@@ -339,6 +360,10 @@ def add_promo_block(content: str, platform: str = "wordpress") -> str:
 
 
 def add_inline_image_block(content: str, image_url: str, alt_text: str, spacer_height: int = 24) -> str:
+    """
+    Add an inline image block after the promo block or after the 2nd paragraph.
+    NEVER insert an image at the very beginning - text must always come first.
+    """
     if not content or not image_url:
         return content
     image_block = (
@@ -351,12 +376,21 @@ def add_inline_image_block(content: str, image_url: str, alt_text: str, spacer_h
         idx = content.find(PROMO_BLOCK) + len(PROMO_BLOCK)
         content, idx = ensure_spacer_before_image(content, idx, height_px=spacer_height)
         return content[:idx] + "\n" + image_block + content[idx:]
+    
+    # Try to insert after 2nd paragraph
     end_second_para = _find_nth_paragraph_end(content, 2)
-    if end_second_para is None:
-        content, insert_at = ensure_spacer_before_image(content, 0, height_px=spacer_height)
-        return image_block + content
-    content, end_second_para = ensure_spacer_before_image(content, end_second_para, height_px=spacer_height)
-    return content[:end_second_para] + "\n\n" + image_block + content[end_second_para:]
+    if end_second_para is not None:
+        content, end_second_para = ensure_spacer_before_image(content, end_second_para, height_px=spacer_height)
+        return content[:end_second_para] + "\n\n" + image_block + content[end_second_para:]
+    
+    # Fallback: insert after 1st paragraph (NEVER at the beginning)
+    end_first_para = _find_nth_paragraph_end(content, 1)
+    if end_first_para is not None:
+        content, end_first_para = ensure_spacer_before_image(content, end_first_para, height_px=spacer_height)
+        return content[:end_first_para] + "\n\n" + image_block + content[end_first_para:]
+    
+    # If no paragraphs found, don't add the image at all - text must come first
+    return content
 
 
 def strip_lede_title(content: str, headline: str) -> str:
