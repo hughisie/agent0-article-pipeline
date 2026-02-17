@@ -47,11 +47,23 @@ CRITICAL SEO CHECKS (these are the most commonly failing):
   9. KEYPHRASE IN SLUG: The slug must contain the keyphrase words.
   10. TEXT LENGTH: Article must be at least 400 words. If shorter, expand with relevant details.
 
-READABILITY CHECKS:
-  - Passive voice under 10% (rewrite passive sentences to active voice)
-  - Sentence length: keep most sentences under 20 words
-  - Transition words: raise usage to above 35% (use: however, meanwhile, therefore, additionally, moreover, furthermore, as a result, consequently)
-  - Previously used keyphrase: choose a keyphrase not exactly used before
+READABILITY CHECKS (EQUALLY CRITICAL — these must also score GREEN):
+  11. PASSIVE VOICE: Must be under 10% of sentences. ACTIVELY REWRITE every passive sentence:
+      - 'The station was evacuated by firefighters' → 'Firefighters evacuated the station'
+      - 'The report was published yesterday' → 'The council published the report yesterday'
+      - 'Residents were told to stay indoors' → 'Authorities told residents to stay indoors'
+      - 'The decision was made after a meeting' → 'Officials made the decision after a meeting'
+      - RULE: If the agent is missing, NAME one (police, officials, authorities, the council, organisers)
+  12. SENTENCE LENGTH: At least 75% of sentences must be UNDER 20 words. Split long sentences:
+      - Split at conjunctions (and, but, while, which, who)
+      - Turn subordinate clauses into separate sentences
+      - Remove unnecessary qualifiers and filler words
+      - Example: 'The fire broke out at the station on Monday afternoon and was quickly extinguished by emergency services who arrived within minutes.' (25 words)
+        → 'The fire broke out on Monday afternoon. Emergency services arrived within minutes and extinguished the blaze.' (7+10 words)
+  13. TRANSITION WORDS: Must appear in >35% of sentences. Add at sentence starts:
+      however, meanwhile, therefore, additionally, moreover, furthermore, consequently,
+      as a result, nevertheless, subsequently, notably, indeed, in addition, for instance
+  14. Previously used keyphrase: choose a keyphrase not exactly used before
 
 Additionally:
   - Maintain exactly one H1 heading.

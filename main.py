@@ -35,6 +35,7 @@ from url_validator import validate_original_source_url
 from translation_analysis import translate_and_analyse_article
 from taxonomy_assigner import assign_tags_and_category, TaxonomyAssignmentError
 from yoast_optimizer import optimise_for_yoast, YoastOptimizationError
+from readability_checker import analyse_readability, build_readability_fix_prompt
 from yoast_bridge_client import yoast_check_status, yoast_sync_post, YoastBridgeError
 from link_validator import validate_and_delink_outbound_links
 from tag_generator import generate_tags_from_article, TagGenerationError
@@ -351,6 +352,11 @@ def _finalize_content(
     # Safety net: strip any bold formatting that survived earlier stages
     content = re.sub(r'<strong>(.*?)</strong>', r'\1', content, flags=re.DOTALL)
     content = re.sub(r'<b>(.*?)</b>', r'\1', content, flags=re.DOTALL)
+    # Safety net: replace em dashes and en dashes that survived prompting
+    content = content.replace(' — ', ', ')
+    content = content.replace(' – ', ', ')
+    content = content.replace('—', ', ')
+    content = content.replace('–', '-')
     final_content = add_footer_cta(content, platform=platform, profile_name=profile_name)
     final_content = finalise_source_credits(
         final_content,
@@ -869,7 +875,8 @@ def main() -> None:
                 title=article.title or article.original_title or "",
                 publisher=analysis.get("probable_primary_publisher", ""),
                 summary=article.main_content_body[:500] if article.main_content_body else "",
-                api_key=config.get("GEMINI_API_KEY", "")
+                api_key=config.get("GEMINI_API_KEY", ""),
+                artifact_type=analysis.get("original_artifact_type"),
             )
             print(f"✓ Primary source search complete")
         except Exception as exc:
@@ -993,6 +1000,39 @@ def main() -> None:
             except (WordPressError, PublishingError) as exc:
                 internal_linking_enabled = False
                 print(f"Recent post fetch failed: {exc}")
+
+    # --- Duplicate Story Detection ---
+    duplicate_flag = None
+    if recent_posts:
+        try:
+            from duplicate_detector import check_duplicate_against_published
+            print("\n--- Duplicate Story Check ---")
+            incoming_title = article.title or article.original_title or ""
+            incoming_summary = article.main_content_body[:500] if article.main_content_body else ""
+            duplicate_flag = check_duplicate_against_published(
+                incoming_title=incoming_title,
+                incoming_summary=incoming_summary,
+                published_posts=recent_posts,
+                api_key=config.get("GEMINI_API_KEY", ""),
+            )
+            if duplicate_flag.get("is_duplicate"):
+                matched = duplicate_flag.get("matched_post", {})
+                print(f"  ⚠️  POTENTIAL DUPLICATE DETECTED")
+                print(f"  - Matches: {matched.get('title', 'N/A')}")
+                print(f"  - URL: {matched.get('url', 'N/A')}")
+                print(f"  - Score: {duplicate_flag.get('similarity_score', 0):.0%}")
+                print(f"  - Reason: {duplicate_flag.get('reason', 'N/A')}")
+                print(f"  → Article will still be generated (soft flag) — review before publishing")
+            elif duplicate_flag.get("is_continuation"):
+                matched = duplicate_flag.get("matched_post", {})
+                print(f"  📰 Story continuation detected")
+                print(f"  - Related to: {matched.get('title', 'N/A')}")
+                print(f"  - URL: {matched.get('url', 'N/A')}")
+                print(f"  → Previous article URL will be added as context")
+            else:
+                print(f"  ✓ No duplicate found")
+        except Exception as exc:
+            print(f"  ⚠️  Duplicate check error: {exc}")
 
     generate_article = "y" if args.non_interactive else input("\nGenerate WordPress article now? (y/n): ").strip().lower()
     wp_article = None
@@ -1212,6 +1252,54 @@ def main() -> None:
             print(f"Yoast optimisation failed: {exc}")
             wp_article["yoast_notes"] = f"Optimisation failed: {exc}"
 
+        # ── Readability fix pass ────────────────────────────────────────
+        try:
+            readability = analyse_readability(wp_article.get("wp_block_content", ""))
+            print(f"\n--- Readability Check ---")
+            print(f"  Passive voice: {readability['passive_pct']}% ({'PASS' if readability['passes_passive'] else 'FAIL — max 10%'})")
+            print(f"  Long sentences: {readability['long_pct']}% ({'PASS' if readability['passes_length'] else 'FAIL — max 25%'})")
+            print(f"  Transition words: {readability['transition_pct']}% ({'PASS' if readability['passes_transitions'] else 'FAIL — min 30%'})")
+
+            if not readability["all_pass"]:
+                fix_prompt = build_readability_fix_prompt(
+                    wp_article.get("wp_block_content", ""),
+                    readability,
+                )
+                if fix_prompt:
+                    print("  → Running targeted readability rewrite...")
+                    from deepseek_client import call_deepseek_chat
+                    ds_key = config.get("DEEPSEEK_API_KEY")
+                    if ds_key:
+                        fixed_content = call_deepseek_chat(
+                            "deepseek-chat",
+                            fix_prompt["system_prompt"],
+                            fix_prompt["user_prompt"],
+                            ds_key,
+                        )
+                        # DeepSeek may wrap in code fences
+                        if fixed_content.startswith("```"):
+                            fixed_content = re.sub(r'^```\w*\n?', '', fixed_content)
+                            fixed_content = re.sub(r'\n?```$', '', fixed_content)
+                        # Verify the fix didn't break the content
+                        if "<!-- wp:" in fixed_content and len(fixed_content) > len(wp_article.get("wp_block_content", "")) * 0.5:
+                            recheck = analyse_readability(fixed_content)
+                            improved = (
+                                recheck["passive_pct"] < readability["passive_pct"]
+                                or recheck["long_pct"] < readability["long_pct"]
+                                or recheck["transition_pct"] > readability["transition_pct"]
+                            )
+                            if improved:
+                                wp_article["wp_block_content"] = fixed_content
+                                print(f"  ✓ Readability improved: passive {readability['passive_pct']}%→{recheck['passive_pct']}%, "
+                                      f"long {readability['long_pct']}%→{recheck['long_pct']}%, "
+                                      f"transitions {readability['transition_pct']}%→{recheck['transition_pct']}%")
+                            else:
+                                print("  ⚠️ Readability rewrite did not improve metrics, keeping original")
+                        else:
+                            print("  ⚠️ Readability rewrite returned invalid content, keeping original")
+        except Exception as exc:
+            print(f"  Readability check skipped: {exc}")
+
         # Log internal link count (don't force links back in - quality over quantity)
         internal_link_count = count_internal_links(wp_article.get("wp_block_content", ""))
         if args.debug_links:
@@ -1305,6 +1393,20 @@ def main() -> None:
         print(quality_report)
         wp_article["quality_report"] = quality_report.to_dict()
 
+        # Attach duplicate detection result
+        if duplicate_flag:
+            wp_article["duplicate_check"] = duplicate_flag
+            if duplicate_flag.get("is_duplicate"):
+                quality_report.add_warning(
+                    f"Potential duplicate of: {duplicate_flag.get('matched_post', {}).get('title', 'N/A')} "
+                    f"({duplicate_flag.get('matched_post', {}).get('url', 'N/A')})"
+                )
+            elif duplicate_flag.get("is_continuation"):
+                quality_report.add_warning(
+                    f"Story continuation of: {duplicate_flag.get('matched_post', {}).get('title', 'N/A')}"
+                )
+            wp_article["quality_report"] = quality_report.to_dict()
+
         print("\nArticle summary:")
 
         print(f"- Meta title: {wp_article.get('meta_title')}")
@@ -1312,6 +1414,8 @@ def main() -> None:
         print(f"- Slug: {wp_article.get('slug')}")
         print(f"- Primary source: {primary_source.get('url')}")
         print(f"- Quality check: {'✓ PASSED' if quality_report.passed else '✗ FAILED'}")
+        if duplicate_flag and duplicate_flag.get("is_duplicate"):
+            print(f"- ⚠️  DUPLICATE FLAG: {duplicate_flag.get('reason', 'N/A')}")
         if wp_article.get("yoast_notes"):
             print(f"- Yoast notes: {wp_article.get('yoast_notes')}")
         _summarise_related(related_articles)
@@ -1398,6 +1502,17 @@ def main() -> None:
 
                     # Upload images to publishing platform
                     alt_text = build_alt_text(wp_article.get("primary_keyword"), analysis.get("core_topic"))
+                    # Build image credit caption from source metadata
+                    image_caption = None
+                    _ps = primary.get("primary_source", {}) if primary else {}
+                    _credit_source = (
+                        _ps.get("publisher_guess")
+                        or analysis.get("probable_primary_publisher")
+                        or article.source_name
+                    )
+                    if _credit_source:
+                        image_caption = f"Image: {_credit_source}"
+
                     uploaded_ids = []
                     uploaded_urls = []
 
@@ -1414,6 +1529,7 @@ def main() -> None:
                                     application_password=config["WP_APPLICATION_PASSWORD"],
                                     image_url=image_url,
                                     alt_text=alt_text,
+                                    caption=image_caption,
                                 )
                             if uploaded_id is not None:
                                 uploaded_ids.append(uploaded_id)
