@@ -144,6 +144,53 @@ def _is_news_domain(url: str) -> bool:
     return any(domain in url_lower for domain in NEWS_DOMAINS)
 
 
+_BAD_ANCHOR_PATTERNS = [
+    r"your browser does not support",
+    r"click here",
+    r"read more",
+    r"more information",
+    r"learn more",
+    r"home$",
+    r"^here$",
+]
+
+_ANCHOR_DOMAIN_EXPECTATIONS = {
+    "generalitat": ["gencat.cat", "govern.cat", "web.gencat.cat"],
+    "govern de catalunya": ["govern.cat", "gencat.cat"],
+    "barcelona city council": ["ajuntament.barcelona.cat", "barcelona.cat"],
+    "ajuntament": ["ajuntament.barcelona.cat", "barcelona.cat"],
+    "fgc": ["fgc.cat"],
+    "ferrocarrils": ["fgc.cat"],
+    "mossos": ["mossos.gencat.cat", "interior.gencat.cat"],
+    "guardia urbana": ["guardiaurbana.bcn.cat", "barcelona.cat", "ajuntament.barcelona.cat"],
+}
+
+
+def _is_bad_anchor_text(anchor_text: str) -> bool:
+    text = (anchor_text or "").strip()
+    if not text:
+        return True
+    if len(text) < 2 or len(text) > 120:
+        return True
+    lower = text.lower()
+    if any(re.search(pattern, lower) for pattern in _BAD_ANCHOR_PATTERNS):
+        return True
+    # avoid labels that look like UI/system artifacts
+    if lower.startswith("http") or "javascript" in lower:
+        return True
+    return False
+
+
+def _anchor_domain_mismatch(anchor_text: str, url: str) -> bool:
+    anchor_lower = (anchor_text or "").strip().lower()
+    domain = urlparse(url).netloc.lower().lstrip("www.")
+    for label, expected_domains in _ANCHOR_DOMAIN_EXPECTATIONS.items():
+        if label in anchor_lower:
+            if not any(domain.endswith(expected) for expected in expected_domains):
+                return True
+    return False
+
+
 # Tourism site patterns that are low-value generic district pages
 _TOURISM_HOMEPAGE_PATTERNS = [
     r'barcelonaturisme\.com/.*/sants-montjuic',
@@ -270,6 +317,86 @@ def _quick_validate_url(url: str, timeout: int = 12) -> bool:
         return True
     except requests.RequestException:
         return False
+
+
+def _extract_first_url(text: str) -> Optional[str]:
+    if not text:
+        return None
+    # Prefer explicit JSON url field if present
+    match = re.search(r'"url"\s*:\s*"(https?://[^"\s]+)"', text)
+    if match:
+        return match.group(1)
+    # Fallback to first URL-like token
+    fallback = re.search(r'https?://[^\s"\'<>]+', text)
+    if fallback:
+        return fallback.group(0)
+    return None
+
+
+def _repair_broken_url_with_gemini(
+    broken_url: str,
+    anchor_text: str,
+    topic: str,
+    article_title: str,
+    article_excerpt: str,
+    gemini_api_key: str,
+) -> Optional[str]:
+    """Use Gemini grounded with Google Search to repair a broken URL.
+
+    Tries Gemini 3 Flash first, then falls back to Gemini 2.5 Flash.
+    Returns a validated replacement URL or None.
+    """
+    if not gemini_api_key:
+        return None
+
+    system_prompt = (
+        "You repair broken outbound links for a news article. "
+        "Use Google Search grounding to find the correct official live page. "
+        "Return ONLY JSON: {\"url\":\"https://...\"} or {\"url\":null}."
+    )
+    user_prompt = f"""Find a working replacement for this broken link.
+
+BROKEN URL: {broken_url}
+ANCHOR TEXT: {anchor_text}
+TOPIC: {topic}
+ARTICLE TITLE: {article_title}
+ARTICLE EXCERPT: {article_excerpt[:700]}
+
+RULES:
+- Find the exact official page if possible
+- Prefer the same organization/domain when it has moved
+- Return a specific live page, not a generic homepage
+- Do not return news article mirrors
+- Return JSON only
+"""
+
+    tools = [{"google_search": {}}, {"google_maps": {}}]
+    for model_name in ["gemini-3-flash", "gemini-2.5-flash"]:
+        try:
+            client = GeminiClient(api_key=gemini_api_key, model=model_name)
+            raw = client.generate(
+                system_prompt=system_prompt,
+                user_prompt=user_prompt,
+                tools=tools,
+                timeout=90,
+                max_retries=2,
+            )
+            candidate = _extract_first_url(raw or "")
+            if not candidate:
+                continue
+            if _is_news_domain(candidate):
+                continue
+            if _is_homepage(candidate):
+                continue
+            if _anchor_domain_mismatch(anchor_text, candidate):
+                continue
+            if _quick_validate_url(candidate):
+                print(f"    🔧 Repaired broken URL via {model_name}: {broken_url[:60]}... -> {candidate[:80]}")
+                return candidate
+        except Exception:
+            continue
+
+    return None
 
 
 def _parse_json_from_response(text: str) -> list:
@@ -510,9 +637,14 @@ If you cannot find real, verified sources, return [].
             links = _parse_json_from_response(response_text)
             for link in links:
                 url = link.get('url', '')
+                anchor_text = link.get('anchor_text', '')
                 if not url or not url.startswith('http'):
                     continue
                 if _is_news_domain(url):
+                    continue
+                if _is_bad_anchor_text(anchor_text):
+                    continue
+                if _anchor_domain_mismatch(anchor_text, url):
                     continue
                 link.setdefault('link_type', 'organization')
                 link.setdefault('source_attribution', '')
@@ -568,11 +700,16 @@ NEVER link to the website of a person or entity portrayed NEGATIVELY (criminals,
             existing_urls = {link.get('url', '').lower() for link in all_links}
             for link in gemini_links:
                 url = link.get('url', '')
+                anchor_text = link.get('anchor_text', '')
                 if not url or not url.startswith('http'):
                     continue
                 if url.lower() in existing_urls:
                     continue
                 if _is_news_domain(url):
+                    continue
+                if _is_bad_anchor_text(anchor_text):
+                    continue
+                if _anchor_domain_mismatch(anchor_text, url):
                     continue
                 link.setdefault('link_type', 'business')
                 link.setdefault('source_attribution', '')
@@ -618,11 +755,21 @@ NEVER link to the website of a person or entity portrayed NEGATIVELY (criminals,
     # --- Validate and deduplicate ---
     seen_domains = set()
     verified = []
+    repair_attempts = 0
+    max_repair_attempts = 4
     for link in all_links:
         url = link.get('url', '')
+        anchor_text = link.get('anchor_text', '')
+        topic = link.get('topic', '')
         parsed = urlparse(url)
         domain = parsed.netloc.lower().lstrip('www.')
         is_maps = link.get('link_type') == 'google_maps'
+
+        if not is_maps:
+            if _is_bad_anchor_text(anchor_text):
+                continue
+            if _anchor_domain_mismatch(anchor_text, url):
+                continue
 
         # Skip duplicate domains (but exempt google_maps links)
         if domain in seen_domains and not is_maps:
@@ -642,7 +789,30 @@ NEVER link to the website of a person or entity portrayed NEGATIVELY (criminals,
             if len(verified) >= max_links + 2:  # Allow extras for better selection
                 break
         else:
-            print(f"    ⚠️ Skipping broken URL: {url[:60]}...")
+            repaired = None
+            if (not is_maps and gemini_api_key and repair_attempts < max_repair_attempts):
+                repair_attempts += 1
+                repaired = _repair_broken_url_with_gemini(
+                    broken_url=url,
+                    anchor_text=anchor_text,
+                    topic=topic,
+                    article_title=article_title,
+                    article_excerpt=plain_text,
+                    gemini_api_key=gemini_api_key,
+                )
+
+            if repaired:
+                repaired_domain = urlparse(repaired).netloc.lower().lstrip('www.')
+                if repaired_domain in seen_domains:
+                    continue
+                link['url'] = repaired
+                seen_domains.add(repaired_domain)
+                link.pop('_source', None)
+                verified.append(link)
+                if len(verified) >= max_links + 2:
+                    break
+            else:
+                print(f"    ⚠️ Skipping broken URL: {url[:60]}...")
 
     return verified[:max_links]
 

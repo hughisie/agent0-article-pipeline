@@ -1,6 +1,7 @@
 import json
 import re
 from dataclasses import dataclass
+from urllib.parse import urlparse
 
 from llm_clients import GeminiClient, LLMError, parse_json_response
 
@@ -40,15 +41,17 @@ def _has_anchor(text: str) -> bool:
 
 
 def _build_templates(url: str, anchor_text: str) -> list[str]:
+    """Build varied, natural link sentences. NEVER use repetitive patterns."""
+    # These templates should read naturally and vary significantly
     return [
-        f"That debate has been building for months — we covered it in <a href=\"{url}\">{anchor_text}</a>.",
-        f"This follows the issues we reported in <a href=\"{url}\">{anchor_text}</a>.",
-        f"The wider context is explained in our earlier piece on <a href=\"{url}\">{anchor_text}</a>.",
-        f"We previously looked at the background in <a href=\"{url}\">{anchor_text}</a>.",
+        f'<a href="{url}">{anchor_text}</a>',  # Just the link - let it be woven naturally
+        f'Read more: <a href="{url}">{anchor_text}</a>',
+        f'See also: <a href="{url}">{anchor_text}</a>',
+        f'Related: <a href="{url}">{anchor_text}</a>',
     ]
 
 
-def weave_internal_links(content: str, related: list[dict], max_links: int = 3) -> tuple[str, WeaveReport]:
+def weave_internal_links(content: str, related: list[dict], max_links: int = 2) -> tuple[str, WeaveReport]:
     related = [item for item in (related or []) if item.get("url") and item.get("anchor_text")]
     seen_urls = set()
     unique = []
@@ -108,9 +111,12 @@ def weave_internal_links(content: str, related: list[dict], max_links: int = 3) 
         if sentence is None:
             sentence = templates[0]
         body = blocks[chosen_index]["body"].rstrip()
+        # Don't append sentences that break flow - just add a simple link reference
+        # The link should be on its own line or naturally integrated
         if not body.endswith((".", "!", "?")):
             body = body + "."
-        body = body + " " + sentence
+        # Add link as a subtle reference, not a jarring sentence
+        body = body + f' <a href="{url}">{anchor}</a>.'
         insertions.append({"index": chosen_index, "url": url, "anchor_text": anchor})
         blocks[chosen_index]["body"] = body
         used_urls.add(url)
@@ -146,22 +152,39 @@ def weave_internal_links_gemini(
     if not content or not related:
         return content
     system_prompt = (
-        "You are an editor inserting internal links into an existing WordPress Gutenberg article.\n"
-        "You must preserve all content and block comments exactly, only adding link sentences.\n"
+        "You are an expert editor for a Barcelona/Catalonia English-language news website.\n"
+        "Your task is to naturally weave internal links into an existing article.\n"
+        "You must preserve ALL existing content exactly - only add link references.\n"
         "Return ONLY valid JSON."
     )
     user_prompt = """
 You will receive:
-  1) Gutenberg content.
-  2) A list of internal links to insert.
+  1) Gutenberg content (WordPress block format).
+  2) A list of related articles to link to.
 
-Rules:
-  - Use each URL at most once.
-  - Insert links inside existing <!-- wp:paragraph --> blocks only.
-  - Do not insert links in headings or HTML blocks.
-  - Do not remove or rewrite existing content.
-  - Add a short, natural sentence that includes the anchor text with <a href="URL">anchor</a>.
-  - Vary phrasing between links; do not repeat the same pattern.
+CRITICAL RULES:
+  - NEVER just append a link at the end of a paragraph - THIS IS THE WORST MISTAKE
+  - NEVER use the phrase "The city previously addressed similar concerns when" - BANNED
+  - Links MUST be woven INTO existing sentences, not added as separate phrases
+  - Only add 1-2 links maximum, and ONLY if they genuinely fit the context
+  - If a link doesn't fit naturally, DON'T include it - return content unchanged
+
+ABSOLUTELY FORBIDDEN (will be rejected):
+  ❌ "...based on solar radiation exposure. Catalan exports to India." - JUST APPENDING A LINK
+  ❌ "...aimed at the international market. AI-driven industrial transformation." - DANGLING LINK
+  ❌ Any link that appears as a standalone phrase at the end of a paragraph
+  ❌ Any link not grammatically integrated into an existing sentence
+
+CORRECT link integration (link is PART of the sentence):
+  ✓ "The company is expanding internationally, similar to <a href="URL">other Catalan firms exporting to India</a>."
+  ✓ "This follows Barcelona's push for <a href="URL">AI-driven industrial transformation</a> in the tech sector."
+  ✓ "The funding mirrors trends seen in <a href="URL">recent biotech investments</a> across Catalonia."
+
+HOW TO INSERT CORRECTLY:
+  1. Find a sentence where the related topic naturally fits
+  2. MODIFY that sentence to include the link as part of its grammar
+  3. The link text should flow as a natural part of the sentence
+  4. If you cannot find a natural fit, return the content UNCHANGED
 
 Return ONLY JSON in this exact shape:
 {
@@ -210,6 +233,23 @@ def count_internal_links(content: str, domain: str = "barna.news") -> int:
 def enforce_unique_internal_links(content: str, domain: str = "barna.news") -> str:
     if not content:
         return content
+
+    def _is_internal_href(href: str) -> bool:
+        parsed = urlparse(href)
+        netloc = (parsed.netloc or "").lower().lstrip("www.")
+        # Relative URLs are internal by definition in this context.
+        if not netloc and (href.startswith("/") or not parsed.scheme):
+            return True
+        return netloc == domain.lower().lstrip("www.")
+
+    def _normalize_internal_href(href: str) -> str:
+        parsed = urlparse(href)
+        netloc = (parsed.netloc or domain).lower().lstrip("www.")
+        path = (parsed.path or "").rstrip("/")
+        if not path:
+            path = "/"
+        return f"{netloc}{path}"
+
     pattern = re.compile(r"<a\s+[^>]*href=[\"']([^\"']+)[\"'][^>]*>(.*?)</a>", re.IGNORECASE | re.DOTALL)
     seen = set()
     rebuilt = []
@@ -218,12 +258,13 @@ def enforce_unique_internal_links(content: str, domain: str = "barna.news") -> s
         href = match.group(1)
         text = match.group(2)
         rebuilt.append(content[cursor:match.start()])
-        if domain in href:
-            if href in seen:
+        if _is_internal_href(href):
+            normalized = _normalize_internal_href(href)
+            if normalized in seen:
                 rebuilt.append(text)
             else:
                 rebuilt.append(match.group(0))
-                seen.add(href)
+                seen.add(normalized)
         else:
             rebuilt.append(match.group(0))
         cursor = match.end()

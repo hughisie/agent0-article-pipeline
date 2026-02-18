@@ -5,6 +5,7 @@ Detects:
   - Passive voice percentage (target: <10%)
   - Long sentence percentage (>20 words, target: <25%)
   - Transition word usage (target: >30%)
+  - Word complexity (target: <=12% complex words)
 
 If thresholds are exceeded, triggers a targeted LLM rewrite pass.
 """
@@ -139,10 +140,39 @@ _TRANSITION_PATTERN = re.compile(
     re.IGNORECASE
 )
 
+_OVERUSED_TRANSITIONS = ["therefore", "consequently"]
+_WORD_COMPLEXITY_MAX = 12.0
+
 
 def has_transition_word(sentence: str) -> bool:
     """Check if a sentence contains at least one transition word/phrase."""
     return bool(_TRANSITION_PATTERN.search(sentence))
+
+
+def _count_transition_occurrences(text: str, transition: str) -> int:
+    pattern = re.compile(rf"\b{re.escape(transition)}\b", re.IGNORECASE)
+    return len(pattern.findall(text or ""))
+
+
+def _estimate_syllables(word: str) -> int:
+    token = re.sub(r"[^a-z]", "", (word or "").lower())
+    if not token:
+        return 0
+    groups = re.findall(r"[aeiouy]+", token)
+    syllables = len(groups)
+    if token.endswith("e") and not token.endswith(("le", "ye")) and syllables > 1:
+        syllables -= 1
+    return max(1, syllables)
+
+
+def _is_complex_word(word: str) -> bool:
+    token = re.sub(r"[^a-z]", "", (word or "").lower())
+    if len(token) < 7:
+        return False
+    # Skip typical proper nouns/acronyms and obvious non-lexical tokens.
+    if not token.isalpha():
+        return False
+    return _estimate_syllables(token) >= 3
 
 
 # ── Main analysis ───────────────────────────────────────────────────────
@@ -176,14 +206,29 @@ def analyse_readability(html_content: str) -> dict:
             "total_sentences": 0, "passive_count": 0, "passive_pct": 0.0,
             "passive_sentences": [], "long_count": 0, "long_pct": 0.0,
             "long_sentences": [], "transition_count": 0, "transition_pct": 0.0,
-            "word_count": 0, "passes_passive": True, "passes_length": True,
-            "passes_transitions": True, "all_pass": True,
+            "transitions_overstuffed": False,
+            "transition_word_counts": {tw: 0 for tw in _OVERUSED_TRANSITIONS},
+            "overused_transition_words": [],
+            "consecutive_stacks": 0,
+            "max_consecutive_transitions": 0,
+            "word_count": 0,
+            "complex_word_count": 0,
+            "complex_word_pct": 0.0,
+            "passes_word_complexity": True,
+            "passes_passive": True,
+            "passes_length": True,
+            "passes_transitions": True,
+            "passes_transition_cap": True,
+            "passes_transition_variety": True,
+            "all_pass": True,
         }
 
     passive_sentences = [s for s in sentences if is_passive_sentence(s)]
     long_sentences = [s for s in sentences if len(s.split()) > 20]
     transition_sentences = [s for s in sentences if has_transition_word(s)]
     word_count = len(text.split())
+    lexical_words = re.findall(r"\b[a-zA-Z]{3,}\b", text)
+    complex_words = [w for w in lexical_words if _is_complex_word(w)]
 
     passive_pct = (len(passive_sentences) / total) * 100
     long_pct = (len(long_sentences) / total) * 100
@@ -193,6 +238,18 @@ def analyse_readability(html_content: str) -> dict:
     passes_length = long_pct <= 25.0
     passes_transitions = transition_pct >= 30.0
     transitions_not_overstuffed = transition_pct <= 50.0
+    complex_word_pct = ((len(complex_words) / len(lexical_words)) * 100) if lexical_words else 0.0
+    passes_word_complexity = complex_word_pct <= _WORD_COMPLEXITY_MAX
+
+    specific_transition_counts = {
+        tw: _count_transition_occurrences(text, tw) for tw in _OVERUSED_TRANSITIONS
+    }
+    overused_transition_words = [
+        tw
+        for tw, count in specific_transition_counts.items()
+        if count >= 2 and total > 0 and (count / total) > 0.08
+    ]
+    passes_transition_variety = len(overused_transition_words) == 0
 
     # Detect consecutive transition word stacking (3+ in a row)
     consecutive_stacks = 0
@@ -220,14 +277,27 @@ def analyse_readability(html_content: str) -> dict:
         "transition_count": len(transition_sentences),
         "transition_pct": round(transition_pct, 1),
         "transitions_overstuffed": not transitions_not_overstuffed,
+        "transition_word_counts": specific_transition_counts,
+        "overused_transition_words": overused_transition_words,
         "consecutive_stacks": consecutive_stacks,
         "max_consecutive_transitions": max_consecutive,
         "word_count": word_count,
+        "complex_word_count": len(complex_words),
+        "complex_word_pct": round(complex_word_pct, 1),
+        "passes_word_complexity": passes_word_complexity,
         "passes_passive": passes_passive,
         "passes_length": passes_length,
         "passes_transitions": passes_transitions,
         "passes_transition_cap": transitions_not_overstuffed,
-        "all_pass": passes_passive and passes_length and passes_transitions and transitions_not_overstuffed,
+        "passes_transition_variety": passes_transition_variety,
+        "all_pass": (
+            passes_passive
+            and passes_length
+            and passes_transitions
+            and transitions_not_overstuffed
+            and passes_transition_variety
+            and passes_word_complexity
+        ),
     }
 
 
@@ -255,6 +325,16 @@ def build_readability_fix_prompt(
             f"  - NEVER have 3+ consecutive sentences starting with transition words\n"
             f"  - BAD: 'Consequently, X. Furthermore, Y. Moreover, Z. Additionally, W.'\n"
             f"  - GOOD: 'X happened. Consequently, Y occurred. Z followed. Moreover, W emerged.'"
+        )
+
+    if analysis.get("overused_transition_words"):
+        overused = ", ".join(analysis["overused_transition_words"])
+        issues.append(
+            f"TRANSITION REPETITION: The article overuses specific connectors ({overused}).\n"
+            f"  Replace repeated uses with varied sentence openings and alternatives.\n"
+            f"  - Keep each of these words to at most once unless absolutely necessary\n"
+            f"  - Prefer variety: however, meanwhile, in contrast, in addition, for example\n"
+            f"  - Keep total transition usage within 30-45%"
         )
 
     if not analysis["passes_passive"]:
@@ -287,11 +367,21 @@ def build_readability_fix_prompt(
             f'    → "The fire broke out at the station on Monday afternoon. Emergency services arrived within minutes and quickly extinguished the blaze."'
         )
 
+    if not analysis.get("passes_word_complexity", True):
+        issues.append(
+            f"WORD COMPLEXITY: Currently {analysis.get('complex_word_pct', 0)}% complex words (target: <= {int(_WORD_COMPLEXITY_MAX)}%).\n"
+            f"  Simplify vocabulary for a broad audience without changing facts.\n"
+            f"  - Replace jargon with plain terms (e.g., 'utilise' -> 'use', 'commence' -> 'start')\n"
+            f"  - Prefer shorter, everyday words where possible\n"
+            f"  - Keep names, institutions, and technical terms only when essential"
+        )
+
     if not analysis["passes_transitions"] and not analysis.get("transitions_overstuffed"):
         issues.append(
             f"TRANSITION WORDS: Currently {analysis['transition_pct']}% (must be 30-45%).\n"
             f"  Add transition words at the START of some sentences. Choose from:\n"
-            f"    however, meanwhile, therefore, additionally, moreover, consequently\n"
+            f"    however, meanwhile, in contrast, in addition, for example, notably\n"
+            f"  Use 'therefore' and 'consequently' sparingly (max once each).\n"
             f"  Add them naturally — maximum 2 consecutive transition-word openers."
         )
 

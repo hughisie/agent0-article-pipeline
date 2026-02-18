@@ -61,13 +61,18 @@ READABILITY CHECKS (EQUALLY CRITICAL — these must also score GREEN):
       - Example: 'The fire broke out at the station on Monday afternoon and was quickly extinguished by emergency services who arrived within minutes.' (25 words)
         → 'The fire broke out on Monday afternoon. Emergency services arrived within minutes and extinguished the blaze.' (7+10 words)
   13. TRANSITION WORDS: Must appear in 30-45% of sentences (NOT more than 45%!):
-      however, meanwhile, therefore, additionally, moreover, consequently
+      however, meanwhile, in contrast, in addition, for example, notably
       - NEVER start more than 2 consecutive sentences with transition words
       - NEVER use the same transition word twice in one section
+      - Use 'therefore' and 'consequently' sparingly (max once each unless essential)
       - If transition word usage is ABOVE 45%, REMOVE excess transition words to sound natural
       - BAD: 'Consequently, X. Furthermore, Y. Moreover, Z. Additionally, W.' (robotic)
       - GOOD: 'X happened. Consequently, Y occurred. Z followed. Moreover, W emerged.' (natural)
-  14. Previously used keyphrase: choose a keyphrase not exactly used before
+  14. WORD COMPLEXITY: Keep wording suitable for a broad audience.
+      - Prefer plain English over jargon and abstract terms
+      - Replace heavy words where possible (e.g., "utilise" -> "use", "commence" -> "start")
+      - Keep names/official terms only when necessary
+  15. Previously used keyphrase: choose a keyphrase not exactly used before
 
 Additionally:
   - Maintain exactly one H1 heading.
@@ -80,6 +85,7 @@ Additionally:
   - Prefer shorter sentences. Only add transition words if usage is below 30%.
   - If transition words exceed 45%, REMOVE some to avoid robotic writing.
   - NEVER start 3+ consecutive sentences with transition words.
+  - Prioritise transition variety. Avoid repeating 'therefore' and 'consequently'.
   - Do NOT repeat the keyphrase in every paragraph or every H2. Use it in intro, one H2, and 1-2 body paragraphs.
   - Vary sentence openers: mix subject-first, time-first, place-first, and transition-word openers.
 

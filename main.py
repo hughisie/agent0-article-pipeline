@@ -1261,8 +1261,11 @@ def main() -> None:
             print(f"  Passive voice: {readability['passive_pct']}% ({'PASS' if readability['passes_passive'] else 'FAIL — max 10%'})")
             print(f"  Long sentences: {readability['long_pct']}% ({'PASS' if readability['passes_length'] else 'FAIL — max 25%'})")
             print(f"  Transition words: {readability['transition_pct']}% ({'PASS' if readability['passes_transitions'] else 'FAIL — min 30%'})")
+            print(f"  Word complexity: {readability.get('complex_word_pct', 0)}% ({'PASS' if readability.get('passes_word_complexity', True) else 'FAIL — max 12%'})")
             if readability.get('transitions_overstuffed'):
                 print(f"  ⚠️ Transition OVERUSE: {readability['transition_pct']}% (max 50%) — will remove excess")
+            if readability.get('overused_transition_words'):
+                print(f"  ⚠️ Transition repetition detected: {', '.join(readability['overused_transition_words'])}")
             if readability.get('consecutive_stacks', 0) > 0:
                 print(f"  ⚠️ Consecutive transition stacking detected: {readability['consecutive_stacks']} runs of 3+")
 
@@ -1289,16 +1292,53 @@ def main() -> None:
                         # Verify the fix didn't break the content
                         if "<!-- wp:" in fixed_content and len(fixed_content) > len(wp_article.get("wp_block_content", "")) * 0.5:
                             recheck = analyse_readability(fixed_content)
+                            before_score = sum(
+                                1
+                                for key in [
+                                    "passes_passive",
+                                    "passes_length",
+                                    "passes_transitions",
+                                    "passes_transition_cap",
+                                    "passes_transition_variety",
+                                    "passes_word_complexity",
+                                ]
+                                if readability.get(key)
+                            )
+                            after_score = sum(
+                                1
+                                for key in [
+                                    "passes_passive",
+                                    "passes_length",
+                                    "passes_transitions",
+                                    "passes_transition_cap",
+                                    "passes_transition_variety",
+                                    "passes_word_complexity",
+                                ]
+                                if recheck.get(key)
+                            )
                             improved = (
-                                recheck["passive_pct"] < readability["passive_pct"]
+                                recheck["all_pass"]
+                                or after_score > before_score
+                                or recheck["passive_pct"] < readability["passive_pct"]
                                 or recheck["long_pct"] < readability["long_pct"]
-                                or recheck["transition_pct"] > readability["transition_pct"]
+                                or (
+                                    readability.get("transitions_overstuffed")
+                                    and recheck["transition_pct"] < readability["transition_pct"]
+                                )
+                                or (
+                                    not readability.get("transitions_overstuffed")
+                                    and recheck["transition_pct"] > readability["transition_pct"]
+                                )
+                                or len(recheck.get("overused_transition_words", [])) < len(readability.get("overused_transition_words", []))
+                                or recheck.get("complex_word_pct", 0) < readability.get("complex_word_pct", 0)
                             )
                             if improved:
                                 wp_article["wp_block_content"] = fixed_content
                                 print(f"  ✓ Readability improved: passive {readability['passive_pct']}%→{recheck['passive_pct']}%, "
                                       f"long {readability['long_pct']}%→{recheck['long_pct']}%, "
-                                      f"transitions {readability['transition_pct']}%→{recheck['transition_pct']}%")
+                                      f"transitions {readability['transition_pct']}%→{recheck['transition_pct']}%, "
+                                      f"complexity {readability.get('complex_word_pct', 0)}%→{recheck.get('complex_word_pct', 0)}%, "
+                                      f"transition_variety {len(readability.get('overused_transition_words', []))}→{len(recheck.get('overused_transition_words', []))} overused")
                             else:
                                 print("  ⚠️ Readability rewrite did not improve metrics, keeping original")
                         else:

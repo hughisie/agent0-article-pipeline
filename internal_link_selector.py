@@ -1,4 +1,5 @@
 import json
+import re
 
 from config import load_config
 from deepseek_client import call_deepseek_chat, DeepSeekError
@@ -9,12 +10,65 @@ class InternalLinkSelectionError(Exception):
     pass
 
 
+_BAD_ANCHOR_PATTERNS = [
+    r"your browser does not support",
+    r"click here",
+    r"read more",
+    r"more from this stream",
+]
+
+
+def _normalize_title(value: str | None) -> str:
+    text = (value or "").lower().strip()
+    text = re.sub(r"[^a-z0-9\s]", " ", text)
+    text = re.sub(r"\s+", " ", text)
+    return text
+
+
+def _title_tokens(value: str | None) -> set[str]:
+    normalized = _normalize_title(value)
+    if not normalized:
+        return set()
+    return {token for token in normalized.split() if len(token) > 2}
+
+
+def _titles_too_similar(a: str | None, b: str | None) -> bool:
+    norm_a = _normalize_title(a)
+    norm_b = _normalize_title(b)
+    if not norm_a or not norm_b:
+        return False
+    if norm_a == norm_b:
+        return True
+
+    tokens_a = _title_tokens(norm_a)
+    tokens_b = _title_tokens(norm_b)
+    if not tokens_a or not tokens_b:
+        return False
+
+    overlap = len(tokens_a & tokens_b)
+    min_size = min(len(tokens_a), len(tokens_b))
+    max_size = max(len(tokens_a), len(tokens_b))
+
+    # Near-duplicate heuristic: strong overlap with one title largely contained in the other.
+    return overlap >= 3 and overlap / min_size >= 0.8 and overlap / max_size >= 0.6
+
+
+def _is_bad_anchor(anchor_text: str) -> bool:
+    text = (anchor_text or "").strip().lower()
+    if not text:
+        return True
+    if len(text) < 3 or len(text) > 140:
+        return True
+    return any(re.search(pattern, text) for pattern in _BAD_ANCHOR_PATTERNS)
+
+
 def _validate_payload(payload: dict, candidate_urls: set[str]) -> dict:
     related = payload.get("related") or []
     if not isinstance(related, list):
         related = []
     cleaned = []
     seen = set()
+    seen_titles = []
     for item in related:
         if not isinstance(item, dict):
             continue
@@ -22,7 +76,10 @@ def _validate_payload(payload: dict, candidate_urls: set[str]) -> dict:
         if not url or url not in candidate_urls or url in seen:
             continue
         anchor_text = (item.get("anchor_text") or "").strip()
-        if not anchor_text:
+        if _is_bad_anchor(anchor_text):
+            continue
+        title_value = item.get("title") or anchor_text
+        if any(_titles_too_similar(title_value, existing) for existing in seen_titles):
             continue
         cleaned.append(
             {
@@ -35,6 +92,8 @@ def _validate_payload(payload: dict, candidate_urls: set[str]) -> dict:
             }
         )
         seen.add(url)
+        if title_value:
+            seen_titles.append(title_value)
         if len(cleaned) >= 3:
             break
     return {"related": cleaned}
